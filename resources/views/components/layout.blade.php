@@ -12,7 +12,7 @@
     <header class="border-b border-stone-200 dark:border-stone-800">
         <div class="mx-auto flex max-w-3xl items-center justify-between px-4 py-4">
             <a href="/" class="text-lg font-semibold tracking-tight text-emerald-800 dark:text-emerald-400">Hadist Apa</a>
-            <span class="text-xs text-stone-500">Kumpulan hadist 7 kitab</span>
+            <a href="/dukung" class="rounded-full border border-emerald-700/30 px-3 py-1 text-sm font-medium text-emerald-800 hover:bg-emerald-50 dark:border-emerald-400/30 dark:text-emerald-400 dark:hover:bg-emerald-950/40">Dukung</a>
         </div>
     </header>
 
@@ -23,7 +23,7 @@
     <footer class="mx-auto max-w-3xl px-4 pb-10 text-xs leading-relaxed text-stone-500">
         Data: <a href="https://github.com/fawazahmed0/hadith-api" class="underline">fawazahmed0/hadith-api</a>.
         Derajat mengikuti penilaian ulama yang tercantum; rujuk ulama untuk penetapan hukum.
-        <a href="/kontak" class="underline">Kontak &amp; laporan</a>.
+        <a href="/kontak" class="underline">Kontak &amp; laporan</a> · <a href="/dukung" class="underline">Dukung Hadist Apa</a>.
     </footer>
 </body>
 </html>

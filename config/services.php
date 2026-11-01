@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'saweria' => [
+        // Halaman Saweria untuk infaq; kosong = tombol "Segera hadir".
+        'url' => env('SAWERIA_URL'),
+    ],
+
 ];

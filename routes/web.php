@@ -11,3 +11,4 @@ Route::get('/cari/saring', [HadistController::class, 'saring'])->middleware('thr
 Route::get('/hadist/{kitab}/{nomor}', [HadistController::class, 'tampil'])->name('hadist');
 Route::get('/kontak', [KontakController::class, 'create']);
 Route::post('/kontak', [KontakController::class, 'store'])->middleware('throttle:5,1');
+Route::view('/dukung', 'dukung');
