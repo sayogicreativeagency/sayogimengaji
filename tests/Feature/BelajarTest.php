@@ -57,8 +57,7 @@ it('dasbor menampilkan persentase hafalan dan tombol lanjutkan', function () {
     $this->actingAs($this->pengguna)->get('/belajar')->assertOk()
         ->assertSee('Lanjutkan')
         ->assertSee('href="'.url('/belajar/2').'#ayat-2"', false)
-        ->assertSee('1/3 ayat hafal')
-        ->assertDontSee('Fitur langganan')->assertDontSee('🔒');
+        ->assertSee('1/3 ayat hafal');
 });
 
 it('menautkan Belajar di header', function () {

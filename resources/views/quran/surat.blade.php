@@ -72,22 +72,22 @@
             </div>
             <p data-status aria-live="polite" class="min-w-32 font-medium">Siap diputar</p>
 
-            <div class="ml-auto flex flex-wrap items-center gap-2">
+            <div class="grid w-full grid-cols-[2fr_1fr_1fr] gap-2 sm:ml-auto sm:flex sm:w-auto sm:items-center">
                 <label class="sr-only" for="pilih-qori">Qori</label>
-                <select id="pilih-qori" data-pilih-qori class="rounded-md border border-stone-300 bg-white px-2 py-1.5 dark:border-stone-700 dark:bg-stone-900">
+                <select id="pilih-qori" data-pilih-qori class="w-full min-w-0 rounded-md text-xs sm:w-auto sm:text-sm border border-stone-300 bg-white px-2 py-1.5 dark:border-stone-700 dark:bg-stone-900">
                     @foreach ($qori as $q)
                         <option value="{{ $q['id'] }}">{{ $q['nama'] }}</option>
                     @endforeach
                 </select>
                 <label class="sr-only" for="pilih-ulang">Ulangi ayat</label>
-                <select id="pilih-ulang" data-pilih-ulang class="rounded-md border border-stone-300 bg-white px-2 py-1.5 dark:border-stone-700 dark:bg-stone-900">
+                <select id="pilih-ulang" data-pilih-ulang class="w-full min-w-0 rounded-md text-xs sm:w-auto sm:text-sm border border-stone-300 bg-white px-2 py-1.5 dark:border-stone-700 dark:bg-stone-900">
                     <option value="1">Ulang 1×</option>
                     <option value="3">Ulang 3×</option>
                     <option value="5">Ulang 5×</option>
                     <option value="0">Ulang terus</option>
                 </select>
                 <label class="sr-only" for="pilih-kecepatan">Kecepatan</label>
-                <select id="pilih-kecepatan" data-pilih-kecepatan class="rounded-md border border-stone-300 bg-white px-2 py-1.5 dark:border-stone-700 dark:bg-stone-900">
+                <select id="pilih-kecepatan" data-pilih-kecepatan class="w-full min-w-0 rounded-md text-xs sm:w-auto sm:text-sm border border-stone-300 bg-white px-2 py-1.5 dark:border-stone-700 dark:bg-stone-900">
                     <option value="0.75">0,75×</option>
                     <option value="1" selected>1×</option>
                     <option value="1.25">1,25×</option>

@@ -71,22 +71,6 @@ Artisan::command('akun:peran {email} {peran : superadmin, editor, atau pengguna}
     return 0;
 })->purpose('Atur peran akun (mis. jadikan superadmin pertama)');
 
-Artisan::command('akun:langganan {email} {--bulan=12 : lama langganan, ditambahkan dari tanggal berakhir bila masih aktif}', function () {
-    $user = User::where('email', $this->argument('email'))->first();
-
-    if (! $user) {
-        $this->error('Akun dengan email itu tidak ditemukan.');
-
-        return 1;
-    }
-
-    $mulai = $user->berlangganan() ? $user->langganan->berakhir_pada : now();
-    $user->langganan()->updateOrCreate([], ['berakhir_pada' => $mulai->copy()->addMonths((int) $this->option('bulan')), 'sumber' => 'manual']);
-    $this->info("{$user->name} berlangganan sampai {$user->fresh()->langganan->berakhir_pada->translatedFormat('j F Y')}.");
-
-    return 0;
-})->purpose('Beri atau perpanjang langganan secara manual (sebelum pembayaran tersedia)');
-
 Artisan::command('quran:impor-kata {surat? : nomor surat 1-114; kosong = semua}', function (ImporKata $impor) {
     $daftar = $this->argument('surat') === null ? range(1, 114) : [(int) $this->argument('surat')];
     $gagal = false;
