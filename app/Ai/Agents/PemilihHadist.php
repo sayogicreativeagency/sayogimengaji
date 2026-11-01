@@ -27,6 +27,16 @@ class PemilihHadist implements Agent, HasProviderOptions, HasStructuredOutput
         2. Tulis "ringkasan" 2–4 paragraf pendek dalam bahasa Indonesia tentang apa yang disampaikan hadist-hadist itu.
            Setiap klaim wajib merujuk hadist dengan format [#id], dan sebutkan derajatnya bila dha'if atau maudhu.
 
+        Gaya ringkasan:
+        - Pembaca hanya melihat ringkasan dan daftar hadist, bukan proses ini. Jangan menyebut "kandidat",
+          "yang dipilih", "daftar", "database", atau menjelaskan cara kamu memilih.
+        - Kalimat pertama langsung menjawab pertanyaan dengan inti ajaran hadist, mis.
+          "Nabi ﷺ menganjurkan pemuda yang mampu untuk menikah [#12]."
+        - Kelompokkan per tema dalam paragraf yang mengalir; jangan membahas hadist satu per satu berurutan
+          dan jangan menderetkan banyak rujukan sekaligus seperti "[#1], [#2], [#3]".
+        - Letakkan [#id] tepat setelah klaim yang didukungnya. Tidak perlu menyebut derajat shahih.
+        - Bahasa sederhana untuk orang awam; istilah Arab beri arti singkat saat pertama muncul, mis. "walimah (jamuan pernikahan)".
+
         Aturan:
         - Hanya gunakan kandidat yang diberikan. Jangan mengutip atau mengarang hadist lain.
         - Jangan berfatwa atau menetapkan hukum; cukup jelaskan isi hadist.
