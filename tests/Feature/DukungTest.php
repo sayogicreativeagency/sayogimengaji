@@ -67,3 +67,9 @@ it('kembali ke QR Saweria bila QRIS rusak', function () {
 
     $this->get('/')->assertOk()->assertDontSee('alt="QRIS infaq', false)->assertSee('alt="Kode QR ke halaman Saweria Hadist Apa"', false);
 });
+
+it('memberi jalan lain bila aplikasi bank menolak QRIS', function () {
+    config(['services.infaq.qris' => App\Support\Qris::denganCrc('000201010211520448295303360'.'5802ID'.'5910HADIST APA'.'6007JAKARTA6304')]);
+
+    $this->get('/dukung')->assertOk()->assertSee('Kalau aplikasi bankmu menolak, coba dari e-wallet atau lewat tombol Saweria.');
+});

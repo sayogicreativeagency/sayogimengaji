@@ -23,6 +23,7 @@
                 Pindai dari aplikasi bank atau e-wallet mana pun, isi nominal seikhlasnya. Pastikan penerimanya
                 atas nama <strong>{{ $qris->namaPenerima() }}</strong>.
             </p>
+            <p class="mt-1 text-center text-xs leading-relaxed text-stone-500">Kalau aplikasi bankmu menolak, coba dari e-wallet atau lewat tombol Saweria.</p>
         @else
             <img src="{{ $qr }}" alt="Kode QR ke halaman Saweria Hadist Apa" width="200" height="200"
                  class="mx-auto mt-4 w-full rounded-lg bg-white p-2 {{ $ringkas ? 'max-w-48' : 'max-w-56' }}">
