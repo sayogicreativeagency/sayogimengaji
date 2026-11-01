@@ -35,7 +35,8 @@ class BelajarController extends Controller
 
         $kata = Kata::where('surat_nomor', $surat->nomor)->orderBy('ayat_nomor')->orderBy('posisi')->get()->groupBy('ayat_nomor');
         // waktu[ayat][qori] = [[posisi, mulai, selesai], ...] urut posisi kata.
-        $waktu = WaktuKata::where('surat_nomor', $surat->nomor)->orderBy('posisi')->get()
+        $qori = QoriBelajar::aktif();
+        $waktu = WaktuKata::where('surat_nomor', $surat->nomor)->whereIn('qori', array_column($qori, 'value'))->orderBy('posisi')->get()
             ->groupBy(['ayat_nomor', 'qori'])
             ->map(fn ($perQori) => $perQori->map(fn ($baris) => $baris->map(fn ($w) => [$w->posisi, $w->mulai_ms, $w->selesai_ms])->values()));
 
@@ -44,7 +45,7 @@ class BelajarController extends Controller
             'kata' => $kata,
             'waktu' => $waktu,
             'hafal' => $request->user()->progresBelajar()->where('surat_nomor', $surat->nomor)->whereNotNull('dihafal_at')->pluck('ayat_nomor')->flip(),
-            'qori' => collect(QoriBelajar::cases())->map(fn ($q) => ['id' => $q->value, 'nama' => $q->nama(), 'url' => $q->urlAudio()]),
+            'qori' => collect($qori)->map(fn ($q) => ['id' => $q->value, 'nama' => $q->nama(), 'url' => $q->urlAudio()]),
             'berikutnya' => Surat::find($surat->nomor + 1),
         ]);
     }

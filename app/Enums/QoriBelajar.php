@@ -2,11 +2,25 @@
 
 namespace App\Enums;
 
+use App\Models\Pengaturan;
+
 /** Qori untuk fitur belajar: audio + waktu per kata dari Quran.com (bukan equran.id seperti murottal). */
 enum QoriBelajar: string
 {
     case HusaryMuallim = 'husary-muallim';
     case Afasi = 'afasi';
+
+    /**
+     * Qori yang tidak dinonaktifkan di admin (Pengaturan qori), urutan sesuai deklarasi.
+     *
+     * @return list<self>
+     */
+    public static function aktif(): array
+    {
+        $nonaktif = Pengaturan::ambil('qori_belajar_nonaktif', []);
+
+        return array_values(array_filter(self::cases(), fn (self $q) => ! in_array($q->value, $nonaktif, true)));
+    }
 
     public function nama(): string
     {

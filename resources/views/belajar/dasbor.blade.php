@@ -48,4 +48,5 @@
         @endforeach
     </div>
     <p data-saring-kosong hidden class="py-10 text-center text-stone-500">Surat tidak ditemukan.</p>
+    <x-atribusi-quran-foundation class="mt-8" />
 </x-layout>

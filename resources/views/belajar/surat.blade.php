@@ -56,6 +56,7 @@
     @if ($berikutnya)
         <p class="mt-8 text-right text-sm"><a href="{{ url('/belajar/'.$berikutnya->nomor) }}" class="hover:underline">{{ $berikutnya->nama_latin }} →</a></p>
     @endif
+    <x-atribusi-quran-foundation class="mt-6" />
     <div class="h-32"></div>
 
     <script type="application/json" data-waktu-kata>{!! json_encode($waktu, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) !!}</script>
