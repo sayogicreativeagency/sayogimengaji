@@ -5,7 +5,8 @@ use App\Http\Controllers\KontakController;
 use App\Http\Controllers\QuranController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [HadistController::class, 'beranda']);
+Route::get('/', [HadistController::class, 'beranda']); // nanti jadi landing; cari hadist pindah ke /hadist
+Route::get('/hadist', [HadistController::class, 'beranda']);
 // throttle: setiap pencarian baru memanggil AI berbayar.
 Route::get('/cari', [HadistController::class, 'cari'])->middleware('throttle:20,1');
 Route::get('/cari/saring', [HadistController::class, 'saring'])->middleware('throttle:60,1');

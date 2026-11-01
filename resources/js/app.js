@@ -1,4 +1,5 @@
 import './murottal';
+import './sholat/widget';
 
 // Filter hasil pencarian: muat daftar dari /cari/saring (DB saja, tanpa AI) tanpa reload.
 // Ringkasan AI disembunyikan selama filter aktif karena hanya berlaku untuk hasil awal.

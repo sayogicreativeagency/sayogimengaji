@@ -13,6 +13,7 @@
         <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
             <a href="/" class="text-lg font-semibold tracking-tight text-emerald-800 dark:text-emerald-400">Hadist Apa</a>
             <nav class="flex items-center gap-4 text-sm">
+                <a href="/hadist" class="font-medium text-stone-700 hover:text-emerald-800 dark:text-stone-300 dark:hover:text-emerald-400">Hadist</a>
                 <a href="/quran" class="font-medium text-stone-700 hover:text-emerald-800 dark:text-stone-300 dark:hover:text-emerald-400">Al-Qur'an</a>
                 <a href="/dukung" class="rounded-full border border-emerald-700/30 px-3 py-1 text-sm font-medium text-emerald-800 hover:bg-emerald-50 dark:border-emerald-400/30 dark:text-emerald-400 dark:hover:bg-emerald-950/40">Dukung</a>
             </nav>
@@ -26,7 +27,8 @@
         </main>
 
         @if ($sidebar)
-            <aside aria-label="Dukung Hadist Apa" class="lg:sticky lg:top-6 lg:self-start">
+            <aside aria-label="Jadwal sholat dan dukungan" class="space-y-6 lg:self-start">
+                <x-widget-sholat />
                 <x-papan-donasi ringkas />
             </aside>
         @endif
