@@ -18,6 +18,9 @@ export default defineConfig({
                 bunny('Amiri Quran', {
                     weights: [400],
                 }),
+                bunny('Cormorant Garamond', {
+                    weights: [500, 600],
+                }),
             ],
         }),
         tailwindcss(),

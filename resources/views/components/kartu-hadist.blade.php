@@ -2,7 +2,7 @@
 <article id="h-{{ $hadist->id }}" data-hadist data-kitab="{{ $hadist->kitab->value }}" data-derajat="{{ $hadist->derajat_ringkas?->value ?? 'belum' }}" class="scroll-mt-6 rounded-xl border border-stone-200 bg-white p-5 shadow-sm dark:border-stone-800 dark:bg-stone-900">
     <div class="mb-3 flex flex-wrap items-center gap-2 text-sm">
         @if ($nomorUrut)
-            <span class="font-semibold text-emerald-700 dark:text-emerald-400">[{{ $nomorUrut }}]</span>
+            <span class="font-semibold text-emerald-700 dark:text-emas-400">[{{ $nomorUrut }}]</span>
         @endif
         <a href="{{ route('hadist', [$hadist->kitab, $hadist->nomor]) }}" class="font-medium hover:underline">
             HR. {{ $hadist->kitab->perawi() }} no. {{ $hadist->nomor }}

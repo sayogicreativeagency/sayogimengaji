@@ -4,7 +4,7 @@
 
     {{-- Diisi resources/js/murottal.js dari ayat terakhir yang diputar. --}}
     <a data-lanjutkan hidden href="#" class="mt-6 flex items-center justify-between rounded-xl border border-emerald-200 bg-emerald-50/60 px-5 py-4 hover:border-emerald-400 dark:border-emerald-900 dark:bg-emerald-950/30">
-        <span><span class="block text-xs font-semibold tracking-wide text-emerald-800 uppercase dark:text-emerald-400">Lanjutkan</span><span data-lanjutkan-teks class="font-medium"></span></span>
+        <span><span class="block text-xs font-semibold tracking-wide text-emerald-800 uppercase dark:text-emas-400">Lanjutkan</span><span data-lanjutkan-teks class="font-medium"></span></span>
         <span aria-hidden="true">→</span>
     </a>
 
@@ -16,7 +16,7 @@
         @foreach ($daftar as $s)
             <a href="{{ url('/quran/'.$s->nomor) }}" data-surat-kartu data-cari="{{ Str::lower("{$s->nomor} {$s->nama_latin} {$s->arti}") }}"
                class="flex items-center gap-4 rounded-xl border border-stone-200 bg-white p-4 hover:border-emerald-500 dark:border-stone-800 dark:bg-stone-900">
-                <span class="flex size-10 shrink-0 items-center justify-center rounded-full bg-emerald-50 text-sm font-semibold text-emerald-800 dark:bg-emerald-950/50 dark:text-emerald-400">{{ $s->nomor }}</span>
+                <span class="flex size-10 shrink-0 items-center justify-center rounded-full bg-emerald-50 text-sm font-semibold text-emerald-800 dark:bg-emerald-950/50 dark:text-emas-400">{{ $s->nomor }}</span>
                 <span class="min-w-0 flex-1">
                     <span class="block font-medium">{{ $s->nama_latin }}</span>
                     <span class="block text-sm text-stone-500">{{ $s->arti }} · {{ $s->jumlah_ayat }} ayat · {{ $s->tempat_turun }}</span>

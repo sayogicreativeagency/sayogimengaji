@@ -3,11 +3,81 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
+/* Situs selalu gelap: <html class="dark"> di layout, jadi semua varian dark: berlaku. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-judul: 'Cormorant Garamond', 'Times New Roman', serif;
     --font-arab: 'Amiri', 'Geeza Pro', 'Traditional Arabic', serif;
     --font-quran: 'Amiri Quran', 'Amiri', 'Geeza Pro', serif;
+
+    /* Netral "malam": stone diganti hijau kehitaman. 950 = latar, 900 = kartu, 800/700 = garis. */
+    --color-stone-50: #f4f2ec;
+    --color-stone-100: #e9ece6;
+    --color-stone-200: #e2e6df;
+    --color-stone-300: #c9d3cd;
+    --color-stone-400: #a3b2aa;
+    --color-stone-500: #84958c;
+    --color-stone-600: #5d6f66;
+    --color-stone-700: #2b4239;
+    --color-stone-800: #1d332b;
+    --color-stone-900: #11201b;
+    --color-stone-950: #0b1512;
+
+    /* Zamrud: tombol, derajat shahih, sholat berikutnya. */
+    --color-emerald-50: #e8f6f0;
+    --color-emerald-100: #c7eadb;
+    --color-emerald-200: #9dd9c0;
+    --color-emerald-300: #6fc6a3;
+    --color-emerald-400: #3fae8a;
+    --color-emerald-500: #2f9474;
+    --color-emerald-600: #24785f;
+    --color-emerald-700: #1d634e;
+    --color-emerald-800: #174f3f;
+    --color-emerald-900: #123d31;
+    --color-emerald-950: #0a2620;
+
+    /* Emas: judul, tautan, sorotan. */
+    --color-emas-200: #efe0b8;
+    --color-emas-300: #e6cd8f;
+    --color-emas-400: #d4b062;
+    --color-emas-500: #b8933f;
+    --color-emas-600: #95752f;
+}
+
+@layer base {
+    h1 {
+        font-family: var(--font-judul);
+        font-weight: 600;
+        color: var(--color-emas-300);
+    }
+}
+
+/* Pola bintang delapan (dua persegi bertumpuk), samar, untuk header dan hero. */
+.pola-islami {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23d4b062' stroke-opacity='0.08'%3E%3Crect x='14' y='14' width='28' height='28'/%3E%3Crect x='14' y='14' width='28' height='28' transform='rotate(45 28 28)'/%3E%3Ccircle cx='28' cy='28' r='5'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Pembatas ornamen: garis emas tipis dengan bintang di tengah. */
+.ornamen {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--color-emas-500);
+
+    &::before,
+    &::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(to var(--arah, right), transparent, color-mix(in oklab, var(--color-emas-500) 45%, transparent));
+    }
+
+    &::after {
+        --arah: left;
+    }
 }
 
 /* Tombol tampilan di halaman surat (resources/js/murottal.js). */

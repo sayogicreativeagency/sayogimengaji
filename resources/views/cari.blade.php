@@ -4,7 +4,7 @@
     <div data-ringkasan>
         @if ($html = $hasil->ringkasanHtml())
             <section class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50/60 p-5 dark:border-emerald-900 dark:bg-emerald-950/30">
-                <h2 class="mb-2 text-sm font-semibold tracking-wide text-emerald-800 uppercase dark:text-emerald-400">Ringkasan</h2>
+                <h2 class="mb-2 text-sm font-semibold tracking-wide text-emerald-800 uppercase dark:text-emas-400">Ringkasan</h2>
                 <div class="space-y-3 leading-relaxed">{{ $html }}</div>
                 <div role="note" class="mt-4 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-relaxed text-amber-900 dark:border-amber-900 dark:bg-amber-950/40 dark:text-amber-200">
                     <strong>Ringkasan ini dibuat oleh AI</strong> hanya untuk membantu melihat garis besar. Yang menjadi

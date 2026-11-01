@@ -6,8 +6,8 @@ use App\Enums\Derajat;
 use App\Enums\Kitab;
 use App\Models\Hadist;
 
-it('menampilkan beranda dengan kotak pencarian', function () {
-    $this->get('/')->assertOk()->assertSee('name="q"', false);
+it('menampilkan beranda dengan kotak pencarian dalam tema gelap', function () {
+    $this->get('/')->assertOk()->assertSee('name="q"', false)->assertSee('<html lang="id" class="dark">', false);
 });
 
 it('mengarahkan pencarian kosong ke beranda', function () {

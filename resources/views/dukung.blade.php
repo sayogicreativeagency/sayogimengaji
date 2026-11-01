@@ -23,7 +23,7 @@
         <h2 class="mt-10 text-lg font-semibold">Ilmu yang terus mengalir</h2>
         <p class="mt-3 leading-relaxed">
             Rasulullah ﷺ bersabda bahwa amal seseorang terputus ketika ia wafat, kecuali tiga perkara; salah satunya
-            ilmu yang bermanfaat (<a href="{{ route('hadist', ['muslim', '4223']) }}" class="text-emerald-700 hover:underline dark:text-emerald-400">HR. Muslim no. 4223</a>).
+            ilmu yang bermanfaat (<a href="{{ route('hadist', ['muslim', '4223']) }}" class="text-emerald-700 hover:underline dark:text-emas-400">HR. Muslim no. 4223</a>).
             Setiap kali seseorang menemukan dan mempelajari hadist di sini, semoga Allah mencatat kebaikannya juga
             untukmu yang ikut menjaganya.
         </p>

@@ -36,6 +36,6 @@
     @endif
 
     @if ($ringkas)
-        <a href="/dukung" class="mt-3 block text-center text-sm text-emerald-800 hover:underline dark:text-emerald-400">Untuk apa infaqmu digunakan →</a>
+        <a href="/dukung" class="mt-3 block text-center text-sm text-emerald-800 hover:underline dark:text-emas-400">Untuk apa infaqmu digunakan →</a>
     @endif
 </div>

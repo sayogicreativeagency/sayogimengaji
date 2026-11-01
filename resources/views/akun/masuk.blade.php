@@ -1,7 +1,7 @@
 <x-layout judul="Masuk" :sidebar="false">
     <div class="mx-auto max-w-md">
         <h1 class="text-2xl font-semibold tracking-tight">Masuk</h1>
-        <p class="mt-2 text-stone-600 dark:text-stone-400">Belum punya akun? <a href="/daftar" class="font-medium text-emerald-700 hover:underline dark:text-emerald-400">Daftar</a></p>
+        <p class="mt-2 text-stone-600 dark:text-stone-400">Belum punya akun? <a href="/daftar" class="font-medium text-emerald-700 hover:underline dark:text-emas-400">Daftar</a></p>
 
         <form action="/masuk" method="post" class="mt-6 space-y-4 rounded-xl border border-stone-200 bg-white p-6 dark:border-stone-800 dark:bg-stone-900">
             @csrf

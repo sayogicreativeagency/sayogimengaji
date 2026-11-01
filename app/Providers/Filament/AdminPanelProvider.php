@@ -28,8 +28,9 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             // Login lewat halaman utama /masuk (route `login`), bukan halaman login Filament.
+            ->darkMode(true, isForced: true)
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::hex('#d4b062'),
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')

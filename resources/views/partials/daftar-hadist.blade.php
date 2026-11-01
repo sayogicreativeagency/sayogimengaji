@@ -16,7 +16,7 @@
                     <dt class="w-32 shrink-0 font-medium">HR. {{ $grup->first()['hadist']->kitab->perawi() }}</dt>
                     <dd class="flex flex-wrap gap-x-3 gap-y-1">
                         @foreach ($grup as $x)
-                            <a href="#h-{{ $x['hadist']->id }}" class="text-emerald-700 hover:underline dark:text-emerald-400">[{{ $x['urut'] }}] no. {{ $x['hadist']->nomor }}</a>
+                            <a href="#h-{{ $x['hadist']->id }}" class="text-emerald-700 hover:underline dark:text-emas-400">[{{ $x['urut'] }}] no. {{ $x['hadist']->nomor }}</a>
                         @endforeach
                     </dd>
                 </div>
