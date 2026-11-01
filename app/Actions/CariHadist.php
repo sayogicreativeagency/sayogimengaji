@@ -79,10 +79,19 @@ final class CariHadist
             $h->derajat_ringkas?->label() ?? 'belum dinilai',
             $h->kitab->perawi(),
             $h->nomor,
-            Str::limit($h->terjemahan, 600),
+            $this->potongMatan($h->terjemahan),
         ))->implode("\n\n");
 
         return "Pertanyaan: {$q}\n\nKandidat:\n{$daftar}";
+    }
+
+    /**
+     * Terjemahan diawali sanad panjang; matan ada di akhir, jadi ambil bagian akhirnya.
+     * ponytail: heuristik 600 karakter terakhir, pisahkan sanad/matan saat impor kalau kurang akurat.
+     */
+    private function potongMatan(string $teks): string
+    {
+        return mb_strlen($teks) > 600 ? '…'.mb_substr($teks, -600) : $teks;
     }
 
     /** @param  list<int>  $ids */

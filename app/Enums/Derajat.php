@@ -41,4 +41,15 @@ enum Derajat: string
             self::Maudhu => 'Maudhu',
         };
     }
+
+    /** Kelas Tailwind untuk label derajat. */
+    public function warna(): string
+    {
+        return match ($this) {
+            self::Shahih => 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300',
+            self::Hasan => 'bg-sky-100 text-sky-800 dark:bg-sky-900/50 dark:text-sky-300',
+            self::Dhaif => 'bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300',
+            self::Maudhu => 'bg-rose-100 text-rose-800 dark:bg-rose-900/50 dark:text-rose-300',
+        };
+    }
 }
