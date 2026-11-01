@@ -61,12 +61,6 @@ class User extends Authenticatable implements FilamentUser
         return (bool) $this->langganan?->aktif();
     }
 
-    /** Al-Fatihah gratis untuk dicoba; surat lain butuh langganan aktif. */
-    public function bisaBelajar(int $surat): bool
-    {
-        return $surat === 1 || $this->berlangganan();
-    }
-
     /** @return HasMany<ProgresBelajar, $this> */
     public function progresBelajar(): HasMany
     {
