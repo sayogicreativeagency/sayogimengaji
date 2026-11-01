@@ -1,9 +1,8 @@
 @props(['ringkas' => false])
 @php
     $saweria = config('services.saweria.url');
-    $qris = config('services.saweria.qris');
-    // Hanya file gambar di public/. Mencegah link widget Saweria (berisi streamKey rahasia) tercetak ke halaman.
-    $qris = $qris && is_file(public_path($qris)) ? $qris : null;
+    // QR ke halaman Saweria (bukan QRIS: QRIS dibuat Saweria per transaksi setelah nominal dipilih).
+    $qr = $saweria ? (new chillerlan\QRCode\QRCode(new chillerlan\QRCode\QROptions(['outputType' => 'svg'])))->render($saweria) : null;
 @endphp
 <div {{ $attributes->class('rounded-xl border border-emerald-200 bg-emerald-50/60 p-5 dark:border-emerald-900 dark:bg-emerald-950/30') }}>
     @if ($ringkas)
@@ -13,18 +12,14 @@
         </p>
     @endif
 
-    @if ($saweria || $qris)
-        @if ($qris)
-            <img src="{{ asset($qris) }}" alt="QRIS Saweria untuk infaq Hadist Apa" loading="lazy"
-                 class="mx-auto mt-4 w-full rounded-lg bg-white p-2 {{ $ringkas ? 'max-w-56' : 'max-w-64' }}">
-            <p class="mt-2 text-center text-xs text-stone-500">Pindai dengan aplikasi bank atau e-wallet.</p>
-        @endif
-        @if ($saweria)
-            <a href="{{ $saweria }}" target="_blank" rel="noopener"
-               class="mt-4 block rounded-lg bg-emerald-700 px-5 py-2.5 text-center font-medium text-white hover:bg-emerald-800 focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2 focus-visible:outline-none">
-                Infaq lewat Saweria
-            </a>
-        @endif
+    @if ($saweria)
+        <img src="{{ $qr }}" alt="Kode QR ke halaman Saweria Hadist Apa" width="200" height="200"
+             class="mx-auto mt-4 w-full rounded-lg bg-white p-2 {{ $ringkas ? 'max-w-48' : 'max-w-56' }}">
+        <p class="mt-2 text-center text-xs text-stone-500">Pindai dengan kamera HP, lalu bayar lewat QRIS atau e-wallet di Saweria.</p>
+        <a href="{{ $saweria }}" target="_blank" rel="noopener"
+           class="mt-4 block rounded-lg bg-emerald-700 px-5 py-2.5 text-center font-medium text-white hover:bg-emerald-800 focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2 focus-visible:outline-none">
+            Infaq lewat Saweria
+        </a>
         @unless ($ringkas)
             <p class="mt-3 text-center text-sm text-stone-600 dark:text-stone-400">Pembayaran diproses oleh Saweria lewat QRIS dan e-wallet. Berapa pun nominalnya sangat berarti.</p>
         @endunless
