@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Peran;
 use App\Filament\Resources\Laporans\Pages\ManageLaporans;
 use App\Models\Laporan;
 use App\Models\User;
@@ -33,7 +34,7 @@ it('mengabaikan kiriman bot lewat honeypot', function () {
 
 it('menampilkan laporan di admin', function () {
     $laporan = Laporan::create(['pesan' => 'Ada yang keliru']);
-    $this->actingAs(User::factory()->create());
+    $this->actingAs(User::factory()->create(['peran' => Peran::Superadmin]));
 
     Livewire::test(ManageLaporans::class)->assertOk()->assertCanSeeTableRecords([$laporan]);
 });

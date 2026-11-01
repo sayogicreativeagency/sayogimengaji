@@ -16,6 +16,18 @@
                 <a href="/hadist" class="font-medium text-stone-700 hover:text-emerald-800 dark:text-stone-300 dark:hover:text-emerald-400">Hadist</a>
                 <a href="/quran" class="font-medium text-stone-700 hover:text-emerald-800 dark:text-stone-300 dark:hover:text-emerald-400">Al-Qur'an</a>
                 <a href="/dukung" class="rounded-full border border-emerald-700/30 px-3 py-1 text-sm font-medium text-emerald-800 hover:bg-emerald-50 dark:border-emerald-400/30 dark:text-emerald-400 dark:hover:bg-emerald-950/40">Dukung</a>
+                @auth
+                    @if (auth()->user()->peran->bisaMasukAdmin())
+                        <a href="/admin" class="font-medium text-stone-700 hover:text-emerald-800 dark:text-stone-300 dark:hover:text-emerald-400">Admin</a>
+                    @endif
+                    <form action="/keluar" method="post" class="flex items-center gap-2">
+                        @csrf
+                        <span class="hidden text-stone-500 sm:inline">{{ auth()->user()->name }}</span>
+                        <button class="font-medium text-stone-700 hover:text-emerald-800 dark:text-stone-300 dark:hover:text-emerald-400">Keluar</button>
+                    </form>
+                @else
+                    <a href="/masuk" class="font-medium text-stone-700 hover:text-emerald-800 dark:text-stone-300 dark:hover:text-emerald-400">Masuk</a>
+                @endauth
             </nav>
         </div>
     </header>

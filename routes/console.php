@@ -3,6 +3,8 @@
 use App\Actions\ImporHadist;
 use App\Actions\ImporQuran;
 use App\Enums\Kitab;
+use App\Enums\Peran;
+use App\Models\User;
 use Illuminate\Support\Facades\Artisan;
 
 Artisan::command('hadist:impor {kitab? : kode kitab, mis. bukhari; kosong = semua}', function (ImporHadist $impor) {
@@ -50,3 +52,19 @@ Artisan::command('quran:impor {surat? : nomor surat 1-114; kosong = semua}', fun
 
     return $gagal ? 1 : 0;
 })->purpose('Impor teks Al-Qur\'an dari equran.id');
+
+Artisan::command('akun:peran {email} {peran : superadmin, editor, atau pengguna}', function () {
+    $peran = Peran::tryFrom($this->argument('peran'));
+    $user = User::where('email', $this->argument('email'))->first();
+
+    if (! $peran || ! $user) {
+        $this->error(! $peran ? 'Peran harus superadmin, editor, atau pengguna.' : 'Akun dengan email itu tidak ditemukan.');
+
+        return 1;
+    }
+
+    $user->forceFill(['peran' => $peran])->save();
+    $this->info("{$user->name} sekarang {$peran->label()}.");
+
+    return 0;
+})->purpose('Atur peran akun (mis. jadikan superadmin pertama)');

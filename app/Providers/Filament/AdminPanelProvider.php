@@ -27,7 +27,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->login()
+            // Login lewat halaman utama /masuk (route `login`), bukan halaman login Filament.
             ->colors([
                 'primary' => Color::Amber,
             ])

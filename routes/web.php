@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AkunController;
 use App\Http\Controllers\HadistController;
 use App\Http\Controllers\KontakController;
 use App\Http\Controllers\QuranController;
@@ -16,3 +17,11 @@ Route::post('/kontak', [KontakController::class, 'store'])->middleware('throttle
 Route::view('/dukung', 'dukung');
 Route::get('/quran', [QuranController::class, 'daftar']);
 Route::get('/quran/{surat}', [QuranController::class, 'tampil'])->whereNumber('surat');
+
+Route::middleware('guest')->group(function () {
+    Route::get('/masuk', [AkunController::class, 'formMasuk'])->name('login');
+    Route::post('/masuk', [AkunController::class, 'masuk']);
+    Route::get('/daftar', [AkunController::class, 'formDaftar']);
+    Route::post('/daftar', [AkunController::class, 'daftar']);
+});
+Route::post('/keluar', [AkunController::class, 'keluar'])->middleware('auth');

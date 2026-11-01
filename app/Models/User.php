@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\Peran;
 use Database\Factories\UserFactory;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
@@ -19,6 +20,9 @@ class User extends Authenticatable implements FilamentUser
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
+    /** @var array<string, mixed> */
+    protected $attributes = ['peran' => 'pengguna'];
+
     /**
      * Get the attributes that should be cast.
      *
@@ -29,12 +33,18 @@ class User extends Authenticatable implements FilamentUser
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'peran' => Peran::class,
         ];
     }
 
-    /** Tidak ada pendaftaran publik; semua akun dibuat lewat make:filament-user, jadi semuanya admin. */
+    // `peran` sengaja tidak fillable: hanya diubah lewat admin (Akun) atau `php artisan akun:peran`.
     public function canAccessPanel(Panel $panel): bool
     {
-        return true;
+        return $this->peran->bisaMasukAdmin();
+    }
+
+    public function superadmin(): bool
+    {
+        return $this->peran === Peran::Superadmin;
     }
 }
