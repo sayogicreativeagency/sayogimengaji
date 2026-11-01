@@ -1,4 +1,4 @@
-<x-layout judul="Dukung">
+<x-layout judul="Dukung" :sidebar="false">
     <article class="mx-auto max-w-2xl">
         <h1 class="text-3xl font-semibold tracking-tight">Infaq untuk Hadist Apa</h1>
         <p class="mt-4 text-lg leading-relaxed text-stone-700 dark:text-stone-300">
@@ -28,18 +28,7 @@
             untukmu yang ikut menjaganya.
         </p>
 
-        <div class="mt-10 rounded-xl border border-emerald-200 bg-emerald-50/60 p-6 text-center dark:border-emerald-900 dark:bg-emerald-950/30">
-            @if ($saweria = config('services.saweria.url'))
-                <a href="{{ $saweria }}" target="_blank" rel="noopener"
-                   class="inline-block rounded-lg bg-emerald-700 px-6 py-3 text-lg font-medium text-white hover:bg-emerald-800 focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2 focus-visible:outline-none">
-                    Infaq lewat Saweria
-                </a>
-                <p class="mt-3 text-sm text-stone-600 dark:text-stone-400">Pembayaran diproses oleh Saweria lewat QRIS dan e-wallet. Berapa pun nominalnya sangat berarti.</p>
-            @else
-                <p class="text-lg font-medium">Segera hadir</p>
-                <p class="mt-2 text-sm text-stone-600 dark:text-stone-400">Halaman infaq sedang kami siapkan. Sementara itu, doa dan berbagi Hadist Apa sudah sangat membantu.</p>
-            @endif
-        </div>
+        <x-papan-donasi class="mt-10" />
 
         <p class="mt-6 text-sm leading-relaxed text-stone-600 dark:text-stone-400">
             Infaq ini sepenuhnya untuk operasional dan pengembangan Hadist Apa, bukan penggalangan dana untuk pihak lain.

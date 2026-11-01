@@ -38,6 +38,8 @@ return [
     'saweria' => [
         // Halaman Saweria untuk infaq; kosong = tombol "Segera hadir".
         'url' => env('SAWERIA_URL'),
+        // Gambar QRIS Saweria, relatif ke public/ (mis. img/qris-saweria.png); kosong = tidak ditampilkan.
+        'qris' => env('SAWERIA_QRIS'),
     ],
 
 ];
