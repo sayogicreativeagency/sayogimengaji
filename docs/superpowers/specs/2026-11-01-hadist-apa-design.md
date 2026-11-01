@@ -143,8 +143,7 @@ Filament 5 di `/admin`, login dengan tabel `users` bawaan; akun lewat
 ## Konfigurasi `.env`
 
 ```
-AI_PROVIDER=deepseek
-AI_MODEL=deepseek-chat        # sesuaikan nama model Flash saat implementasi
+AI_PROVIDER=deepseek          # model = default provider (deepseek-flash), atur di config/ai.php
 DEEPSEEK_API_KEY=
 ```
 
