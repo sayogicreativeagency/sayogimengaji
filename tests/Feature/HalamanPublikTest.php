@@ -76,3 +76,22 @@ it('menampilkan daftar isi per kitab untuk loncat ke hadist', function () {
         ->assertSeeInOrder(['Loncat ke', 'HR. Bukhari', 'no. 5063', 'HR. Muslim', 'no. 1400', 'no. 1401'])
         ->assertSee('href="#h-'.$muslim2->id.'"', false);
 });
+
+it('menyiapkan filter tanpa reload hanya untuk kitab dan derajat yang ada di hasil', function () {
+    $a = Hadist::factory()->create(['kitab' => Kitab::Muslim, 'derajat_ringkas' => Derajat::Shahih, 'terjemahan' => 'menikahlah']);
+    $b = Hadist::factory()->create(['kitab' => Kitab::AbuDawud, 'derajat_ringkas' => Derajat::Dhaif, 'terjemahan' => 'menikahlah']);
+    $c = Hadist::factory()->create(['kitab' => Kitab::AbuDawud, 'derajat_ringkas' => null, 'terjemahan' => 'menikahlah']);
+    PengembangKataKunci::fake([['kata_kunci' => ['menikahlah']]]);
+    PemilihHadist::fake([['ringkasan' => 'x', 'hadist_ids' => [$a->id, $b->id, $c->id]]]);
+
+    $this->get('/cari?q=menikah')->assertOk()
+        ->assertSee('data-filter-hasil', false)
+        ->assertDontSee('<select id="derajat" name="derajat"', false)
+        ->assertSee('<option value="muslim">HR. Muslim (1)</option>', false)
+        ->assertSee('<option value="abudawud">HR. Abu Dawud (2)</option>', false)
+        ->assertDontSee('<option value="bukhari">', false)
+        ->assertSee('<option value="dhaif">Dha&#039;if (1)</option>', false)
+        ->assertSee('<option value="belum">Belum dinilai (1)</option>', false)
+        ->assertDontSee('<option value="hasan">', false)
+        ->assertSee('data-hadist data-kitab="abudawud" data-derajat="belum"', false);
+});
