@@ -41,4 +41,9 @@ return [
         'url' => env('SAWERIA_URL'),
     ],
 
+    'infaq' => [
+        // Isi teks QRIS (diawali 000201), bukan gambar. Digambar ulang di papan donasi; CRC salah = tidak ditampilkan.
+        'qris' => env('INFAQ_QRIS'),
+    ],
+
 ];

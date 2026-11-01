@@ -1,5 +1,7 @@
 <?php
 
+use App\Support\Qris;
+
 it('menampilkan halaman dukung dengan tombol ke saweria', function () {
     config(['services.saweria.url' => 'https://saweria.co/hadistapa']);
 
@@ -44,4 +46,24 @@ it('menampilkan QR otomatis di halaman dukung', function () {
 
 it('tanpa sidebar di halaman dukung karena isinya sudah lengkap', function () {
     $this->get('/dukung')->assertOk()->assertDontSee('<aside', false);
+});
+
+it('menampilkan QRIS infaq beserta nama penerima bila diatur', function () {
+    $nama = '5910HADIST APA';
+    config([
+        'services.saweria.url' => 'https://saweria.co/hadistapa',
+        'services.infaq.qris' => Qris::denganCrc('000201010211520448295303360'.'5802ID'.$nama.'6007JAKARTA6304'),
+    ]);
+
+    $this->get('/')->assertOk()
+        ->assertSee('alt="QRIS infaq Hadist Apa atas nama HADIST APA"', false)
+        ->assertSee('atas nama <strong>HADIST APA</strong>', false)
+        ->assertDontSee('alt="Kode QR ke halaman Saweria', false)
+        ->assertSee('href="https://saweria.co/hadistapa"', false);
+});
+
+it('kembali ke QR Saweria bila QRIS rusak', function () {
+    config(['services.saweria.url' => 'https://saweria.co/hadistapa', 'services.infaq.qris' => '000201xxxx6304ABCD']);
+
+    $this->get('/')->assertOk()->assertDontSee('alt="QRIS infaq', false)->assertSee('alt="Kode QR ke halaman Saweria Hadist Apa"', false);
 });
