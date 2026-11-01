@@ -89,13 +89,13 @@ Index: unique `(kitab, nomor)`, FULLTEXT `(terjemahan, bab_judul)`, index `deraj
 
 ## Pencarian
 
-`GET /cari?q=&derajat=&kitab=` → satu kelas aksi `App\Actions\CariHadist`.
+`GET /cari?q=` → satu kelas aksi `App\Actions\CariHadist`.
 
 1. **Cache**: `Cache::remember` 7 hari, kunci = hash dari query ternormalisasi
-   (lowercase, trim, spasi tunggal) + filter.
+   (lowercase, trim, spasi tunggal). Kata kunci AI juga di-cache 7 hari (`kata:{hash}`) untuk filter.
 2. **AI 1 — pengembangan kata kunci** (output terstruktur): 5–12 kata kunci Indonesia +
    istilah Arab yang ditulis latin.
-3. **DB**: `MATCH(terjemahan, bab_judul) AGAINST(? IN BOOLEAN MODE)` + filter, 30 kandidat
+3. **DB**: `MATCH(terjemahan, bab_judul) AGAINST(? IN BOOLEAN MODE)`, 30 kandidat
    teratas menurut skor.
 4. **AI 2 — pilih ulang + ringkas** (output terstruktur): input 30 kandidat (`id` +
    terjemahan dipotong ±600 karakter + derajat). Output
@@ -129,7 +129,9 @@ Query kosong → redirect ke `/`. Tidak ada kandidat → pesan "tidak ditemukan"
 - `/` — kotak pencarian + contoh query yang bisa diklik.
 - `/cari` — ringkasan AI (rujukan `[#id]` jadi link ke kartu), kartu hadist (Arab RTL,
   terjemahan, "HR. {kitab} no. {nomor}", label derajat berwarna: hijau shahih, biru hasan,
-  kuning dha'if, merah maudhu, abu-abu belum dinilai), filter derajat & kitab via form GET.
+  kuning dha'if, merah maudhu, abu-abu belum dinilai), filter derajat & kitab tanpa reload: JS `fetch` ke `GET /cari/saring?q=&derajat=&kitab=`
+  (`CariHadist::saring`, kata kunci dari cache, tanpa AI, ≤30 hasil, potongan HTML). Selama filter aktif
+  ringkasan AI disembunyikan; filter kembali ke "Semua" memulihkan tampilan awal.
 - `/hadist/{kitab}/{nomor}` — detail: semua penilaian ulama, judul bab. 404 bila tidak ada.
 
 ## Admin

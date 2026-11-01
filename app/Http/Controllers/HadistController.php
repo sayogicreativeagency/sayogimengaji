@@ -24,14 +24,24 @@ class HadistController extends Controller
             return redirect('/');
         }
 
-        $derajat = Derajat::tryFrom((string) $request->query('derajat'));
-        $kitab = Kitab::tryFrom((string) $request->query('kitab'));
+        return view('cari', ['q' => $q, 'hasil' => $cari($q)]);
+    }
 
-        return view('cari', [
-            'q' => $q,
-            'derajat' => $derajat,
-            'kitab' => $kitab,
-            'hasil' => $cari($q, $derajat, $kitab),
+    /** Potongan HTML untuk filter AJAX di halaman /cari; tanpa panggilan AI. */
+    public function saring(Request $request, CariHadist $cari)
+    {
+        $q = Str::limit(Str::squish((string) $request->query('q')), 200, '');
+        abort_if($q === '', 422);
+
+        $hadist = $cari->saring(
+            $q,
+            Derajat::tryFrom((string) $request->query('derajat')),
+            Kitab::tryFrom((string) $request->query('kitab')),
+        );
+
+        return view('partials.daftar-hadist', [
+            'hadist' => $hadist,
+            'keterangan' => $hadist->count().' hadist cocok dengan filter'.($hadist->count() >= 30 ? ' (30 teratas)' : '').'.',
         ]);
     }
 

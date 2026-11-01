@@ -77,21 +77,35 @@ it('menampilkan daftar isi per kitab untuk loncat ke hadist', function () {
         ->assertSee('href="#h-'.$muslim2->id.'"', false);
 });
 
-it('menyiapkan filter tanpa reload hanya untuk kitab dan derajat yang ada di hasil', function () {
-    $a = Hadist::factory()->create(['kitab' => Kitab::Muslim, 'derajat_ringkas' => Derajat::Shahih, 'terjemahan' => 'menikahlah']);
-    $b = Hadist::factory()->create(['kitab' => Kitab::AbuDawud, 'derajat_ringkas' => Derajat::Dhaif, 'terjemahan' => 'menikahlah']);
-    $c = Hadist::factory()->create(['kitab' => Kitab::AbuDawud, 'derajat_ringkas' => null, 'terjemahan' => 'menikahlah']);
+it('menyiapkan filter yang memuat ulang hasil lewat AJAX', function () {
+    $a = Hadist::factory()->create(['kitab' => Kitab::Muslim, 'terjemahan' => 'menikahlah']);
+    $b = Hadist::factory()->create(['kitab' => Kitab::AbuDawud, 'derajat_ringkas' => null, 'terjemahan' => 'menikahlah']);
     PengembangKataKunci::fake([['kata_kunci' => ['menikahlah']]]);
-    PemilihHadist::fake([['ringkasan' => 'x', 'hadist_ids' => [$a->id, $b->id, $c->id]]]);
+    PemilihHadist::fake([['ringkasan' => 'Ringkasan x', 'hadist_ids' => [$a->id, $b->id]]]);
 
     $this->get('/cari?q=menikah')->assertOk()
         ->assertSee('data-filter-hasil', false)
-        ->assertDontSee('<select id="derajat" name="derajat"', false)
-        ->assertSee('<option value="muslim">HR. Muslim (1)</option>', false)
-        ->assertSee('<option value="abudawud">HR. Abu Dawud (2)</option>', false)
-        ->assertDontSee('<option value="bukhari">', false)
-        ->assertSee('<option value="dhaif">Dha&#039;if (1)</option>', false)
-        ->assertSee('<option value="belum">Belum dinilai (1)</option>', false)
-        ->assertDontSee('<option value="hasan">', false)
-        ->assertSee('data-hadist data-kitab="abudawud" data-derajat="belum"', false);
+        ->assertSee('data-ringkasan', false)
+        ->assertSee('data-hasil', false)
+        ->assertSee('<option value="bukhari">HR. Bukhari</option>', false)
+        ->assertSee('<option value="dhaif">Dha&#039;if</option>', false);
+});
+
+it('mengembalikan potongan HTML hasil saringan tanpa ringkasan dan tanpa AI', function () {
+    Hadist::factory()->create(['kitab' => Kitab::Muslim, 'nomor' => '1400', 'terjemahan' => 'menikahlah', 'derajat_ringkas' => Derajat::Shahih]);
+    Hadist::factory()->create(['kitab' => Kitab::Bukhari, 'nomor' => '5063', 'terjemahan' => 'menikahlah', 'derajat_ringkas' => Derajat::Shahih]);
+    PengembangKataKunci::fake()->preventStrayPrompts();
+    PemilihHadist::fake()->preventStrayPrompts();
+
+    $this->get('/cari/saring?q=menikahlah&kitab=muslim&derajat=shahih')->assertOk()
+        ->assertSee('HR. Muslim no. 1400')
+        ->assertDontSee('no. 5063')
+        ->assertSee('1 hadist cocok dengan filter')
+        ->assertDontSee('<html', false)
+        ->assertDontSee('Ringkasan');
+    PengembangKataKunci::assertNeverPrompted();
+});
+
+it('menolak saringan tanpa query', function () {
+    $this->get('/cari/saring?kitab=muslim')->assertStatus(422);
 });

@@ -34,15 +34,25 @@ it('membuang id dan rujukan yang bukan kandidat', function () {
         ->and($hasil->ringkasan)->toBe("Lihat [#{$this->nikah->id}] dan  serta .");
 });
 
-it('menerapkan filter derajat dan kitab', function () {
-    PengembangKataKunci::fake([['kata_kunci' => ['menikah', 'mahar', 'wudhu']], ['kata_kunci' => ['menikah', 'mahar', 'wudhu']]]);
-    PemilihHadist::fake([['ringkasan' => '', 'hadist_ids' => []], ['ringkasan' => '', 'hadist_ids' => []]]);
+it('menyaring ke seluruh DB dengan kata kunci tersimpan tanpa memanggil AI', function () {
+    PengembangKataKunci::fake([['kata_kunci' => ['menikah', 'mahar', 'wudhu']]]);
+    PemilihHadist::fake([['ringkasan' => 'ok', 'hadist_ids' => [$this->nikah->id]]]);
+    (new CariHadist)('Apa Saja');
 
-    (new CariHadist)('apa saja', derajat: Derajat::Dhaif);
-    (new CariHadist)('apa saja', kitab: Kitab::Tirmidhi);
+    $dhaif = (new CariHadist)->saring('apa  saja', Derajat::Dhaif, null);
+    $tirmidhi = (new CariHadist)->saring('apa saja', null, Kitab::Tirmidhi);
 
-    PemilihHadist::assertPrompted(fn ($p) => $p->contains("[#{$this->mahar->id}]") && ! $p->contains("[#{$this->nikah->id}]") && ! $p->contains("[#{$this->wudhu->id}]"));
-    PemilihHadist::assertPrompted(fn ($p) => $p->contains("[#{$this->wudhu->id}]") && ! $p->contains("[#{$this->mahar->id}]"));
+    expect($dhaif->modelKeys())->toBe([$this->mahar->id])
+        ->and($tirmidhi->modelKeys())->toBe([$this->wudhu->id]);
+    PengembangKataKunci::assertPromptedTimes(1);
+    PemilihHadist::assertPromptedTimes(1);
+});
+
+it('menyaring dengan kata dari query bila belum ada kata kunci tersimpan', function () {
+    PengembangKataKunci::fake()->preventStrayPrompts();
+
+    expect((new CariHadist)->saring('wudhu', null, Kitab::Tirmidhi)->modelKeys())->toBe([$this->wudhu->id]);
+    PengembangKataKunci::assertNeverPrompted();
 });
 
 it('tetap mencari dengan kata dari query bila AI kata kunci gagal', function () {

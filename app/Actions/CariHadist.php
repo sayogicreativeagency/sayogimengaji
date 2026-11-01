@@ -15,6 +15,7 @@ use Throwable;
 /**
  * Cari hadist: AI mengembangkan kata kunci → FULLTEXT → AI memilih & meringkas.
  * AI hanya memilih id; semua teks hadist yang ditampilkan berasal dari DB.
+ * `saring()` memakai ulang kata kunci tersimpan untuk filter derajat/kitab tanpa memanggil AI.
  */
 final class CariHadist
 {
@@ -22,10 +23,12 @@ final class CariHadist
 
     private const HASIL = 10;
 
-    public function __invoke(string $q, ?Derajat $derajat = null, ?Kitab $kitab = null): HasilPencarian
+    private const SIMPAN = 7; // hari
+
+    public function __invoke(string $q): HasilPencarian
     {
-        $q = Str::of($q)->squish()->lower()->toString();
-        $kunci = 'cari:'.md5(json_encode([$q, $derajat?->value, $kitab?->value]));
+        $q = $this->normal($q);
+        $kunci = 'cari:'.md5($q);
 
         if ($simpanan = Cache::get($kunci)) {
             return new HasilPencarian($simpanan['ringkasan'], $this->muat($simpanan['ids']), true);
@@ -35,18 +38,14 @@ final class CariHadist
 
         try {
             $kataKunci = (new PengembangKataKunci)->prompt($q)['kata_kunci'];
+            Cache::put('kata:'.md5($q), $kataKunci, now()->addDays(self::SIMPAN));
         } catch (Throwable $e) {
             report($e);
             $aiTersedia = false;
             $kataKunci = explode(' ', $q);
         }
 
-        $kandidat = Hadist::query()
-            ->cocok($kataKunci)
-            ->when($derajat, fn ($query) => $query->where('derajat_ringkas', $derajat))
-            ->when($kitab, fn ($query) => $query->where('kitab', $kitab))
-            ->limit(self::KANDIDAT)
-            ->get();
+        $kandidat = Hadist::query()->cocok($kataKunci)->limit(self::KANDIDAT)->get();
 
         if ($kandidat->isEmpty()) {
             return new HasilPencarian(null, $kandidat, $aiTersedia);
@@ -65,10 +64,33 @@ final class CariHadist
         $ringkasan = preg_replace_callback('/\[#(\d+)\]/', fn ($m) => in_array((int) $m[1], $ids, true) ? $m[0] : '', $pilihan['ringkasan']);
 
         if ($aiTersedia) {
-            Cache::put($kunci, ['ringkasan' => $ringkasan, 'ids' => $ids], now()->addDays(7));
+            Cache::put($kunci, ['ringkasan' => $ringkasan, 'ids' => $ids], now()->addDays(self::SIMPAN));
         }
 
         return new HasilPencarian($ringkasan, $this->muat($ids), $aiTersedia);
+    }
+
+    /**
+     * Hadist dari seluruh DB yang cocok dengan kata kunci pencarian + filter, urut skor FULLTEXT.
+     *
+     * @return Collection<int, Hadist>
+     */
+    public function saring(string $q, ?Derajat $derajat, ?Kitab $kitab): Collection
+    {
+        $q = $this->normal($q);
+        $kataKunci = Cache::get('kata:'.md5($q)) ?? explode(' ', $q);
+
+        return Hadist::query()
+            ->cocok($kataKunci)
+            ->when($derajat, fn ($query) => $query->where('derajat_ringkas', $derajat))
+            ->when($kitab, fn ($query) => $query->where('kitab', $kitab))
+            ->limit(self::KANDIDAT)
+            ->get();
+    }
+
+    private function normal(string $q): string
+    {
+        return Str::of($q)->squish()->lower()->toString();
     }
 
     private function promptPemilih(string $q, Collection $kandidat): string
