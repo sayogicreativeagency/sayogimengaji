@@ -2,6 +2,8 @@
 @php
     $saweria = config('services.saweria.url');
     $qris = config('services.saweria.qris');
+    // Hanya file gambar di public/. Mencegah link widget Saweria (berisi streamKey rahasia) tercetak ke halaman.
+    $qris = $qris && is_file(public_path($qris)) ? $qris : null;
 @endphp
 <div {{ $attributes->class('rounded-xl border border-emerald-200 bg-emerald-50/60 p-5 dark:border-emerald-900 dark:bg-emerald-950/30') }}>
     @if ($ringkas)
