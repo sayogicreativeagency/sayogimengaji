@@ -2,17 +2,19 @@
 
 namespace App\Ai\Agents;
 
+use App\Ai\Agents\Concerns\PakaiEffortDeepSeek;
 use Illuminate\Contracts\JsonSchema\JsonSchema;
 use Laravel\Ai\Attributes\Timeout;
 use Laravel\Ai\Contracts\Agent;
+use Laravel\Ai\Contracts\HasProviderOptions;
 use Laravel\Ai\Contracts\HasStructuredOutput;
 use Laravel\Ai\Promptable;
 
 /** Mengubah pertanyaan pengguna jadi kata kunci untuk FULLTEXT. */
 #[Timeout(20)]
-class PengembangKataKunci implements Agent, HasStructuredOutput
+class PengembangKataKunci implements Agent, HasProviderOptions, HasStructuredOutput
 {
-    use Promptable;
+    use PakaiEffortDeepSeek, Promptable;
 
     public function instructions(): string
     {

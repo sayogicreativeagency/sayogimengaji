@@ -2,17 +2,19 @@
 
 namespace App\Ai\Agents;
 
+use App\Ai\Agents\Concerns\PakaiEffortDeepSeek;
 use Illuminate\Contracts\JsonSchema\JsonSchema;
 use Laravel\Ai\Attributes\Timeout;
 use Laravel\Ai\Contracts\Agent;
+use Laravel\Ai\Contracts\HasProviderOptions;
 use Laravel\Ai\Contracts\HasStructuredOutput;
 use Laravel\Ai\Promptable;
 
 /** Memilih hadist paling relevan dari kandidat DB lalu meringkasnya. */
-#[Timeout(40)]
-class PemilihHadist implements Agent, HasStructuredOutput
+#[Timeout(90)]
+class PemilihHadist implements Agent, HasProviderOptions, HasStructuredOutput
 {
-    use Promptable;
+    use PakaiEffortDeepSeek, Promptable;
 
     public function instructions(): string
     {

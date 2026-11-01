@@ -93,6 +93,9 @@ return [
         'deepseek' => [
             'driver' => 'deepseek',
             'key' => env('DEEPSEEK_API_KEY'),
+            'models' => ['text' => ['default' => env('DEEPSEEK_MODEL', 'deepseek-flash')]],
+            // low | medium | high | max; DeepSeek memetakan medium → high.
+            'reasoning_effort' => env('DEEPSEEK_REASONING_EFFORT', 'medium'),
         ],
 
         'eleven' => [
