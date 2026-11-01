@@ -21,8 +21,8 @@ Admin bisa mengoreksi data.
 
 ## Sumber data
 
-`fawazahmed0/hadith-api` via jsDelivr
-(`https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/{edisi}.json`).
+`fawazahmed0/hadith-api` via raw.githubusercontent.com (jsDelivr menolak: repo > 150 MB)
+(`https://raw.githubusercontent.com/fawazahmed0/hadith-api/1/editions/{edisi}.min.json`).
 
 7 kitab yang punya edisi Indonesia (`ind-*`) dan Arab (`ara-*`), total ±36.390 hadist:
 
@@ -72,7 +72,8 @@ Index: unique `(kitab, nomor)`, FULLTEXT `(terjemahan, bab_judul)`, index `deraj
 2. Selain itu: ambil penilaian Al-Albani bila ada, jika tidak ambil yang pertama.
 3. Cocokkan teks (case-insensitive, urutan dicek dari atas):
    `sahih` → shahih (termasuk "Hasan Sahih"), `hasan` → hasan,
-   `da'if` / `daif` / `dhaif` → dhaif, `maudu` / `mawdu` → maudhu.
+   `da'if` / `daif` / `dhaif` / `munkar` / `shadh` → dhaif,
+   `maudu` / `mawdu` / `batil` → maudhu.
 4. Tidak cocok / tidak ada penilaian → null ("belum dinilai").
 
 ## Impor
