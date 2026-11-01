@@ -7,4 +7,11 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
     --font-arab: 'Amiri', 'Geeza Pro', 'Traditional Arabic', serif;
+    --font-quran: 'Amiri Quran', 'Amiri', 'Geeza Pro', serif;
+}
+
+/* Tombol tampilan di halaman surat (resources/js/murottal.js). */
+[data-tanpa-latin] [data-latin],
+[data-tanpa-terjemahan] [data-terjemahan] {
+    display: none;
 }

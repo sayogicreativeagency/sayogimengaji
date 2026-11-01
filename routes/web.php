@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HadistController;
 use App\Http\Controllers\KontakController;
+use App\Http\Controllers\QuranController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HadistController::class, 'beranda']);
@@ -12,3 +13,5 @@ Route::get('/hadist/{kitab}/{nomor}', [HadistController::class, 'tampil'])->name
 Route::get('/kontak', [KontakController::class, 'create']);
 Route::post('/kontak', [KontakController::class, 'store'])->middleware('throttle:5,1');
 Route::view('/dukung', 'dukung');
+Route::get('/quran', [QuranController::class, 'daftar']);
+Route::get('/quran/{surat}', [QuranController::class, 'tampil'])->whereNumber('surat');
