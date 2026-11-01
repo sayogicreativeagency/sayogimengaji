@@ -15,7 +15,7 @@
     @if ($saweria)
         <img src="{{ $qr }}" alt="Kode QR ke halaman Saweria Hadist Apa" width="200" height="200"
              class="mx-auto mt-4 w-full rounded-lg bg-white p-2 {{ $ringkas ? 'max-w-48' : 'max-w-56' }}">
-        <p class="mt-2 text-center text-xs text-stone-500">Pindai dengan kamera HP, lalu bayar lewat QRIS atau e-wallet di Saweria.</p>
+        <p class="mt-2 text-center text-xs text-stone-500">Pindai dengan <strong>kamera HP</strong> atau Google Lens (bukan aplikasi bank) untuk membuka halaman Saweria, lalu bayar lewat QRIS atau e-wallet di sana.</p>
         <a href="{{ $saweria }}" target="_blank" rel="noopener"
            class="mt-4 block rounded-lg bg-emerald-700 px-5 py-2.5 text-center font-medium text-white hover:bg-emerald-800 focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2 focus-visible:outline-none">
             Infaq lewat Saweria
