@@ -30,7 +30,9 @@ it('menampilkan ringkasan dan kartu hadist', function () {
         ->assertSee('مَنِ اسْتَطَاعَ')
         ->assertSee('HR. Bukhari no. 5063')
         ->assertSee('Shahih')
-        ->assertSee('Ringkasan dibuat AI');
+        ->assertSee('Ringkasan ini dibuat oleh AI')
+        ->assertSee('patokan utamanya adalah teks hadist')
+        ->assertSee('href="'.url('/kontak?q=pernikahan').'"', false);
 });
 
 it('memberi tahu bila ringkasan AI tidak tersedia', function () {
@@ -61,4 +63,16 @@ it('menampilkan detail hadist dengan semua penilaian ulama', function () {
 it('404 untuk hadist atau kitab yang tidak ada', function () {
     $this->get('/hadist/abudawud/1')->assertNotFound();
     $this->get('/hadist/tidakada/1')->assertNotFound();
+});
+
+it('menampilkan daftar isi per kitab untuk loncat ke hadist', function () {
+    $muslim = Hadist::factory()->create(['kitab' => Kitab::Muslim, 'nomor' => '1400', 'terjemahan' => 'menikahlah']);
+    $bukhari = Hadist::factory()->create(['kitab' => Kitab::Bukhari, 'nomor' => '5063', 'terjemahan' => 'menikahlah']);
+    $muslim2 = Hadist::factory()->create(['kitab' => Kitab::Muslim, 'nomor' => '1401', 'terjemahan' => 'menikahlah']);
+    PengembangKataKunci::fake([['kata_kunci' => ['menikahlah']]]);
+    PemilihHadist::fake([['ringkasan' => 'x', 'hadist_ids' => [$muslim->id, $bukhari->id, $muslim2->id]]]);
+
+    $this->get('/cari?q=menikah')->assertOk()
+        ->assertSeeInOrder(['Loncat ke', 'HR. Bukhari', 'no. 5063', 'HR. Muslim', 'no. 1400', 'no. 1401'])
+        ->assertSee('href="#h-'.$muslim2->id.'"', false);
 });

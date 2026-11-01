@@ -23,6 +23,7 @@
     <footer class="mx-auto max-w-3xl px-4 pb-10 text-xs leading-relaxed text-stone-500">
         Data: <a href="https://github.com/fawazahmed0/hadith-api" class="underline">fawazahmed0/hadith-api</a>.
         Derajat mengikuti penilaian ulama yang tercantum; rujuk ulama untuk penetapan hukum.
+        <a href="/kontak" class="underline">Kontak &amp; laporan</a>.
     </footer>
 </body>
 </html>
