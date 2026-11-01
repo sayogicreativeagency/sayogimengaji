@@ -9,7 +9,7 @@ use App\Models\WaktuKata;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-/** Fitur belajar/hafalan Al-Qur'an: gratis, cukup login. */
+/** Fitur belajar/hafalan Al-Qur'an (langganan; Al-Fatihah gratis). */
 class BelajarController extends Controller
 {
     public function dasbor(Request $request)
@@ -23,11 +23,16 @@ class BelajarController extends Controller
             'daftar' => Surat::orderBy('nomor')->get(),
             'hafal' => $progres->whereNotNull('dihafal_at')->countBy('surat_nomor'),
             'terakhir' => $terakhir,
+            'langganan' => $user->berlangganan() ? $user->langganan : null,
         ]);
     }
 
     public function tampil(Request $request, Surat $surat)
     {
+        if (! $request->user()->bisaBelajar($surat->nomor)) {
+            return view('belajar.terkunci', ['surat' => $surat]);
+        }
+
         $kata = Kata::where('surat_nomor', $surat->nomor)->orderBy('ayat_nomor')->orderBy('posisi')->get()->groupBy('ayat_nomor');
         // waktu[ayat][qori] = [[posisi, mulai, selesai], ...] urut posisi kata.
         $waktu = WaktuKata::where('surat_nomor', $surat->nomor)->orderBy('posisi')->get()
@@ -51,6 +56,7 @@ class BelajarController extends Controller
             'ayat' => ['required', 'integer', 'min:1'],
             'status' => ['required', Rule::in(['didengar', 'hafal', 'belum-hafal'])],
         ]);
+        abort_unless($request->user()->bisaBelajar($data['surat']), 403);
         $request->validate(['ayat' => ['integer', 'max:'.Surat::find($data['surat'])->jumlah_ayat]]);
 
         $progres = $request->user()->progresBelajar()->firstOrNew(['surat_nomor' => $data['surat'], 'ayat_nomor' => $data['ayat']]);

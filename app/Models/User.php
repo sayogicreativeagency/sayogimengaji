@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -47,6 +48,23 @@ class User extends Authenticatable implements FilamentUser
     public function superadmin(): bool
     {
         return $this->peran === Peran::Superadmin;
+    }
+
+    /** @return HasOne<Langganan, $this> */
+    public function langganan(): HasOne
+    {
+        return $this->hasOne(Langganan::class);
+    }
+
+    public function berlangganan(): bool
+    {
+        return (bool) $this->langganan?->aktif();
+    }
+
+    /** Al-Fatihah gratis untuk dicoba; surat lain butuh langganan aktif. */
+    public function bisaBelajar(int $surat): bool
+    {
+        return $surat === 1 || $this->berlangganan();
     }
 
     /** @return HasMany<ProgresBelajar, $this> */

@@ -19,6 +19,8 @@ beforeEach(function () {
         }
     }
     $this->pengguna = User::factory()->create();
+    $this->pelanggan = User::factory()->create();
+    $this->pelanggan->langganan()->create(['berakhir_pada' => now()->addYear(), 'sumber' => 'manual']);
 });
 
 it('meminta login untuk belajar', function () {
@@ -26,8 +28,17 @@ it('meminta login untuk belajar', function () {
     $this->get('/belajar/1')->assertRedirect('/masuk');
 });
 
-it('semua surat terbuka gratis untuk yang login, lengkap dengan kata dan waktunya', function () {
+it('Al-Fatihah gratis untuk semua yang login', function () {
+    $this->actingAs($this->pengguna)->get('/belajar/1')->assertOk()->assertSee('data-belajar', false);
+});
+
+it('surat lain terkunci tanpa langganan', function () {
     $this->actingAs($this->pengguna)->get('/belajar/2')->assertOk()
+        ->assertSee('Fitur langganan')->assertDontSee('data-belajar', false);
+});
+
+it('pelanggan bisa membuka semua surat dengan kata dan waktunya', function () {
+    $this->actingAs($this->pelanggan)->get('/belajar/2')->assertOk()
         ->assertSee('data-belajar', false)
         ->assertSee('data-posisi="2"', false)
         ->assertSee('ٱللَّهِ')
@@ -36,28 +47,43 @@ it('semua surat terbuka gratis untuk yang login, lengkap dengan kata dan waktuny
 });
 
 it('menyimpan progres hafalan milik sendiri', function () {
-    $this->actingAs($this->pengguna)->postJson('/belajar/progres', ['surat' => 2, 'ayat' => 3, 'status' => 'hafal'])->assertNoContent();
-    $this->actingAs($this->pengguna)->postJson('/belajar/progres', ['surat' => 2, 'ayat' => 2, 'status' => 'didengar'])->assertNoContent();
+    $this->actingAs($this->pelanggan)->postJson('/belajar/progres', ['surat' => 2, 'ayat' => 3, 'status' => 'hafal'])->assertNoContent();
+    $this->actingAs($this->pelanggan)->postJson('/belajar/progres', ['surat' => 2, 'ayat' => 2, 'status' => 'didengar'])->assertNoContent();
 
-    expect(ProgresBelajar::where('user_id', $this->pengguna->id)->where('ayat_nomor', 3)->sole()->dihafal_at)->not->toBeNull();
+    expect(ProgresBelajar::where('user_id', $this->pelanggan->id)->where('ayat_nomor', 3)->sole()->dihafal_at)->not->toBeNull();
 
-    $this->actingAs($this->pengguna)->postJson('/belajar/progres', ['surat' => 2, 'ayat' => 3, 'status' => 'belum-hafal'])->assertNoContent();
+    $this->actingAs($this->pelanggan)->postJson('/belajar/progres', ['surat' => 2, 'ayat' => 3, 'status' => 'belum-hafal'])->assertNoContent();
     expect(ProgresBelajar::where('ayat_nomor', 3)->sole()->dihafal_at)->toBeNull();
 });
 
-it('menolak progres untuk ayat di luar jangkauan atau status tidak dikenal', function () {
-    $this->actingAs($this->pengguna)->postJson('/belajar/progres', ['surat' => 2, 'ayat' => 9, 'status' => 'hafal'])->assertUnprocessable();
-    $this->actingAs($this->pengguna)->postJson('/belajar/progres', ['surat' => 2, 'ayat' => 1, 'status' => 'raja'])->assertUnprocessable();
+it('menolak progres untuk surat terkunci atau ayat di luar jangkauan', function () {
+    $this->actingAs($this->pengguna)->postJson('/belajar/progres', ['surat' => 2, 'ayat' => 1, 'status' => 'hafal'])->assertForbidden();
+    $this->actingAs($this->pelanggan)->postJson('/belajar/progres', ['surat' => 2, 'ayat' => 9, 'status' => 'hafal'])->assertUnprocessable();
+    $this->actingAs($this->pelanggan)->postJson('/belajar/progres', ['surat' => 2, 'ayat' => 1, 'status' => 'raja'])->assertUnprocessable();
 });
 
 it('dasbor menampilkan persentase hafalan dan tombol lanjutkan', function () {
-    $this->actingAs($this->pengguna)->postJson('/belajar/progres', ['surat' => 2, 'ayat' => 1, 'status' => 'hafal']);
-    $this->actingAs($this->pengguna)->postJson('/belajar/progres', ['surat' => 2, 'ayat' => 2, 'status' => 'didengar']);
+    $this->actingAs($this->pelanggan)->postJson('/belajar/progres', ['surat' => 2, 'ayat' => 1, 'status' => 'hafal']);
+    $this->actingAs($this->pelanggan)->postJson('/belajar/progres', ['surat' => 2, 'ayat' => 2, 'status' => 'didengar']);
 
-    $this->actingAs($this->pengguna)->get('/belajar')->assertOk()
+    $this->actingAs($this->pelanggan)->get('/belajar')->assertOk()
         ->assertSee('Lanjutkan')
         ->assertSee('href="'.url('/belajar/2').'#ayat-2"', false)
-        ->assertSee('1/3 ayat hafal');
+        ->assertSee('1/3 ayat hafal')
+        ->assertSee('Langganan aktif sampai');
+});
+
+it('dasbor pengguna tanpa langganan menawarkan Al-Fatihah', function () {
+    $this->actingAs($this->pengguna)->get('/belajar')->assertOk()
+        ->assertSee('Coba gratis')->assertSee('href="'.url('/belajar/1').'"', false);
+});
+
+it('progres tetap tersimpan saat langganan habis', function () {
+    $this->actingAs($this->pelanggan)->postJson('/belajar/progres', ['surat' => 2, 'ayat' => 1, 'status' => 'hafal']);
+    $this->pelanggan->langganan->update(['berakhir_pada' => now()->subDay()]);
+
+    $this->actingAs($this->pelanggan->fresh())->get('/belajar/2')->assertSee('Fitur langganan');
+    expect(ProgresBelajar::count())->toBe(1);
 });
 
 it('menautkan Belajar di header', function () {
