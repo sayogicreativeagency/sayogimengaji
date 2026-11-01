@@ -59,6 +59,7 @@ it('404 untuk surat yang tidak ada', function () {
     $this->get('/quran/abc')->assertNotFound();
 });
 
-it('menautkan Al-Qur\'an dari header dan kredit equran di footer', function () {
-    $this->get('/')->assertOk()->assertSee('href="/quran"', false)->assertSee('equran.id');
+it('menautkan Al-Qur\'an dari header dan kredit equran di halaman sumber', function () {
+    $this->get('/')->assertOk()->assertSee('href="/quran"', false)->assertSee('href="/sumber"', false);
+    $this->get('/sumber')->assertOk()->assertSee('equran.id');
 });

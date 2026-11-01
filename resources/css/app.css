@@ -85,3 +85,46 @@
 [data-tanpa-terjemahan] [data-terjemahan] {
     display: none;
 }
+
+/* Halaman teks panjang (syarat, privasi, sumber). */
+.prosa {
+    line-height: 1.75;
+    color: var(--color-stone-300);
+
+    & h2 {
+        margin-top: 2.5rem;
+        font-family: var(--font-judul);
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--color-emas-300);
+    }
+
+    & h3 {
+        margin-top: 1.5rem;
+        font-weight: 600;
+        color: var(--color-stone-100);
+    }
+
+    & p,
+    & ul {
+        margin-top: 0.75rem;
+    }
+
+    & ul {
+        list-style: disc;
+        padding-left: 1.25rem;
+
+        & li + li {
+            margin-top: 0.375rem;
+        }
+    }
+
+    & a {
+        color: var(--color-emas-400);
+        text-decoration: underline;
+    }
+
+    & strong {
+        color: var(--color-stone-100);
+    }
+}

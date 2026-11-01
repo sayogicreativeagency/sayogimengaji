@@ -50,10 +50,14 @@
 
     <footer class="mx-auto max-w-6xl px-4 pb-10 text-xs leading-relaxed text-stone-500">
         <div class="ornamen mb-6" aria-hidden="true">✦</div>
-        Data hadist: <a href="https://github.com/fawazahmed0/hadith-api" class="underline">fawazahmed0/hadith-api</a>.
-        Data &amp; audio Al-Qur'an: <a href="https://equran.id" class="underline">equran.id</a> (terjemahan Kemenag).
-        Derajat mengikuti penilaian ulama yang tercantum; rujuk ulama untuk penetapan hukum.
-        <a href="/kontak" class="underline">Kontak &amp; laporan</a> · <a href="/dukung" class="underline">Dukung Hadist Apa</a>.
+        Derajat hadist mengikuti penilaian ulama yang tercantum; rujuk ulama untuk penetapan hukum.
+        <nav class="mt-2 flex flex-wrap gap-x-3 gap-y-1">
+            <a href="/syarat-ketentuan" class="underline">Syarat &amp; Ketentuan</a>
+            <a href="/kebijakan-privasi" class="underline">Kebijakan Privasi</a>
+            <a href="/sumber" class="underline">Sumber &amp; Atribusi</a>
+            <a href="/kontak" class="underline">Kontak &amp; laporan</a>
+            <a href="/dukung" class="underline">Dukung Hadist Apa</a>
+        </nav>
     </footer>
 </body>
 </html>

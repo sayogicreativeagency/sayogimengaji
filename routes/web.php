@@ -25,3 +25,6 @@ Route::middleware('guest')->group(function () {
     Route::post('/daftar', [AkunController::class, 'daftar']);
 });
 Route::post('/keluar', [AkunController::class, 'keluar'])->middleware('auth');
+Route::view('/syarat-ketentuan', 'legal.syarat');
+Route::view('/kebijakan-privasi', 'legal.privasi');
+Route::view('/sumber', 'legal.sumber');

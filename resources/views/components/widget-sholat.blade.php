@@ -11,6 +11,7 @@
             <span data-cuaca-ikon class="text-3xl" aria-hidden="true"></span>
             <span data-cuaca-suhu class="block font-semibold tabular-nums"></span>
             <span data-cuaca-kondisi class="block text-xs text-stone-500"></span>
+            <a href="https://open-meteo.com/" class="block text-[10px] text-stone-600 hover:underline">Open-Meteo</a>
         </div>
     </div>
 
