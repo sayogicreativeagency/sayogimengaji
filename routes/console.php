@@ -1,9 +1,11 @@
 <?php
 
 use App\Actions\ImporHadist;
+use App\Actions\ImporKata;
 use App\Actions\ImporQuran;
 use App\Enums\Kitab;
 use App\Enums\Peran;
+use App\Enums\QoriBelajar;
 use App\Models\User;
 use Illuminate\Support\Facades\Artisan;
 
@@ -84,3 +86,21 @@ Artisan::command('akun:langganan {email} {--bulan=12 : lama langganan, ditambahk
 
     return 0;
 })->purpose('Beri atau perpanjang langganan secara manual (sebelum pembayaran tersedia)');
+
+Artisan::command('quran:impor-kata {surat? : nomor surat 1-114; kosong = semua}', function (ImporKata $impor) {
+    $daftar = $this->argument('surat') === null ? range(1, 114) : [(int) $this->argument('surat')];
+    $gagal = false;
+
+    foreach ($daftar as $surat) {
+        foreach (QoriBelajar::cases() as $qori) {
+            try {
+                $this->line("Surat {$surat} ({$qori->value}): ".$impor($surat, $qori).' kata');
+            } catch (Throwable $e) {
+                $gagal = true;
+                $this->error("Surat {$surat} ({$qori->value}) gagal: {$e->getMessage()}");
+            }
+        }
+    }
+
+    return $gagal ? 1 : 0;
+})->purpose('Impor kata Utsmani & waktu per kata dari Quran.com untuk fitur belajar');

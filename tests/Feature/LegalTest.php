@@ -10,7 +10,7 @@ it('menampilkan syarat & ketentuan', function () {
 
 it('menampilkan kebijakan privasi yang menyebut pihak ketiga dan data yang dikumpulkan', function () {
     $this->get('/kebijakan-privasi')->assertOk()
-        ->assertSeeInOrder(['Kebijakan Privasi', 'DeepSeek', 'Tiongkok', 'Open-Meteo', 'BigDataCloud', 'equran.id'])
+        ->assertSeeInOrder(['Kebijakan Privasi', 'progres', 'DeepSeek', 'Tiongkok', 'Open-Meteo', 'BigDataCloud', 'equran.id', 'Quran.com'])
         ->assertSee('alamat IP')
         ->assertSee('UU No. 27 Tahun 2022')
         ->assertSee('href="/kontak"', false);
@@ -20,6 +20,7 @@ it('menampilkan sumber dan atribusi', function () {
     $this->get('/sumber')->assertOk()
         ->assertSee('href="https://github.com/fawazahmed0/hadith-api"', false)
         ->assertSee('href="https://equran.id"', false)
+        ->assertSee('href="https://quran.com"', false)
         ->assertSee('Weather data by Open-Meteo.com')
         ->assertSee('CC BY 4.0')
         ->assertSee('adhan')

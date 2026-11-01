@@ -11,7 +11,8 @@
         <h2>Al-Qur'an</h2>
         <ul>
             <li><a href="https://equran.id">equran.id</a>: teks Al-Qur'an, transliterasi latin, terjemahan Kementerian Agama RI, deskripsi surat, dan audio murottal.</li>
-            <li>Qori: Abdullah Al-Juhany, Abdul Muhsin Al-Qasim, Abdurrahman As-Sudais, Ibrahim Al-Dossari, Misyari Rasyid Al-Afasi, dan Yasser Al-Dosari.</li>
+            <li><a href="https://quran.com">Quran.com</a> (Quran Foundation): teks Utsmani per kata dan waktu tiap kata untuk fitur belajar, dengan audio dari <a href="https://quran.com">Quran.com</a> dan <a href="https://quranicaudio.com">QuranicAudio</a> (Mahmoud Khalil Al-Husary Muallim dan Misyari Rasyid Al-Afasi).</li>
+            <li>Qori murottal: Abdullah Al-Juhany, Abdul Muhsin Al-Qasim, Abdurrahman As-Sudais, Ibrahim Al-Dossari, Misyari Rasyid Al-Afasi, dan Yasser Al-Dosari.</li>
         </ul>
 
         <h2>Jadwal sholat</h2>

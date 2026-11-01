@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AkunController;
+use App\Http\Controllers\BelajarController;
 use App\Http\Controllers\HadistController;
 use App\Http\Controllers\KontakController;
 use App\Http\Controllers\QuranController;
@@ -28,3 +29,9 @@ Route::post('/keluar', [AkunController::class, 'keluar'])->middleware('auth');
 Route::view('/syarat-ketentuan', 'legal.syarat');
 Route::view('/kebijakan-privasi', 'legal.privasi');
 Route::view('/sumber', 'legal.sumber');
+
+Route::middleware('auth')->prefix('belajar')->group(function () {
+    Route::get('/', [BelajarController::class, 'dasbor']);
+    Route::post('/progres', [BelajarController::class, 'progres'])->middleware('throttle:120,1');
+    Route::get('/{surat}', [BelajarController::class, 'tampil'])->whereNumber('surat');
+});

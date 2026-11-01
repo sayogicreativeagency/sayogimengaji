@@ -128,3 +128,23 @@
         color: var(--color-stone-100);
     }
 }
+
+/* Mode hafalan di halaman belajar (resources/js/belajar.js). Kata yang sedang dibaca/diketuk selalu terbuka. */
+.kata .awal {
+    display: none;
+}
+
+[data-mode='awal'] .kata:not([data-aktif], [data-terbuka]) {
+    & .penuh {
+        display: none;
+    }
+
+    & .awal {
+        display: inline;
+    }
+}
+
+[data-mode='sembunyi'] .kata:not([data-aktif], [data-terbuka]) {
+    color: transparent;
+    background: color-mix(in oklab, var(--color-stone-700) 70%, transparent);
+}

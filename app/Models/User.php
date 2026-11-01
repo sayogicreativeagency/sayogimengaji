@@ -10,6 +10,7 @@ use Filament\Panel;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -58,5 +59,17 @@ class User extends Authenticatable implements FilamentUser
     public function berlangganan(): bool
     {
         return (bool) $this->langganan?->aktif();
+    }
+
+    /** Al-Fatihah gratis untuk dicoba; surat lain butuh langganan aktif. */
+    public function bisaBelajar(int $surat): bool
+    {
+        return $surat === 1 || $this->berlangganan();
+    }
+
+    /** @return HasMany<ProgresBelajar, $this> */
+    public function progresBelajar(): HasMany
+    {
+        return $this->hasMany(ProgresBelajar::class);
     }
 }

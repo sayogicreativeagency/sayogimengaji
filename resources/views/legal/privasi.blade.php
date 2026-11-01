@@ -9,6 +9,9 @@
         <h3>Akun</h3>
         <p>Nama, email, dan password (disimpan dalam bentuk hash, sehingga kami tidak bisa membacanya), serta peran akun dan waktu pendaftaran.</p>
 
+        <h3>Belajar Al-Qur'an &amp; langganan</h3>
+        <p>Ayat yang sudah kamu dengar dan tandai hafal, beserta waktunya, disimpan di akunmu agar progres bisa dilanjutkan dari perangkat mana pun. Untuk langganan kami menyimpan masa berlakunya dan cara pemberiannya.</p>
+
         <h3>Formulir kontak &amp; laporan</h3>
         <p>Nama dan email (keduanya opsional), pencarian terkait, dan isi pesan yang kamu kirim.</p>
 
@@ -31,7 +34,7 @@
         <ul>
             <li><strong>DeepSeek</strong> (penyedia AI): menerima kata pencarian dan cuplikan hadist untuk menyusun ringkasan. Menurut kebijakan mereka, data diproses dan disimpan di <strong>Tiongkok</strong> dan dapat dipakai untuk mengembangkan layanan mereka. Data akun dan kontakmu tidak kami kirim ke DeepSeek.</li>
             <li><strong>Open-Meteo</strong> (cuaca) dan <strong>BigDataCloud</strong> (nama kota): bila kamu mengizinkan lokasi, peramban kamu mengirim koordinat yang sudah dibulatkan langsung ke layanan ini.</li>
-            <li><strong>equran.id</strong>: audio murottal diputar langsung dari server mereka, sehingga alamat IP-mu terlihat oleh mereka saat audio dimuat.</li>
+            <li><strong>equran.id</strong>, <strong>Quran.com</strong>, dan <strong>QuranicAudio</strong>: audio murottal dan audio di halaman belajar diputar langsung dari server mereka, sehingga alamat IP-mu terlihat oleh mereka saat audio dimuat.</li>
             <li><strong>DANA, Saweria, dan aplikasi bank/e-wallet</strong>: bila kamu berinfaq, pembayaran diproses oleh mereka sesuai kebijakan privasi masing-masing. Kami tidak menerima data kartu atau rekeningmu.</li>
         </ul>
 
@@ -44,7 +47,7 @@
         <p>Kami tidak menjual data pribadimu dan tidak memakainya untuk iklan.</p>
 
         <h2>5. Penyimpanan &amp; keamanan</h2>
-        <p>Password disimpan dalam bentuk hash. Akses ke data di panel admin dibatasi sesuai peran. Data akun disimpan selama akunmu aktif; laporan disimpan sampai selesai ditindaklanjuti; cache pencarian terhapus otomatis setelah 7 hari; data sesi kedaluwarsa setelah tidak aktif.</p>
+        <p>Password disimpan dalam bentuk hash. Akses ke data di panel admin dibatasi sesuai peran. Data akun dan progres belajar disimpan selama akunmu aktif (progres tetap tersimpan meski langganan berakhir); laporan disimpan sampai selesai ditindaklanjuti; cache pencarian terhapus otomatis setelah 7 hari; data sesi kedaluwarsa setelah tidak aktif.</p>
 
         <h2>6. Hak kamu</h2>
         <p>Sesuai Undang-Undang Pelindungan Data Pribadi (UU No. 27 Tahun 2022), kamu berhak meminta akses, perbaikan, atau penghapusan data pribadimu, termasuk penghapusan akun, serta menarik persetujuan. Izin lokasi bisa dicabut kapan saja dari pengaturan peramban. Ajukan permintaan lewat <a href="/kontak">halaman kontak</a>.</p>

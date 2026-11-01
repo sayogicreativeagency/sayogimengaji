@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="dark">
     <meta name="theme-color" content="#0b1512">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $judul ? $judul.' — ' : '' }}{{ config('app.name') }}</title>
     @fonts
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -16,6 +17,7 @@
             <a href="/" class="font-judul text-2xl font-semibold whitespace-nowrap text-emerald-800 dark:text-emas-300">Hadist Apa</a>
             <nav class="-mx-1 flex max-w-full items-center gap-4 overflow-x-auto px-1 text-sm whitespace-nowrap">
                 <a href="/hadist" class="font-medium text-stone-700 hover:text-emerald-800 dark:text-stone-300 dark:hover:text-emas-300">Hadist</a>
+                <a href="/belajar" class="font-medium text-stone-700 hover:text-emerald-800 dark:text-stone-300 dark:hover:text-emas-300">Belajar</a>
                 <a href="/quran" class="font-medium text-stone-700 hover:text-emerald-800 dark:text-stone-300 dark:hover:text-emas-300">Al-Qur'an</a>
                 <a href="/dukung" class="rounded-full border border-emerald-700/30 px-3 py-1 text-sm font-medium text-emerald-800 hover:bg-emerald-50 dark:border-emas-400/40 dark:text-emas-300 dark:hover:bg-emas-400/10">Dukung</a>
                 @auth
