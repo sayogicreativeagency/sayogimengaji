@@ -25,6 +25,20 @@ enum Kitab: string
         };
     }
 
+    /** Penyusun kitab dan tahun wafatnya (Hijriah). */
+    public function penyusun(): string
+    {
+        return match ($this) {
+            self::Bukhari => 'Imam al-Bukhari (w. 256 H)',
+            self::Muslim => 'Imam Muslim (w. 261 H)',
+            self::AbuDawud => 'Imam Abu Dawud (w. 275 H)',
+            self::Tirmidhi => 'Imam at-Tirmidzi (w. 279 H)',
+            self::Nasai => "Imam an-Nasa'i (w. 303 H)",
+            self::IbnuMajah => 'Imam Ibnu Majah (w. 273 H)',
+            self::Malik => 'Imam Malik (w. 179 H)',
+        };
+    }
+
     /** Nama perawi untuk rujukan "HR. ...". */
     public function perawi(): string
     {

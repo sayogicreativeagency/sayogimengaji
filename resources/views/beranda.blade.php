@@ -33,11 +33,7 @@
                 <div class="mt-8 max-w-2xl">
                     <x-form-cari />
                 </div>
-                <div class="mt-5 flex flex-wrap gap-2 text-sm">
-                    @foreach (['hadist tentang pernikahan', 'adab makan dan minum', 'keutamaan sedekah', 'berbakti kepada orang tua', 'larangan marah'] as $contoh)
-                        <a href="/cari?q={{ urlencode($contoh) }}" class="rounded-full border border-stone-700 px-3 py-1 text-stone-300 hover:border-emas-400/60 hover:text-emas-300">{{ $contoh }}</a>
-                    @endforeach
-                </div>
+                <x-contoh-cari class="mt-5" />
             </div>
 
             {{-- Desktop: kotak melayang, separuh di hero, separuh di section ini (geser ke atas 50% tinggi + padding atas section). --}}

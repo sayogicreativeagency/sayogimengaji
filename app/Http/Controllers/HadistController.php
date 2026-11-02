@@ -7,6 +7,7 @@ use App\Enums\Derajat;
 use App\Enums\Kitab;
 use App\Models\Hadist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
 class HadistController extends Controller
@@ -14,6 +15,24 @@ class HadistController extends Controller
     public function beranda()
     {
         return view('beranda');
+    }
+
+    /** /hadist: form pencarian, penjelasan derajat, dan daftar kitab beserta jumlah hadistnya. */
+    public function pencarian()
+    {
+        // Data hadist hanya berubah lewat impor atau koreksi admin, jadi hitungan cukup diperbarui sehari sekali.
+        $baris = collect(Cache::remember('jumlah-hadist', now()->addDay(), fn () => Hadist::toBase()
+            ->selectRaw('kitab, derajat_ringkas, count(*) as n')
+            ->groupBy('kitab', 'derajat_ringkas')
+            ->get()
+            ->map(fn ($b) => (array) $b)
+            ->all()));
+
+        return view('pencarian', [
+            'total' => $baris->sum('n'),
+            'perKitab' => $baris->groupBy('kitab')->map->sum('n'),
+            'perDerajat' => $baris->groupBy(fn ($b) => $b['derajat_ringkas'] ?? 'belum')->map->sum('n'),
+        ]);
     }
 
     public function cari(Request $request, CariHadist $cari)
