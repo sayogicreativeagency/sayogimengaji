@@ -117,4 +117,4 @@ Artisan::command('pencarian:sugesti', function (BuatSugestiCari $buat) {
 })->purpose('Susun ulang sugesti pencarian dari kata terbanyak dicari 30 hari terakhir');
 
 // Butuh cron `php artisan schedule:run` tiap menit di server.
-Schedule::command('pencarian:sugesti')->dailyAt('02:00');
+Schedule::command('pencarian:sugesti')->dailyAt('02:00')->timezone('Asia/Jakarta');
