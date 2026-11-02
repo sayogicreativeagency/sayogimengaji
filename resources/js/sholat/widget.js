@@ -42,6 +42,9 @@ if (widget) {
     const pilihMazhab = el('mazhab');
     const pesan = el('lokasi-pesan');
     const jam = (tanggal) => tanggal.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+    // Umm al-Qura; bisa selisih sehari dengan penetapan Kemenag (rukyat). Browser tanpa kalender Islam → baris disembunyikan.
+    const hijriah = new Intl.DateTimeFormat('id-ID-u-ca-islamic-umalqura', { day: 'numeric', month: 'long', year: 'numeric' });
+    const adaHijriah = hijriah.resolvedOptions().calendar === 'islamic-umalqura';
 
     let lokasi = simpan.ambil('sholat:lokasi') ?? JAKARTA;
     pilihMazhab.value = simpan.ambil('sholat:mazhab') ?? 'syafii';
@@ -60,6 +63,7 @@ if (widget) {
 
         el('jam').textContent = jam(sekarang);
         el('tanggal').textContent = sekarang.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long' });
+        if (adaHijriah) el('hijriah').textContent = hijriah.format(sekarang);
         el('kota').textContent = lokasi.kota ?? 'Lokasimu';
         el('info-berikutnya').textContent = `${NAMA[berikut.kunci]} dalam ${sisaTeks} (${jam(berikut.waktu)})`;
 

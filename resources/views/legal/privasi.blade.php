@@ -3,7 +3,7 @@
         <h1 class="text-4xl">Kebijakan Privasi</h1>
         <p class="text-sm text-stone-500">Berlaku sejak 2 November 2026</p>
 
-        <p>Kebijakan ini menjelaskan data apa yang dikumpulkan Hadist Apa, untuk apa, dan ke mana data itu dikirim. Kami berusaha mengumpulkan sesedikit mungkin. Hadist Apa tidak memasang iklan dan tidak memakai alat pelacak atau analitik pihak ketiga.</p>
+        <p>Kebijakan ini menjelaskan data apa yang dikumpulkan Sayogi Mengaji, untuk apa, dan ke mana data itu dikirim. Kami berusaha mengumpulkan sesedikit mungkin. Sayogi Mengaji tidak memasang iklan dan tidak memakai alat pelacak atau analitik pihak ketiga.</p>
 
         <h2>1. Data yang kami kumpulkan</h2>
         <h3>Akun</h3>

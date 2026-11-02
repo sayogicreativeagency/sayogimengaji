@@ -104,7 +104,7 @@ if (pemutar) {
             navigator.mediaSession.metadata = new MediaMetadata({
                 title: `${namaSurat} · ${label(n)}`,
                 artist: qoriAktif().nama,
-                album: "Hadist Apa · Al-Qur'an",
+                album: "Sayogi Mengaji · Al-Qur'an",
             });
         }
     };

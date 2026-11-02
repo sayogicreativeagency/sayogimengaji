@@ -1,8 +1,8 @@
 <x-layout judul="Dukung" :sidebar="false">
     <article class="mx-auto max-w-2xl">
-        <h1 class="text-3xl font-semibold tracking-tight">Infaq untuk Hadist Apa</h1>
+        <h1 class="text-3xl font-semibold tracking-tight">Infaq untuk Sayogi Mengaji</h1>
         <p class="mt-4 text-lg leading-relaxed text-stone-700 dark:text-stone-300">
-            Hadist Apa gratis untuk semua orang dan tanpa iklan. Agar tetap begitu, kami mengandalkan
+            Sayogi Mengaji gratis untuk semua orang dan tanpa iklan. Agar tetap begitu, kami mengandalkan
             infaq seikhlasnya dari para pengguna.
         </p>
 
@@ -31,10 +31,10 @@
         <x-papan-donasi class="mt-10" />
 
         <p class="mt-6 text-sm leading-relaxed text-stone-600 dark:text-stone-400">
-            Infaq ini sepenuhnya untuk operasional dan pengembangan Hadist Apa, bukan penggalangan dana untuk pihak lain.
+            Infaq ini sepenuhnya untuk operasional dan pengembangan Sayogi Mengaji, bukan penggalangan dana untuk pihak lain.
         </p>
         <p class="mt-4 leading-relaxed">
-            <em>Jazakumullahu khairan.</em> Belum bisa berinfaq? Doakan kami dan bagikan Hadist Apa ke orang
+            <em>Jazakumullahu khairan.</em> Belum bisa berinfaq? Doakan kami dan bagikan Sayogi Mengaji ke orang
             terdekat. Itu juga dukungan yang sangat berarti.
         </p>
     </article>

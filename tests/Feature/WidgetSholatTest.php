@@ -2,7 +2,7 @@
 
 it('menampilkan widget jam sholat di atas papan donasi', function (string $url) {
     $this->get($url)->assertOk()
-        ->assertSeeInOrder(['<aside', 'data-widget-sholat', 'Bantu Hadist Apa tetap hidup'], false)
+        ->assertSeeInOrder(['<aside', 'data-widget-sholat', 'Bantu Sayogi Mengaji tetap hidup'], false)
         ->assertSeeInOrder(['Imsak', 'Subuh', 'Terbit', 'Dzuhur', 'Ashar', 'Maghrib', 'Isya'])
         ->assertSee('data-minta-lokasi', false)
         ->assertSee('<option value="hanafi">Hanafi</option>', false);

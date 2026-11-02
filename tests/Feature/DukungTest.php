@@ -6,7 +6,7 @@ it('menampilkan halaman dukung dengan tombol ke saweria', function () {
     config(['services.saweria.url' => 'https://saweria.co/hadistapa']);
 
     $this->get('/dukung')->assertOk()
-        ->assertSee('Infaq untuk Hadist Apa')
+        ->assertSee('Infaq untuk Sayogi Mengaji')
         ->assertSee('href="https://saweria.co/hadistapa"', false)
         ->assertSee('bukan penggalangan dana untuk pihak lain')
         ->assertSee('href="'.route('hadist', ['muslim', '6592']).'"', false)
@@ -31,9 +31,9 @@ it('menampilkan papan donasi dengan QR otomatis di sidebar halaman publik', func
 
     $this->get($url)->assertOk()
         ->assertSee('<aside', false)
-        ->assertSee('Bantu Hadist Apa tetap hidup')
+        ->assertSee('Bantu Sayogi Mengaji tetap hidup')
         ->assertSee('src="data:image/svg+xml;base64,', false)
-        ->assertSee('alt="Kode QR ke halaman Saweria Hadist Apa"', false)
+        ->assertSee('alt="Kode QR ke halaman Saweria Sayogi Mengaji"', false)
         ->assertSee('href="https://saweria.co/hadistapa"', false)
         ->assertSee('href="/dukung"', false);
 })->with(['/', '/kontak']);
@@ -56,7 +56,7 @@ it('menampilkan QRIS infaq beserta nama penerima bila diatur', function () {
     ]);
 
     $this->get('/')->assertOk()
-        ->assertSee('alt="QRIS infaq Hadist Apa atas nama HADIST APA"', false)
+        ->assertSee('alt="QRIS infaq Sayogi Mengaji atas nama HADIST APA"', false)
         ->assertSee('atas nama <strong>HADIST APA</strong>', false)
         ->assertDontSee('alt="Kode QR ke halaman Saweria', false)
         ->assertSee('href="https://saweria.co/hadistapa"', false);
@@ -65,7 +65,7 @@ it('menampilkan QRIS infaq beserta nama penerima bila diatur', function () {
 it('kembali ke QR Saweria bila QRIS rusak', function () {
     config(['services.saweria.url' => 'https://saweria.co/hadistapa', 'services.infaq.qris' => '000201xxxx6304ABCD']);
 
-    $this->get('/')->assertOk()->assertDontSee('alt="QRIS infaq', false)->assertSee('alt="Kode QR ke halaman Saweria Hadist Apa"', false);
+    $this->get('/')->assertOk()->assertDontSee('alt="QRIS infaq', false)->assertSee('alt="Kode QR ke halaman Saweria Sayogi Mengaji"', false);
 });
 
 it('memberi jalan lain bila aplikasi bank menolak QRIS', function () {

@@ -1,7 +1,7 @@
 <x-layout judul="Sumber & Atribusi" :sidebar="false">
     <article class="prosa mx-auto max-w-3xl">
         <h1 class="text-4xl">Sumber &amp; Atribusi</h1>
-        <p>Hadist Apa berdiri di atas karya banyak orang. Berikut sumber data, layanan, dan perangkat lunak yang kami gunakan beserta lisensinya. Jazakumullahu khairan.</p>
+        <p>Sayogi Mengaji berdiri di atas karya banyak orang. Berikut sumber data, layanan, dan perangkat lunak yang kami gunakan beserta lisensinya. Jazakumullahu khairan.</p>
 
         <h2>Hadist</h2>
         <ul>

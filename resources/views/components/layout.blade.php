@@ -14,7 +14,7 @@
 <body class="min-h-screen bg-stone-50 text-stone-800 antialiased dark:bg-stone-950 dark:text-stone-200">
     <header class="pola-islami border-b border-stone-200 dark:border-stone-800">
         <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-2 px-4 py-4">
-            <a href="/" class="font-judul text-2xl font-semibold whitespace-nowrap text-emerald-800 dark:text-emas-300">Hadist Apa</a>
+            <a href="/" class="font-judul text-2xl font-semibold whitespace-nowrap text-emerald-800 dark:text-emas-300">Sayogi Mengaji</a>
             <nav class="-mx-1 flex max-w-full items-center gap-4 overflow-x-auto px-1 text-sm whitespace-nowrap">
                 <a href="/hadist" class="font-medium text-stone-700 hover:text-emerald-800 dark:text-stone-300 dark:hover:text-emas-300">Hadist</a>
                 <a href="/belajar" class="font-medium text-stone-700 hover:text-emerald-800 dark:text-stone-300 dark:hover:text-emas-300">Belajar</a>
@@ -54,12 +54,15 @@
         <div class="ornamen mb-6" aria-hidden="true">✦</div>
         Derajat hadist mengikuti penilaian ulama yang tercantum; rujuk ulama untuk penetapan hukum.
         <nav class="mt-2 flex flex-wrap gap-x-3 gap-y-1">
+            <a href="/tentang" class="underline">Tentang kami</a>
+            <a href="/kalender" class="underline">Kalender</a>
             <a href="/syarat-ketentuan" class="underline">Syarat &amp; Ketentuan</a>
             <a href="/kebijakan-privasi" class="underline">Kebijakan Privasi</a>
             <a href="/sumber" class="underline">Sumber &amp; Atribusi</a>
             <a href="/kontak" class="underline">Kontak &amp; laporan</a>
-            <a href="/dukung" class="underline">Dukung Hadist Apa</a>
+            <a href="/dukung" class="underline">Dukung Sayogi Mengaji</a>
         </nav>
+        <p class="mt-2">© {{ date('Y') }} Sayogi Mengaji · dibuat oleh Sayogi Creative Agency</p>
     </footer>
 </body>
 </html>

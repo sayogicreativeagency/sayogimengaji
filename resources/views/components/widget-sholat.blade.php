@@ -5,6 +5,7 @@
         <div>
             <p data-jam class="text-3xl font-semibold tabular-nums">--.--</p>
             <p data-tanggal class="text-sm text-stone-500"></p>
+            <p data-hijriah class="text-sm text-stone-500"></p>
             <p class="mt-1 text-sm font-medium"><span aria-hidden="true">📍</span> <span data-kota>Jakarta</span></p>
         </div>
         <div data-cuaca hidden class="text-right">
@@ -30,7 +31,10 @@
     </table>
 
     <div class="mt-3 flex items-center justify-between gap-2 text-xs text-stone-500">
-        <button type="button" data-minta-lokasi class="underline hover:text-emerald-800">Gunakan lokasiku</button>
+        <span class="flex gap-3">
+            <button type="button" data-minta-lokasi class="underline hover:text-emerald-800">Gunakan lokasiku</button>
+            <a href="/kalender" class="underline hover:text-emerald-800">Kalender</a>
+        </span>
         <label class="flex items-center gap-1">Ashar
             <select data-mazhab class="rounded border border-stone-300 bg-white px-1 py-0.5 dark:border-stone-700 dark:bg-stone-900">
                 <option value="syafii">Syafi'i</option>

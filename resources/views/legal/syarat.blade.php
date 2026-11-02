@@ -3,10 +3,10 @@
         <h1 class="text-4xl">Syarat &amp; Ketentuan</h1>
         <p class="text-sm text-stone-500">Berlaku sejak 2 November 2026</p>
 
-        <p>Dengan menggunakan Hadist Apa, kamu menyetujui syarat berikut. Kalau tidak setuju, mohon tidak menggunakan layanan ini. Cara kami mengelola data dijelaskan di <a href="/kebijakan-privasi">Kebijakan Privasi</a>.</p>
+        <p>Dengan menggunakan Sayogi Mengaji, kamu menyetujui syarat berikut. Kalau tidak setuju, mohon tidak menggunakan layanan ini. Cara kami mengelola data dijelaskan di <a href="/kebijakan-privasi">Kebijakan Privasi</a>.</p>
 
         <h2>1. Tentang layanan</h2>
-        <p>Hadist Apa adalah situs untuk mempelajari hadist dan Al-Qur'an: pencarian hadist dengan bantuan AI, murottal Al-Qur'an, serta jadwal sholat dan cuaca. Layanan ini gratis dan dikelola secara pribadi oleh pengelola Hadist Apa.</p>
+        <p>Sayogi Mengaji adalah situs untuk mempelajari hadist dan Al-Qur'an: pencarian hadist dengan bantuan AI, murottal Al-Qur'an, serta jadwal sholat dan cuaca. Layanan ini gratis dan dikelola secara pribadi oleh pengelola Sayogi Mengaji.</p>
 
         <h2>2. Konten keagamaan</h2>
         <ul>
@@ -34,7 +34,7 @@
         <h2>5. Infaq</h2>
         <ul>
             <li>Infaq bersifat <strong>sukarela dan seikhlasnya</strong>. Infaq <strong>tidak membuka akses</strong>, fitur, atau keuntungan apa pun di situs ini.</li>
-            <li>Infaq digunakan sepenuhnya untuk operasional dan pengembangan Hadist Apa, dan bukan penggalangan dana untuk pihak lain.</li>
+            <li>Infaq digunakan sepenuhnya untuk operasional dan pengembangan Sayogi Mengaji, dan bukan penggalangan dana untuk pihak lain.</li>
             <li>Pembayaran diproses oleh pihak ketiga (DANA, Saweria, atau aplikasi bank/e-wallet yang kamu pakai) dan tunduk pada ketentuan mereka. Infaq yang sudah dikirim pada dasarnya tidak dikembalikan; kalau terjadi salah kirim, hubungi kami lewat <a href="/kontak">halaman kontak</a>.</li>
         </ul>
 
@@ -42,7 +42,7 @@
         <p>Bila nanti tersedia fitur berbayar, ketentuan langganannya (harga, pembayaran, dan pengembalian dana) akan diatur tersendiri dan ditampilkan sebelum kamu membayar.</p>
 
         <h2>7. Hak atas konten</h2>
-        <p>Teks Al-Qur'an dan hadist adalah warisan bersama umat. Data, terjemahan, audio, dan huruf yang kami gunakan tetap mengikuti lisensi pemiliknya masing-masing, seperti dirinci di halaman <a href="/sumber">Sumber</a>. Kode, desain, dan susunan situs ini milik pengelola Hadist Apa.</p>
+        <p>Teks Al-Qur'an dan hadist adalah warisan bersama umat. Data, terjemahan, audio, dan huruf yang kami gunakan tetap mengikuti lisensi pemiliknya masing-masing, seperti dirinci di halaman <a href="/sumber">Sumber</a>. Kode, desain, dan susunan situs ini milik pengelola Sayogi Mengaji.</p>
 
         <h2>8. Batasan tanggung jawab</h2>
         <p>Layanan disediakan sebagaimana adanya. Kami berusaha menjaga ketepatan dan ketersediaannya, tetapi tidak menjamin layanan selalu bebas kesalahan atau tanpa gangguan, termasuk gangguan dari layanan pihak ketiga yang kami gunakan.</p>

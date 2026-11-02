@@ -52,12 +52,12 @@ it('memesan membuat tagihan bernominal unik dan memakai ulang tagihan yang belum
 it('halaman bayar menampilkan nominal, QRIS bernominal, dan rekening', function () {
     config([
         'services.infaq.qris' => Qris::denganCrc('000201010211520448295303360'.'5802ID'.'5910HADIST APA'.'6007JAKARTA6304'),
-        'services.pembayaran.rekening' => 'BCA 123 a.n. Hadist Apa',
+        'services.pembayaran.rekening' => 'BCA 123 a.n. Sayogi Mengaji',
     ]);
     $tagihan = $this->pengguna->pembayaran()->create(['bulan' => 1, 'nominal' => 33127]);
 
     $this->actingAs($this->pengguna)->get('/langganan/bayar/'.$tagihan->id)->assertOk()
-        ->assertSee('Rp 33.127')->assertSee('QRIS pembayaran Rp 33.127', false)->assertSee('BCA 123 a.n. Hadist Apa');
+        ->assertSee('Rp 33.127')->assertSee('QRIS pembayaran Rp 33.127', false)->assertSee('BCA 123 a.n. Sayogi Mengaji');
 });
 
 it('tagihan orang lain tidak bisa dilihat atau dikonfirmasi', function () {
