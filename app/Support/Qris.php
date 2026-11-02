@@ -18,15 +18,38 @@ final readonly class Qris
     /** Tag 59 (nama merchant/penerima) di tingkat teratas. */
     public function namaPenerima(): ?string
     {
-        for ($i = 0; $i + 4 <= strlen($this->payload); $i += 4 + $panjang) {
-            $tag = substr($this->payload, $i, 2);
-            $panjang = (int) substr($this->payload, $i + 2, 2);
-            if ($tag === '59') {
-                return trim(substr($this->payload, $i + 4, $panjang));
-            }
+        $nama = $this->tag()['59'] ?? null;
+
+        return $nama === null ? null : trim($nama);
+    }
+
+    /** QRIS statis → dinamis dengan nominal terisi (tag 01 = 12, tag 54 = nominal), CRC dihitung ulang. */
+    public function denganNominal(int $rupiah): self
+    {
+        $tag = $this->tag();
+        unset($tag['63']);
+        $tag['01'] = '12';
+        $tag['54'] = (string) $rupiah;
+        ksort($tag, SORT_STRING);
+
+        $isi = '';
+        foreach ($tag as $id => $nilai) {
+            $isi .= $id.sprintf('%02d', strlen($nilai)).$nilai;
         }
 
-        return null;
+        return new self(self::denganCrc($isi.'6304'));
+    }
+
+    /** @return array<string, string> tag tingkat teratas → nilai */
+    private function tag(): array
+    {
+        $tag = [];
+        for ($i = 0; $i + 4 <= strlen($this->payload); $i += 4 + $panjang) {
+            $panjang = (int) substr($this->payload, $i + 2, 2);
+            $tag[substr($this->payload, $i, 2)] = substr($this->payload, $i + 4, $panjang);
+        }
+
+        return $tag;
     }
 
     /** Lengkapi payload yang diakhiri "6304" dengan CRC-nya. */

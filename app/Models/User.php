@@ -61,10 +61,24 @@ class User extends Authenticatable implements FilamentUser
         return (bool) $this->langganan?->aktif();
     }
 
-    /** Al-Fatihah gratis untuk dicoba; surat lain butuh langganan aktif. */
+    /** Ditambahkan dari tanggal berakhir bila masih aktif, dari sekarang bila belum/sudah habis. */
+    public function perpanjangLangganan(int $bulan, string $sumber, ?string $catatan = null): void
+    {
+        $mulai = $this->berlangganan() ? $this->langganan->berakhir_pada : now();
+        $this->langganan()->updateOrCreate([], ['berakhir_pada' => $mulai->copy()->addMonths($bulan), 'sumber' => $sumber, 'catatan' => $catatan]);
+        $this->unsetRelation('langganan');
+    }
+
+    /** Al-Fatihah gratis untuk dicoba; surat lain butuh langganan aktif, kecuali saklar langganan dimatikan. */
     public function bisaBelajar(int $surat): bool
     {
-        return $surat === 1 || $this->berlangganan();
+        return $surat === 1 || ! Langganan::berbayar() || $this->berlangganan();
+    }
+
+    /** @return HasMany<Pembayaran, $this> */
+    public function pembayaran(): HasMany
+    {
+        return $this->hasMany(Pembayaran::class);
     }
 
     /** @return HasMany<ProgresBelajar, $this> */

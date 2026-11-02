@@ -80,8 +80,7 @@ Artisan::command('akun:langganan {email} {--bulan=12 : lama langganan, ditambahk
         return 1;
     }
 
-    $mulai = $user->berlangganan() ? $user->langganan->berakhir_pada : now();
-    $user->langganan()->updateOrCreate([], ['berakhir_pada' => $mulai->copy()->addMonths((int) $this->option('bulan')), 'sumber' => 'manual']);
+    $user->perpanjangLangganan((int) $this->option('bulan'), 'manual');
     $this->info("{$user->name} berlangganan sampai {$user->fresh()->langganan->berakhir_pada->translatedFormat('j F Y')}.");
 
     return 0;

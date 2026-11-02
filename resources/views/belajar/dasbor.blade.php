@@ -15,12 +15,15 @@
         @endif
 
         <div class="rounded-xl border border-stone-200 bg-white px-5 py-4 text-sm dark:border-stone-800 dark:bg-stone-900">
-            @if ($langganan)
+            @if (! $berbayar)
+                <p class="font-medium">Semua surat terbuka gratis</p>
+                <p class="mt-1 text-stone-500">Selamat belajar.</p>
+            @elseif ($langganan)
                 <p class="font-medium">Langganan aktif sampai {{ $langganan->berakhir_pada->translatedFormat('j F Y') }}</p>
-                <p class="mt-1 text-stone-500">Semua surat terbuka.</p>
+                <p class="mt-1 text-stone-500">Semua surat terbuka. <a href="/langganan" class="text-emas-400 underline">Perpanjang</a></p>
             @else
                 <p class="font-medium">Belum berlangganan</p>
-                <p class="mt-1 text-stone-500">Coba gratis di <a href="{{ url('/belajar/1') }}" class="text-emas-400 underline">Al-Fatihah</a>. Surat lain terbuka dengan langganan; pembayaran segera tersedia.</p>
+                <p class="mt-1 text-stone-500">Coba gratis di <a href="{{ url('/belajar/1') }}" class="text-emas-400 underline">Al-Fatihah</a>. Surat lain terbuka dengan <a href="/langganan" class="text-emas-400 underline">langganan</a>.</p>
             @endif
         </div>
     </div>
@@ -36,7 +39,7 @@
                class="rounded-xl border border-stone-200 bg-white p-4 hover:border-emerald-500 dark:border-stone-800 dark:bg-stone-900">
                 <span class="flex items-center justify-between gap-2">
                     <span class="font-medium">{{ $s->nomor }}. {{ $s->nama_latin }}</span>
-                    @unless ($langganan || $s->nomor === 1)
+                    @unless (! $berbayar || $langganan || $s->nomor === 1)
                         <span class="text-xs text-stone-500" title="Butuh langganan">🔒</span>
                     @endunless
                 </span>

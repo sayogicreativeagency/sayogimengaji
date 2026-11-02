@@ -10,7 +10,7 @@
         <p>Nama, email, dan password (disimpan dalam bentuk hash, sehingga kami tidak bisa membacanya), serta peran akun dan waktu pendaftaran.</p>
 
         <h3>Belajar Al-Qur'an &amp; langganan</h3>
-        <p>Ayat yang sudah kamu dengar dan tandai hafal, beserta waktunya, disimpan di akunmu agar progres bisa dilanjutkan dari perangkat mana pun. Untuk langganan kami menyimpan masa berlakunya dan cara pemberiannya.</p>
+        <p>Ayat yang sudah kamu dengar dan tandai hafal, beserta waktunya, disimpan di akunmu agar progres bisa dilanjutkan dari perangkat mana pun. Untuk langganan kami menyimpan masa berlakunya dan cara pemberiannya. Saat kamu membayar, kami menyimpan nominal, metode, nama pengirim, dan bukti bayar yang kamu unggah; bukti bayar hanya bisa dilihat admin untuk mencocokkan pembayaran.</p>
 
         <h3>Formulir kontak &amp; laporan</h3>
         <p>Nama dan email (keduanya opsional), pencarian terkait, dan isi pesan yang kamu kirim.</p>

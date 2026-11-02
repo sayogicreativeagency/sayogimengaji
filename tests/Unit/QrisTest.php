@@ -22,6 +22,15 @@ it('menolak payload yang CRC-nya tidak cocok', function () {
     expect((new Qris($rusak))->valid())->toBeFalse();
 });
 
+it('mengubah QRIS statis jadi dinamis dengan nominal', function () {
+    $dinamis = (new Qris(qrisContoh()))->denganNominal(33127);
+
+    expect($dinamis->valid())->toBeTrue()
+        ->and($dinamis->payload)->toStartWith('000201010212')
+        ->toContain('5303360540533127'.'5802ID')
+        ->and($dinamis->namaPenerima())->toBe('HADIST APA');
+});
+
 it('menolak teks yang bukan QRIS', function (string $teks) {
     expect((new Qris($teks))->valid())->toBeFalse();
 })->with(['', 'https://saweria.co/hadistapa', '000201']);

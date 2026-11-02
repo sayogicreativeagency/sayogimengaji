@@ -46,4 +46,9 @@ return [
         'qris' => env('INFAQ_QRIS'),
     ],
 
+    'pembayaran' => [
+        // Langganan dibayar ke QRIS infaq di atas (diberi nominal) atau rekening ini, mis. "BCA 1234567890 a.n. Nama".
+        'rekening' => env('BAYAR_REKENING'),
+    ],
+
 ];

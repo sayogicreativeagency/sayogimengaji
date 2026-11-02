@@ -4,6 +4,7 @@ use App\Http\Controllers\AkunController;
 use App\Http\Controllers\BelajarController;
 use App\Http\Controllers\HadistController;
 use App\Http\Controllers\KontakController;
+use App\Http\Controllers\LanggananController;
 use App\Http\Controllers\QuranController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,4 +35,11 @@ Route::middleware('auth')->prefix('belajar')->group(function () {
     Route::get('/', [BelajarController::class, 'dasbor']);
     Route::post('/progres', [BelajarController::class, 'progres'])->middleware('throttle:120,1');
     Route::get('/{surat}', [BelajarController::class, 'tampil'])->whereNumber('surat');
+});
+
+Route::middleware('auth')->prefix('langganan')->group(function () {
+    Route::get('/', [LanggananController::class, 'tampil']);
+    Route::post('/', [LanggananController::class, 'pesan'])->middleware('throttle:10,1');
+    Route::get('/bayar/{pembayaran}', [LanggananController::class, 'bayar']);
+    Route::post('/bayar/{pembayaran}', [LanggananController::class, 'konfirmasi'])->middleware('throttle:10,1');
 });

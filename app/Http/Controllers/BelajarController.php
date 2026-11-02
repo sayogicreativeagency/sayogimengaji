@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Enums\QoriBelajar;
 use App\Models\Kata;
+use App\Models\Langganan;
 use App\Models\Surat;
 use App\Models\WaktuKata;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-/** Fitur belajar/hafalan Al-Qur'an (langganan; Al-Fatihah gratis). */
+/** Fitur belajar/hafalan Al-Qur'an (langganan; Al-Fatihah gratis; semua gratis bila saklar langganan mati). */
 class BelajarController extends Controller
 {
     public function dasbor(Request $request)
@@ -24,13 +25,14 @@ class BelajarController extends Controller
             'hafal' => $progres->whereNotNull('dihafal_at')->countBy('surat_nomor'),
             'terakhir' => $terakhir,
             'langganan' => $user->berlangganan() ? $user->langganan : null,
+            'berbayar' => Langganan::berbayar(),
         ]);
     }
 
     public function tampil(Request $request, Surat $surat)
     {
         if (! $request->user()->bisaBelajar($surat->nomor)) {
-            return view('belajar.terkunci', ['surat' => $surat]);
+            return view('belajar.terkunci', ['surat' => $surat, 'harga' => Langganan::harga()]);
         }
 
         $kata = Kata::where('surat_nomor', $surat->nomor)->orderBy('ayat_nomor')->orderBy('posisi')->get()->groupBy('ayat_nomor');
