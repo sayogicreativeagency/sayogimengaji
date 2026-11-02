@@ -9,7 +9,8 @@
             <p class="mt-1 text-sm font-medium"><span aria-hidden="true">📍</span> <span data-kota>Jakarta</span></p>
         </div>
         <div data-cuaca hidden class="text-right">
-            <span data-cuaca-ikon class="text-3xl" aria-hidden="true"></span>
+            {{-- Ikon diisi JS (public/images/cuaca, dibuat dengan OpenAI); kondisi ditulis di bawahnya, jadi alt kosong. --}}
+            <img data-cuaca-ikon alt="" width="48" height="48" class="ml-auto block size-12">
             <span data-cuaca-suhu class="block font-semibold tabular-nums"></span>
             <span data-cuaca-kondisi class="block text-xs text-stone-500"></span>
             <a href="https://open-meteo.com/" class="block text-[10px] text-stone-600 hover:underline">Open-Meteo</a>

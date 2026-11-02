@@ -24,17 +24,17 @@ const simpan = {
     },
 };
 
-// Kode cuaca WMO (Open-Meteo) → [kondisi, ikon siang, ikon malam].
+// Kode cuaca WMO (Open-Meteo) → [kondisi, ikon siang, ikon malam]; ikon = public/images/cuaca/<nama>.webp.
 function kondisiCuaca(kode) {
-    if (kode === 0) return ['Cerah', '☀️', '🌙'];
-    if (kode <= 2) return ['Cerah berawan', '🌤️', '☁️'];
-    if (kode === 3) return ['Berawan', '☁️', '☁️'];
-    if (kode <= 48) return ['Berkabut', '🌫️', '🌫️'];
-    if (kode <= 57) return ['Gerimis', '🌦️', '🌧️'];
-    if (kode <= 67) return ['Hujan', '🌧️', '🌧️'];
-    if (kode <= 77) return ['Salju', '❄️', '❄️'];
-    if (kode <= 82) return ['Hujan lokal', '🌦️', '🌧️'];
-    return ['Badai petir', '⛈️', '⛈️'];
+    if (kode === 0) return ['Cerah', 'cerah-siang', 'cerah-malam'];
+    if (kode <= 2) return ['Cerah berawan', 'cerah-berawan-siang', 'cerah-berawan-malam'];
+    if (kode === 3) return ['Berawan', 'berawan', 'berawan'];
+    if (kode <= 48) return ['Berkabut', 'kabut', 'kabut'];
+    if (kode <= 57) return ['Gerimis', 'gerimis-siang', 'hujan'];
+    if (kode <= 67) return ['Hujan', 'hujan', 'hujan'];
+    if (kode <= 77) return ['Salju', 'salju', 'salju'];
+    if (kode <= 82) return ['Hujan lokal', 'gerimis-siang', 'hujan'];
+    return ['Badai petir', 'badai', 'badai'];
 }
 
 if (widget) {
@@ -97,7 +97,7 @@ if (widget) {
         const jadwal = hitungJadwal(lintang, bujur, new Date(), pilihMazhab.value);
         const malam = new Date() >= jadwal.maghrib || new Date() < jadwal.terbit;
         const [kondisi, ikonSiang, ikonMalam] = kondisiCuaca(cuaca.kode);
-        el('cuaca-ikon').textContent = malam ? ikonMalam : ikonSiang;
+        el('cuaca-ikon').src = `/images/cuaca/${malam ? ikonMalam : ikonSiang}.webp`;
         el('cuaca-suhu').textContent = `${cuaca.suhu}°C`;
         el('cuaca-kondisi').textContent = kondisi;
         el('cuaca').hidden = false;
