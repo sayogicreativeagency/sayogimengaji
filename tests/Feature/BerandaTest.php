@@ -10,6 +10,19 @@ it('beranda: hero dengan tombol ke form cari, lalu form + widget, lalu section b
         ->assertSee('src="/images/hero.webp"', false);
 });
 
-it('header polos tanpa pola latar', function () {
-    $this->get('/kontak')->assertOk()->assertDontSee('pola-islami');
+it('header polos tanpa pola latar, dengan logo dan tagline Imam asy-Syafi\'i', function () {
+    $this->get('/kontak')->assertOk()->assertDontSee('pola-islami')
+        ->assertSee('src="/images/logo.webp"', false)
+        ->assertSee('ليس العلم ما حفظ، إنما العلم ما نفع');
+});
+
+it('menu HP: tombol burger membuka dialog berisi menu yang sama dengan desktop', function () {
+    $halaman = $this->get('/kontak')->assertOk()->getContent();
+    $dialog = str($halaman)->between('<dialog id="menu-hp"', '</dialog>')->toString();
+
+    expect($halaman)->toContain('data-buka-menu')->toContain('aria-controls="menu-hp"')
+        ->and($dialog)->toContain('data-tutup-menu')
+        ->toContain('href="/hadist"')->toContain('href="/belajar"')->toContain('href="/quran"')
+        ->toContain('href="/dukung"')->toContain('href="/masuk"')
+        ->not->toContain('href="/admin"');
 });

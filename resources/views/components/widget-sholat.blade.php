@@ -6,7 +6,7 @@
             <p data-jam class="text-3xl font-semibold tabular-nums">--.--</p>
             <p data-tanggal class="text-sm text-stone-500"></p>
             <p data-hijriah class="text-sm text-stone-500"></p>
-            <p class="mt-1 text-sm font-medium"><span aria-hidden="true">📍</span> <span data-kota>Jakarta</span></p>
+            <p class="mt-1 text-sm font-medium"><img src="/images/lokasi.webp" alt="" width="16" height="16" class="inline size-4 align-[-0.15em]"> <span data-kota>Jakarta</span></p>
         </div>
         <div data-cuaca hidden class="text-right">
             {{-- Ikon diisi JS (public/images/cuaca, dibuat dengan OpenAI); kondisi ditulis di bawahnya, jadi alt kosong. --}}

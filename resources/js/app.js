@@ -2,6 +2,16 @@ import './murottal';
 import './sholat/widget';
 import './belajar';
 
+// Menu HP: showModal() mengunci fokus di panel dan Esc menutupnya; animasinya di CSS (.menu-hp).
+const menuHp = document.getElementById('menu-hp');
+
+if (menuHp) {
+    document.querySelector('[data-buka-menu]').addEventListener('click', () => menuHp.showModal());
+    menuHp.querySelector('[data-tutup-menu]').addEventListener('click', () => menuHp.close());
+    // Layar dilebarkan sampai menu desktop tampil: panel tidak boleh tertinggal terbuka.
+    matchMedia('(min-width: 48rem)').addEventListener('change', (e) => e.matches && menuHp.close());
+}
+
 // Filter hasil pencarian: muat daftar dari /cari/saring (DB saja, tanpa AI) tanpa reload.
 // Ringkasan AI disembunyikan selama filter aktif karena hanya berlaku untuk hasil awal.
 const filter = document.querySelector('[data-filter-hasil]');

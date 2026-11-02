@@ -1,6 +1,6 @@
 <x-layout :penuh="true">
-    {{-- Hero setinggi layar dikurangi header (±4rem). Gambar: public/images/hero*.webp (OpenAI gpt-image-2.5-sunburst). --}}
-    <section class="relative isolate flex min-h-[calc(100svh-4rem)] items-center overflow-hidden">
+    {{-- Hero setinggi layar dikurangi header (77px di desktop: logo 44px + padding + garis). Gambar: public/images/hero*.webp (OpenAI gpt-image-2.5-sunburst). --}}
+    <section class="relative isolate flex min-h-[calc(100svh-77px)] items-center overflow-hidden">
         <img src="/images/hero.webp" srcset="/images/hero-900.webp 900w, /images/hero.webp 1536w" sizes="100vw"
              alt="" fetchpriority="high" width="1536" height="1024"
              class="hero-gambar absolute inset-0 -z-10 size-full object-cover object-[94%_70%] lg:object-[72%_70%]">

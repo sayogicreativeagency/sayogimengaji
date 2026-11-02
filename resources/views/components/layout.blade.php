@@ -9,32 +9,77 @@
     <meta name="theme-color" content="#0b1512">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $judul ? $judul.' — ' : '' }}{{ config('app.name') }}</title>
+    <link rel="icon" href="/favicon.ico" sizes="48x48">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     @fonts
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-screen bg-stone-50 text-stone-800 antialiased dark:bg-stone-950 dark:text-stone-200">
+    @php
+        $menu = ['/hadist' => 'Hadist', '/belajar' => 'Belajar', '/quran' => "Al-Qur'an"];
+        if (auth()->user()?->peran->bisaMasukAdmin()) {
+            $menu['/admin'] = 'Admin';
+        }
+    @endphp
     <header class="border-b border-stone-200 bg-stone-950 dark:border-stone-800">
-        <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-2 px-4 py-4">
-            <a href="/" class="font-judul text-2xl font-semibold whitespace-nowrap text-emerald-800 dark:text-emas-300">Sayogi Mengaji</a>
-            <nav class="-mx-1 flex max-w-full items-center gap-4 overflow-x-auto px-1 text-sm whitespace-nowrap">
-                <a href="/hadist" class="font-medium text-stone-700 hover:text-emerald-800 dark:text-stone-300 dark:hover:text-emas-300">Hadist</a>
-                <a href="/belajar" class="font-medium text-stone-700 hover:text-emerald-800 dark:text-stone-300 dark:hover:text-emas-300">Belajar</a>
-                <a href="/quran" class="font-medium text-stone-700 hover:text-emerald-800 dark:text-stone-300 dark:hover:text-emas-300">Al-Qur'an</a>
+        <div class="mx-auto flex max-w-6xl items-center justify-between gap-6 px-4 py-4">
+            <x-logo />
+
+            <nav aria-label="Menu utama" class="hidden items-center gap-4 text-sm whitespace-nowrap md:flex">
+                @foreach ($menu as $url => $label)
+                    <a href="{{ $url }}" class="font-medium text-stone-700 hover:text-emerald-800 dark:text-stone-300 dark:hover:text-emas-300">{{ $label }}</a>
+                @endforeach
                 <a href="/dukung" class="rounded-full border border-emerald-700/30 px-3 py-1 text-sm font-medium text-emerald-800 hover:bg-emerald-50 dark:border-emas-400/40 dark:text-emas-300 dark:hover:bg-emas-400/10">Dukung</a>
                 @auth
-                    @if (auth()->user()->peran->bisaMasukAdmin())
-                        <a href="/admin" class="font-medium text-stone-700 hover:text-emerald-800 dark:text-stone-300 dark:hover:text-emas-300">Admin</a>
-                    @endif
                     <form action="/keluar" method="post" class="flex items-center gap-2">
                         @csrf
-                        <span class="hidden text-stone-500 sm:inline">{{ auth()->user()->name }}</span>
+                        <span class="hidden text-stone-500 lg:inline">{{ auth()->user()->name }}</span>
                         <button class="font-medium text-stone-700 hover:text-emerald-800 dark:text-stone-300 dark:hover:text-emas-300">Keluar</button>
                     </form>
                 @else
                     <a href="/masuk" class="font-medium text-stone-700 hover:text-emerald-800 dark:text-stone-300 dark:hover:text-emas-300">Masuk</a>
                 @endauth
             </nav>
+
+            <button type="button" data-buka-menu aria-haspopup="dialog" aria-controls="menu-hp"
+                    class="-mr-2 grid size-11 place-items-center rounded-lg text-stone-200 hover:text-emas-300 focus-visible:ring-2 focus-visible:ring-emas-400 focus-visible:outline-none md:hidden">
+                <span class="sr-only">Buka menu</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" class="size-6" aria-hidden="true"><path d="M4 7h16M4 12h16M8 17h12"/></svg>
+            </button>
         </div>
+
+        {{-- Menu HP: panel layar penuh yang menggeser masuk dari kanan (.menu-hp di app.css, buka/tutup di app.js). --}}
+        <dialog id="menu-hp" aria-label="Menu" class="menu-hp m-0 h-dvh max-h-none w-full max-w-none bg-stone-950 p-0 text-stone-200 md:hidden">
+            <div class="flex h-full flex-col px-4 pt-4 pb-8">
+                <div class="flex items-center justify-between gap-6">
+                    <x-logo />
+                    <button type="button" data-tutup-menu
+                            class="-mr-2 grid size-11 place-items-center rounded-lg text-stone-200 hover:text-emas-300 focus-visible:ring-2 focus-visible:ring-emas-400 focus-visible:outline-none">
+                        <span class="sr-only">Tutup menu</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" class="size-6" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+                    </button>
+                </div>
+
+                <nav aria-label="Menu utama" class="mt-14 flex flex-col">
+                    @foreach ($menu as $url => $label)
+                        <a href="{{ $url }}" class="border-b border-stone-800 py-4 font-judul text-4xl font-semibold text-stone-100 hover:text-emas-300">{{ $label }}</a>
+                    @endforeach
+                </nav>
+
+                <div class="mt-auto space-y-5 pt-10">
+                    <a href="/dukung" class="block rounded-full bg-emas-400 px-6 py-3.5 text-center font-medium text-stone-950 hover:bg-emas-300">Dukung Sayogi Mengaji</a>
+                    @auth
+                        <form action="/keluar" method="post" class="flex items-center justify-between gap-4 text-sm">
+                            @csrf
+                            <span class="truncate text-stone-400">{{ auth()->user()->name }}</span>
+                            <button class="font-medium text-stone-200 hover:text-emas-300">Keluar</button>
+                        </form>
+                    @else
+                        <a href="/masuk" class="block text-center font-medium text-stone-200 hover:text-emas-300">Masuk</a>
+                    @endauth
+                </div>
+            </div>
+        </dialog>
     </header>
 
     @if ($penuh)
