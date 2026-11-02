@@ -102,8 +102,9 @@
         </div>
     @endif
 
-    <footer class="mx-auto max-w-6xl px-4 pb-10 text-xs leading-relaxed text-stone-500">
-        <div class="ornamen mb-6" aria-hidden="true">✦</div>
+    {{-- Ornamen emas menumpang tepat di batas atas footer, jadi pemisah dengan section terakhir. --}}
+    <footer class="relative mx-auto max-w-6xl px-4 pt-10 pb-10 text-xs leading-relaxed text-stone-500">
+        <div class="ornamen absolute inset-x-4 top-0 -translate-y-1/2" aria-hidden="true">✦</div>
         Derajat hadist mengikuti penilaian ulama yang tercantum; rujuk ulama untuk penetapan hukum.
         <nav class="mt-2 flex flex-wrap gap-x-3 gap-y-1">
             <a href="/tentang" class="underline">Tentang kami</a>
