@@ -1,5 +1,5 @@
 // Widget sidebar: jam, sholat berikutnya, jadwal hari ini, dan cuaca.
-// Lokasi diminta sekali saat pertama masuk lalu disimpan; ditolak → Jakarta.
+// Lokasi diminta saat pertama masuk sampai pengguna menjawab, lalu disimpan; ditolak → Jakarta.
 import { hitungJadwal, NAMA, sholatBerikutnya } from './hitung';
 
 const widget = document.querySelector('[data-widget-sholat]');
@@ -112,12 +112,14 @@ if (widget) {
     }
 
     function mintaLokasi() {
-        simpan.taruh('sholat:sudah-ditanya', true);
         if (!navigator.geolocation) return beriPesan('Browser ini tidak mendukung lokasi. Jadwal memakai Jakarta.');
+        // Di luar HTTPS browser menolak tanpa bertanya; jangan dianggap pengguna sudah menjawab.
+        if (!window.isSecureContext) return beriPesan('Lokasi hanya bisa dipakai lewat koneksi aman (HTTPS). Jadwal memakai Jakarta.');
 
         beriPesan('Mencari lokasimu…');
         navigator.geolocation.getCurrentPosition(
             async ({ coords }) => {
+                simpan.taruh('sholat:sudah-ditanya', true);
                 // Dibulatkan ±1 km: cukup untuk jadwal sholat, tidak membocorkan lokasi persis ke layanan cuaca.
                 const lintang = Math.round(coords.latitude * 100) / 100;
                 const bujur = Math.round(coords.longitude * 100) / 100;
@@ -130,6 +132,8 @@ if (widget) {
                 perbaruiCuaca();
             },
             (galat) => {
+                // Hanya penolakan pengguna yang diingat; timeout/GPS gagal dicoba lagi di kunjungan berikutnya.
+                if (galat.code === galat.PERMISSION_DENIED) simpan.taruh('sholat:sudah-ditanya', true);
                 beriPesan(
                     galat.code === galat.PERMISSION_DENIED
                         ? 'Izin lokasi ditolak, jadwal memakai Jakarta. Izinkan lokasi di pengaturan browser lalu tekan "Gunakan lokasiku".'
