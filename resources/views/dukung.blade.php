@@ -2,7 +2,7 @@
     <article class="mx-auto max-w-2xl">
         <h1 class="text-3xl font-semibold tracking-tight">Infaq untuk Sayogi Mengaji</h1>
         <p class="mt-4 text-lg leading-relaxed text-stone-700 dark:text-stone-300">
-            Sayogi Mengaji gratis untuk semua orang dan tanpa iklan. Agar tetap begitu, kami mengandalkan
+            Sayogi Mengaji tanpa iklan, dan pencarian hadist, Al-Qur'an, murottal, serta jadwal sholatnya gratis untuk semua orang. Agar tetap begitu, kami mengandalkan
             infaq seikhlasnya dari para pengguna.
         </p>
 
@@ -17,7 +17,7 @@
         <ul class="mt-3 space-y-3 leading-relaxed">
             <li><strong>Server dan database</strong> yang menyimpan lebih dari 36 ribu hadist beserta teks Arab dan derajatnya.</li>
             <li><strong>Biaya AI</strong> yang membantu memahami pertanyaanmu dan merangkum hadist yang relevan.</li>
-            <li><strong>Pengembangan fitur berikutnya</strong>, insyaAllah: murottal dengan pilihan qori, jadwal sholat, dan belajar Al-Qur'an.</li>
+            <li><strong>Perawatan dan pengembangan fitur</strong> seperti murottal, jadwal sholat, kalender Hijriah, dan belajar Al-Qur'an.</li>
         </ul>
 
         <h2 class="mt-10 text-lg font-semibold">Ilmu yang terus mengalir</h2>

@@ -35,7 +35,7 @@
             <li><strong>DeepSeek</strong> (penyedia AI): menerima kata pencarian dan cuplikan hadist untuk menyusun ringkasan. Menurut kebijakan mereka, data diproses dan disimpan di <strong>Tiongkok</strong> dan dapat dipakai untuk mengembangkan layanan mereka. Data akun dan kontakmu tidak kami kirim ke DeepSeek.</li>
             <li><strong>Open-Meteo</strong> (cuaca) dan <strong>BigDataCloud</strong> (nama kota): bila kamu mengizinkan lokasi, peramban kamu mengirim koordinat yang sudah dibulatkan langsung ke layanan ini.</li>
             <li><strong>equran.id</strong>, <strong>Quran.com</strong>, dan <strong>QuranicAudio</strong>: audio murottal dan audio di halaman belajar diputar langsung dari server mereka, sehingga alamat IP-mu terlihat oleh mereka saat audio dimuat.</li>
-            <li><strong>DANA, Saweria, dan aplikasi bank/e-wallet</strong>: bila kamu berinfaq, pembayaran diproses oleh mereka sesuai kebijakan privasi masing-masing. Kami tidak menerima data kartu atau rekeningmu.</li>
+            <li><strong>DANA, Saweria, dan aplikasi bank/e-wallet</strong>: bila kamu berinfaq atau membayar langganan, pembayaran diproses oleh mereka sesuai kebijakan privasi masing-masing. Kami tidak menerima data kartu, PIN, atau kata sandi; untuk langganan kami hanya menyimpan yang kamu isi di konfirmasi pembayaran (nama pengirim dan bukti bayar, yang bisa memuat nama dan nomor rekening pengirim).</li>
         </ul>
 
         <h2>4. Untuk apa data digunakan</h2>

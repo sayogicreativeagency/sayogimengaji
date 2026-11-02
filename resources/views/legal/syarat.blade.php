@@ -6,7 +6,8 @@
         <p>Dengan menggunakan Sayogi Mengaji, kamu menyetujui syarat berikut. Kalau tidak setuju, mohon tidak menggunakan layanan ini. Cara kami mengelola data dijelaskan di <a href="/kebijakan-privasi">Kebijakan Privasi</a>.</p>
 
         <h2>1. Tentang layanan</h2>
-        <p>Sayogi Mengaji adalah situs untuk mempelajari hadist dan Al-Qur'an: pencarian hadist dengan bantuan AI, murottal Al-Qur'an, serta jadwal sholat dan cuaca. Layanan ini gratis dan dikelola secara pribadi oleh pengelola Sayogi Mengaji.</p>
+        <p>Sayogi Mengaji adalah situs untuk mempelajari hadist dan Al-Qur'an: pencarian hadist dengan bantuan AI, murottal Al-Qur'an, belajar dan menghafal Al-Qur'an per kata, serta jadwal sholat, kalender, dan cuaca. Sayogi Mengaji dibuat dan dikelola oleh <strong>Sayogi Creative Agency</strong> ("kami").</p>
+        <p>Sayogi Mengaji tidak memasang iklan. Pencarian hadist, Al-Qur'an, murottal, jadwal sholat, dan kalender gratis untuk semua orang. Fitur belajar Al-Qur'an per kata dapat memerlukan langganan berbayar, seperti diatur di <a href="#langganan">bagian 6</a>.</p>
 
         <h2>2. Konten keagamaan</h2>
         <ul>
@@ -33,16 +34,22 @@
 
         <h2>5. Infaq</h2>
         <ul>
-            <li>Infaq bersifat <strong>sukarela dan seikhlasnya</strong>. Infaq <strong>tidak membuka akses</strong>, fitur, atau keuntungan apa pun di situs ini.</li>
+            <li>Infaq bersifat <strong>sukarela dan seikhlasnya</strong>. Infaq <strong>tidak membuka akses</strong>, fitur, atau keuntungan apa pun di situs ini. Untuk membuka fitur belajar, gunakan langganan (<a href="#langganan">bagian 6</a>), bukan infaq.</li>
             <li>Infaq digunakan sepenuhnya untuk operasional dan pengembangan Sayogi Mengaji, dan bukan penggalangan dana untuk pihak lain.</li>
             <li>Pembayaran diproses oleh pihak ketiga (DANA, Saweria, atau aplikasi bank/e-wallet yang kamu pakai) dan tunduk pada ketentuan mereka. Infaq yang sudah dikirim pada dasarnya tidak dikembalikan; kalau terjadi salah kirim, hubungi kami lewat <a href="/kontak">halaman kontak</a>.</li>
         </ul>
 
-        <h2>6. Fitur berbayar</h2>
-        <p>Bila nanti tersedia fitur berbayar, ketentuan langganannya (harga, pembayaran, dan pengembalian dana) akan diatur tersendiri dan ditampilkan sebelum kamu membayar.</p>
+        <h2 id="langganan">6. Langganan belajar Al-Qur'an</h2>
+        <ul>
+            <li><strong>Cakupan.</strong> Belajar surat Al-Fatihah gratis untuk akun yang login; surat lain memerlukan langganan aktif. Kami dapat membuka semua surat secara gratis untuk sementara waktu. Langganan yang sudah dibayar tetap berlaku sampai tanggal berakhirnya.</li>
+            <li><strong>Harga.</strong> Harga per bulan dan pilihan lama langganan ditampilkan di halaman <a href="/langganan">Langganan</a> sebelum kamu membayar. Total pembayaran ditambah kode unik tiga digit (Rp 1 sampai Rp 999) agar pembayaranmu bisa kami kenali.</li>
+            <li><strong>Pembayaran dan aktivasi.</strong> Pembayaran dilakukan lewat QRIS atau transfer bank ke tujuan yang tercantum di halaman tagihan, lalu dikonfirmasi lewat halaman yang sama. Langganan aktif setelah pembayaran kami cocokkan, biasanya dalam 1×24 jam. Bila langgananmu masih aktif, masa yang baru dibayar ditambahkan setelah tanggal berakhirnya. Pembayaran diproses oleh bank atau e-wallet yang kamu pakai dan tunduk pada ketentuan mereka.</li>
+            <li><strong>Tanpa perpanjangan otomatis.</strong> Langganan berakhir dengan sendirinya pada tanggal berakhirnya; tidak ada penagihan berulang. Progres hafalan tetap tersimpan setelah langganan berakhir.</li>
+            <li><strong>Pengembalian dana.</strong> Langganan yang sudah aktif tidak dapat dikembalikan, termasuk bila tidak dipakai atau akun dihapus. Kami mengembalikan dana secara penuh hanya bila terjadi kesalahan: salah transfer, pembayaran ganda untuk tagihan yang sama, atau pembayaran yang tidak dapat kami cocokkan atau aktifkan. Ajukan lewat <a href="/kontak">halaman kontak</a> dengan menyertakan nomor tagihan dan bukti bayar; dana dikembalikan ke rekening atau e-wallet pengirim.</li>
+        </ul>
 
         <h2>7. Hak atas konten</h2>
-        <p>Teks Al-Qur'an dan hadist adalah warisan bersama umat. Data, terjemahan, audio, dan huruf yang kami gunakan tetap mengikuti lisensi pemiliknya masing-masing, seperti dirinci di halaman <a href="/sumber">Sumber</a>. Kode, desain, dan susunan situs ini milik pengelola Sayogi Mengaji.</p>
+        <p>Teks Al-Qur'an dan hadist adalah warisan bersama umat. Data, terjemahan, audio, dan huruf yang kami gunakan tetap mengikuti lisensi pemiliknya masing-masing, seperti dirinci di halaman <a href="/sumber">Sumber</a>. Kode, desain, dan susunan situs ini milik Sayogi Creative Agency.</p>
 
         <h2>8. Batasan tanggung jawab</h2>
         <p>Layanan disediakan sebagaimana adanya. Kami berusaha menjaga ketepatan dan ketersediaannya, tetapi tidak menjamin layanan selalu bebas kesalahan atau tanpa gangguan, termasuk gangguan dari layanan pihak ketiga yang kami gunakan.</p>

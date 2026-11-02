@@ -18,25 +18,43 @@ Project pribadi (Sayogi Creative Agency), bukan pekerjaan Akmanda Media. Tidak d
 - [x] Halaman kalender Masehi + Hijriah, ditautkan dari footer dan widget (2 Nov 2026)
 - [x] Rebranding jadi Sayogi Mengaji (2 Nov 2026)
 - [x] Halaman Tentang kami (Sayogi Creative Agency) di footer (2 Nov 2026)
+- [x] Kalender: libur nasional + cuti bersama (Google) dan hari besar Islam di bawah kalender, Jumat hijau (2 Nov 2026)
+- [x] Beranda gaya company profile: hero layar penuh (gambar OpenAI), widget melayang, section Bantu di atas footer (2 Nov 2026)
+- [x] Ikon cuaca dan pin lokasi 3D (OpenAI) menggantikan emoji (2 Nov 2026)
+- [x] Logo emblem + tagline Imam asy-Syafi'i, favicon, menu burger HP dengan panel geser (2 Nov 2026)
+- [x] Font Amiri benar-benar dipakai untuk huruf Arab (sebelumnya hanya subset Latin yang dimuat) (2 Nov 2026)
+- [x] Halaman `/hadist` sendiri: form cari, penjelasan derajat, daftar 7 kitab dengan jumlah hadist (2 Nov 2026)
+
+## Perlu keputusan Angga
+
+- [x] Syarat & Ketentuan: pengelola Sayogi Creative Agency, bagian 6 mengatur langganan (harga, aktivasi, tanpa perpanjangan otomatis, refund hanya bila ada kesalahan) (2 Nov 2026)
+- [x] Kalimat "gratis" di beranda, kartu donasi, dan halaman Dukung dibatasi ke fitur yang memang gratis (2 Nov 2026)
+- [ ] Baca ulang penjelasan derajat dan tahun wafat para imam di `/hadist` sebelum tayang.
 
 ## Menunggu pihak lain
 
 - [ ] Izin tertulis Quran Foundation untuk fitur belajar berbayar (email terkirim 2 Nov 2026). Sampai ada jawaban, pertimbangkan saklar langganan dimatikan.
 - [ ] Isi `BAYAR_REKENING` dan tes pindai QRIS bernominal dari HP
-- [ ] Kebijakan pengembalian dana untuk halaman langganan (Syarat & Ketentuan bagian 6 menjanjikannya)
 
 ## Berikutnya
 
 ### Sugesti pencarian dari kata yang paling sering dicari
 
-Chip contoh di beranda (sekarang daftar tetap di `beranda.blade.php`) diganti kata/frasa yang paling sering dicari 30 hari terakhir, dirapikan LLM sekali sehari.
+Chip contoh di beranda dan `/hadist` (sekarang daftar tetap di komponen `contoh-cari`) diganti kata/frasa yang paling sering dicari 30 hari terakhir, dirapikan LLM sekali sehari.
 
 1. **Catat pencarian.** Tabel `pencarian_harian` (`tanggal`, `kata` ternormalisasi: huruf kecil + spasi dirapikan, `jumlah`, `jumlah_tanpa_hasil`), unik per (`tanggal`, `kata`), di-upsert tiap `/cari`. Tanpa user_id dan IP, jadi tidak menyimpan siapa mencari apa.
 2. **Rapikan tiap hari.** Command terjadwal mengambil ±50 kata teratas 30 hari terakhir (minimal dicari beberapa kali, supaya pencarian pribadi satu orang tidak tampil), lalu meminta LLM (laravel/ai, DeepSeek yang sudah ada) menggabungkan yang semakna atau salah ketik dan membuang yang tidak pantas tampil. Hasilnya ±8 sugesti disimpan di `pengaturan` (`sugesti_cari`). Kalau LLM gagal, pakai kata teratas mentah. Kalau data belum cukup, pakai daftar tetap yang sekarang.
-3. **Beranda** menampilkan `sugesti_cari`.
+3. **Beranda dan `/hadist`** menampilkan `sugesti_cari` lewat komponen `contoh-cari`.
 4. **Riset di admin.** Halaman Filament "Riset pencarian": kata teratas 30 hari dengan jumlahnya, dan kata yang sering **tanpa hasil** (petunjuk konten atau sinonim yang kurang). Superadmin bisa menyembunyikan satu kata dari sugesti.
 5. Tambah satu kalimat di Kebijakan Privasi tentang pencatatan kata kunci tanpa identitas.
 
 Butuh scheduler (`php artisan schedule:run` lewat cron) di server produksi.
 
 Sengaja belum: autocomplete saat mengetik, grafik tren, riwayat pencarian per akun. Layak ditambah kalau data pencarian sudah cukup banyak dan sugesti harian terbukti dipakai.
+
+## Sebelum tayang di produksi
+
+- HTTPS wajib: tanpa itu browser menolak izin lokasi dan widget selalu memakai Jakarta.
+- `npm run build` di server (`public/build` tidak masuk git) dan `php artisan migrate` (tabel `pembayaran`).
+- `BAYAR_REKENING` di `.env`. `OPENAI_API_KEY` hanya dipakai untuk membuat gambar; situs tidak memanggilnya saat berjalan.
+- Cron `schedule:run` baru dibutuhkan setelah sugesti pencarian dibuat.

@@ -51,7 +51,9 @@
             <li>Bayar lewat QRIS (aplikasi bank atau e-wallet mana pun) atau transfer bank, lalu isi konfirmasi pembayaran.</li>
             <li>Langganan aktif setelah pembayaran dicek admin, biasanya dalam 1×24 jam.</li>
             <li>Progres hafalan tetap tersimpan meski langganan berakhir.</li>
-            <li>Ada kendala atau salah transfer? Hubungi kami lewat <a href="/kontak" class="underline">halaman kontak</a>.</li>
+            <li>Tidak diperpanjang otomatis; tidak ada penagihan berulang.</li>
+            <li>Langganan yang sudah aktif tidak dikembalikan. Dana dikembalikan penuh hanya bila ada kesalahan: salah transfer, bayar dua kali, atau pembayaran yang tidak bisa kami aktifkan. Ajukan lewat <a href="/kontak" class="underline">halaman kontak</a>.</li>
+            <li>Ketentuan lengkap ada di <a href="/syarat-ketentuan#langganan" class="underline">Syarat &amp; Ketentuan bagian 6</a>.</li>
         </ul>
     </div>
 </x-layout>

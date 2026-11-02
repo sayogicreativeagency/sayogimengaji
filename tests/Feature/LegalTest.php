@@ -35,3 +35,20 @@ it('menautkan halaman legal dari footer dan form daftar', function () {
 it('mencantumkan atribusi Open-Meteo di widget cuaca', function () {
     $this->get('/')->assertOk()->assertSee('href="https://open-meteo.com/"', false);
 });
+
+it('syarat mengatur langganan dan refund, menyebut Sayogi Creative Agency sebagai pengelola', function () {
+    $this->get('/syarat-ketentuan')->assertOk()
+        ->assertSee('Sayogi Creative Agency')
+        ->assertSee('id="langganan"', false)
+        ->assertSee('Tanpa perpanjangan otomatis')
+        ->assertSee('Langganan yang sudah aktif tidak dapat dikembalikan')
+        ->assertDontSee('dikelola secara pribadi')
+        ->assertDontSee('Bila nanti tersedia fitur berbayar');
+
+    $this->actingAs(App\Models\User::factory()->create())->get('/langganan')->assertOk()
+        ->assertSee('href="/syarat-ketentuan#langganan"', false);
+});
+
+it('tidak lagi mengklaim seluruh situs gratis, karena belajar per kata bisa berbayar', function (string $url) {
+    $this->get($url)->assertOk()->assertDontSee('Gratis dan tanpa iklan')->assertDontSee('gratis untuk semua orang dan tanpa iklan');
+})->with(['/', '/dukung', '/kontak']);

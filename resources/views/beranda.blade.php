@@ -50,7 +50,7 @@
             <div>
                 <h2 id="judul-dukung" class="font-judul text-4xl leading-tight font-semibold text-balance text-emas-300 sm:text-5xl">Bantu Sayogi Mengaji tetap hidup</h2>
                 <p class="mt-5 max-w-xl text-lg leading-relaxed text-stone-300">
-                    Gratis dan tanpa iklan. Infaq seikhlasnya membantu biaya server, AI, dan pengembangan fitur.
+                    Tanpa iklan, dan pencarian hadist, Al-Qur'an, murottal, serta jadwal sholat gratis untuk semua orang. Infaq seikhlasnya membantu biaya server, AI, dan pengembangan fitur.
                 </p>
 
                 <figure class="mt-10 max-w-xl">

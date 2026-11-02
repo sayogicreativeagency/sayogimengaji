@@ -11,7 +11,7 @@
     @if ($ringkas)
         <h2 class="font-semibold">Bantu Sayogi Mengaji tetap hidup</h2>
         <p class="mt-2 text-sm leading-relaxed text-stone-700 dark:text-stone-300">
-            Gratis dan tanpa iklan. Infaq seikhlasnya membantu biaya server, AI, dan pengembangan fitur.
+            Tanpa iklan, dan pencarian hadist serta murottal gratis. Infaq seikhlasnya membantu biaya server, AI, dan pengembangan fitur.
         </p>
     @endif
 
