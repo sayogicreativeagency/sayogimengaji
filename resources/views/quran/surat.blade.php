@@ -35,7 +35,7 @@
                 <div class="flex items-center justify-between text-sm">
                     <button type="button" data-putar-ayat="{{ $a->nomor }}" aria-label="Putar mulai ayat {{ $a->nomor }}"
                             class="flex items-center gap-2 rounded-full border border-stone-300 px-3 py-1 font-medium hover:border-emerald-600 hover:text-emerald-800 dark:border-stone-700">
-                        <span aria-hidden="true">▶</span> {{ $a->nomor }}
+                        <x-ikon-media nama="putar" class="size-3.5 text-emerald-600 dark:text-emas-400" /> {{ $a->nomor }}
                     </button>
                     <a href="#ayat-{{ $a->nomor }}" class="text-stone-500 hover:underline">{{ $surat->nomor }}:{{ $a->nomor }}</a>
                 </div>
@@ -67,9 +67,12 @@
          class="fixed inset-x-0 bottom-0 z-10 border-t border-stone-200 bg-white/95 backdrop-blur dark:border-stone-800 dark:bg-stone-950/95">
         <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-4 gap-y-2 px-4 py-3 text-sm">
             <div class="flex items-center gap-1">
-                <button type="button" data-sebelumnya aria-label="Ayat sebelumnya" class="rounded-full p-2 hover:bg-stone-100 dark:hover:bg-stone-800">⏮</button>
-                <button type="button" data-putar aria-label="Putar" class="flex size-11 items-center justify-center rounded-full bg-emerald-700 text-lg text-white hover:bg-emerald-800">▶</button>
-                <button type="button" data-berikutnya aria-label="Ayat berikutnya" class="rounded-full p-2 hover:bg-stone-100 dark:hover:bg-stone-800">⏭</button>
+                <button type="button" data-sebelumnya aria-label="Ayat sebelumnya" class="grid size-10 place-items-center rounded-full text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 hover:text-emas-300"><x-ikon-media nama="sebelumnya" /></button>
+                <button type="button" data-putar aria-label="Putar" class="group grid size-12 place-items-center rounded-full bg-emas-400 text-stone-950 shadow-[0_8px_24px_-8px_rgb(212_176_98/0.6)] transition-colors hover:bg-emas-300 focus-visible:ring-2 focus-visible:ring-emas-300 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-950 focus-visible:outline-none">
+                    <x-ikon-media nama="putar" class="size-6 translate-x-px group-data-main:hidden" />
+                    <x-ikon-media nama="jeda" class="hidden size-6 group-data-main:block" />
+                </button>
+                <button type="button" data-berikutnya aria-label="Ayat berikutnya" class="grid size-10 place-items-center rounded-full text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 hover:text-emas-300"><x-ikon-media nama="berikutnya" /></button>
             </div>
             <p data-status aria-live="polite" class="min-w-32 font-medium">Siap diputar</p>
 

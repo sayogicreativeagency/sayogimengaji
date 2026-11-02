@@ -116,6 +116,8 @@ if (pemutar) {
     const sebelumnya = () => putar(Math.max(pertama, (ayat ?? pertama) - 1));
     const putarAtauJeda = () => {
         if (ayat === null) putar(awal);
+        // Surat sudah selesai: mulai lagi dari awal, bukan mengulang ayat terakhir.
+        else if (audio.ended && ayat === jumlah) putar(pertama);
         else if (audio.paused) audio.play().catch(() => {});
         else audio.pause();
     };
@@ -133,11 +135,11 @@ if (pemutar) {
         }
     });
     audio.addEventListener('play', () => {
-        tombolPutar.textContent = '⏸';
+        tombolPutar.toggleAttribute('data-main', true); // ikon jeda (lihat tombol data-putar)
         tombolPutar.setAttribute('aria-label', 'Jeda');
     });
     audio.addEventListener('pause', () => {
-        tombolPutar.textContent = '▶';
+        tombolPutar.toggleAttribute('data-main', false);
         tombolPutar.setAttribute('aria-label', 'Putar');
     });
     audio.addEventListener('error', () => (status.textContent = 'Audio gagal dimuat. Coba qori lain.'));
