@@ -17,6 +17,7 @@
 
         <h3>Pencarian hadist</h3>
         <p>Kata yang kamu cari dikirim ke penyedia AI (lihat bagian 3) untuk dikembangkan menjadi kata kunci dan untuk menyusun ringkasan. Hasilnya kami simpan sementara di cache selama 7 hari agar pencarian yang sama tidak memanggil AI lagi. Cache ini tidak dikaitkan dengan akunmu. <strong>Jangan menuliskan data pribadi di kotak pencarian.</strong></p>
+        <p>Kami juga mencatat kata yang dicari beserta jumlahnya per hari, tanpa akun dan tanpa alamat IP, untuk menyusun sugesti pencarian dan menemukan topik yang belum terjawab. Kata yang sering dicari bisa tampil sebagai sugesti di beranda setelah dirapikan dengan bantuan AI; kata yang dicari kurang dari tiga kali dalam sebulan tidak pernah ditampilkan.</p>
 
         <h3>Data teknis</h3>
         <p>Saat kamu membuka situs, server mencatat <strong>alamat IP</strong> dan jenis peramban (user agent) di data sesi. Alamat IP juga dipakai untuk membatasi percobaan login dan pengiriman formulir agar tidak disalahgunakan, serta dapat tercatat di log server.</p>
@@ -47,7 +48,7 @@
         <p>Kami tidak menjual data pribadimu dan tidak memakainya untuk iklan.</p>
 
         <h2>5. Penyimpanan &amp; keamanan</h2>
-        <p>Password disimpan dalam bentuk hash. Akses ke data di panel admin dibatasi sesuai peran. Data akun dan progres belajar disimpan selama akunmu aktif (progres tetap tersimpan meski langganan berakhir); laporan disimpan sampai selesai ditindaklanjuti; cache pencarian terhapus otomatis setelah 7 hari; data sesi kedaluwarsa setelah tidak aktif.</p>
+        <p>Password disimpan dalam bentuk hash. Akses ke data di panel admin dibatasi sesuai peran. Data akun dan progres belajar disimpan selama akunmu aktif (progres tetap tersimpan meski langganan berakhir); laporan disimpan sampai selesai ditindaklanjuti; cache pencarian terhapus otomatis setelah 7 hari; catatan kata pencarian harian terhapus setelah 90 hari; data sesi kedaluwarsa setelah tidak aktif.</p>
 
         <h2>6. Hak kamu</h2>
         <p>Sesuai Undang-Undang Pelindungan Data Pribadi (UU No. 27 Tahun 2022), kamu berhak meminta akses, perbaikan, atau penghapusan data pribadimu, termasuk penghapusan akun, serta menarik persetujuan. Izin lokasi bisa dicabut kapan saja dari pengaturan peramban. Ajukan permintaan lewat <a href="/kontak">halaman kontak</a>.</p>

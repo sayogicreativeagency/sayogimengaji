@@ -8,7 +8,7 @@
 
 ## Fitur
 
-- **Pencarian hadist berbantuan AI.** 36 ribu lebih hadist dari 7 kitab (Kutubus Sittah dan Muwaththa'), lengkap dengan teks Arab, terjemahan, dan derajat. AI (DeepSeek lewat Laravel AI SDK) mengembangkan kata kunci dan menulis ringkasan; filter derajat dan kitab tanpa reload. Halaman `/hadist` menjelaskan arti tiap derajat dan cara situs menentukannya.
+- **Pencarian hadist berbantuan AI.** 36 ribu lebih hadist dari 7 kitab (Kutubus Sittah dan Muwaththa'), lengkap dengan teks Arab, terjemahan, dan derajat. AI (DeepSeek lewat Laravel AI SDK) mengembangkan kata kunci dan menulis ringkasan; filter derajat dan kitab tanpa reload. Halaman `/hadist` menjelaskan arti tiap derajat dan cara situs menentukannya. Sugesti pencarian diambil dari kata yang paling sering dicari, dirapikan AI sekali sehari.
 - **Al-Qur'an dan murottal.** Teks, transliterasi, terjemahan Kemenag, dan pemutar murottal per ayat dengan 6 qori (ulang, kecepatan, lanjut dari terakhir).
 - **Belajar Al-Qur'an per kata.** Sorot kata mengikuti bacaan, ketuk kata untuk mendengar pelafalannya, mode hafalan (huruf awal / teks tersembunyi), progres tersimpan per akun. Al-Fatihah gratis, surat lain lewat langganan.
 - **Langganan.** Bayar lewat QRIS (nominal terisi otomatis dengan kode unik) atau transfer, konfirmasi bayar dengan bukti, disetujui admin. Ada saklar di admin untuk menggratiskan semua surat.
@@ -52,6 +52,8 @@ php artisan akun:peran email@contoh.com superadmin
 ```
 
 `akun:langganan email@contoh.com --bulan=12` memberi atau memperpanjang langganan secara manual.
+
+Sugesti pencarian di beranda disusun dari kata yang paling sering dicari 30 hari terakhir oleh `php artisan pencarian:sugesti`, yang dijadwalkan tiap pukul 02.00. Di server, jalankan scheduler lewat cron: `* * * * * php artisan schedule:run`. Hasilnya bisa dipantau dan diatur di admin, menu Riset pencarian.
 
 ### Konfigurasi `.env`
 

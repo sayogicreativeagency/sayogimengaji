@@ -6,6 +6,7 @@ use App\Actions\CariHadist;
 use App\Enums\Derajat;
 use App\Enums\Kitab;
 use App\Models\Hadist;
+use App\Models\PencarianHarian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
@@ -43,7 +44,11 @@ class HadistController extends Controller
             return redirect('/');
         }
 
-        return view('cari', ['q' => $q, 'hasil' => $cari($q)]);
+        $hasil = $cari($q);
+        // Bahan sugesti & riset pencarian; gagal mencatat tidak boleh menggagalkan pencarian.
+        rescue(fn () => PencarianHarian::catat($q, $hasil->hadist->isEmpty()));
+
+        return view('cari', ['q' => $q, 'hasil' => $hasil]);
     }
 
     /** Potongan HTML untuk filter AJAX di halaman /cari; tanpa panggilan AI. */

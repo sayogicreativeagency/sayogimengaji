@@ -1,13 +1,16 @@
 <?php
 
+use App\Actions\BuatSugestiCari;
 use App\Actions\ImporHadist;
 use App\Actions\ImporKata;
 use App\Actions\ImporQuran;
 use App\Enums\Kitab;
 use App\Enums\Peran;
 use App\Enums\QoriBelajar;
+use App\Models\PencarianHarian;
 use App\Models\User;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schedule;
 
 Artisan::command('hadist:impor {kitab? : kode kitab, mis. bukhari; kosong = semua}', function (ImporHadist $impor) {
     $pilihan = $this->argument('kitab');
@@ -103,3 +106,15 @@ Artisan::command('quran:impor-kata {surat? : nomor surat 1-114; kosong = semua}'
 
     return $gagal ? 1 : 0;
 })->purpose('Impor kata Utsmani & waktu per kata dari Quran.com untuk fitur belajar');
+
+Artisan::command('pencarian:sugesti', function (BuatSugestiCari $buat) {
+    // Sugesti dan riset hanya memakai 30 hari terakhir; sisanya tidak perlu disimpan (lihat Kebijakan Privasi).
+    PencarianHarian::where('tanggal', '<', today()->subDays(90)->toDateString())->delete();
+    $sugesti = $buat();
+    $this->info($sugesti ? 'Sugesti: '.implode(' · ', $sugesti) : 'Data pencarian belum cukup; beranda memakai daftar bawaan.');
+
+    return 0;
+})->purpose('Susun ulang sugesti pencarian dari kata terbanyak dicari 30 hari terakhir');
+
+// Butuh cron `php artisan schedule:run` tiap menit di server.
+Schedule::command('pencarian:sugesti')->dailyAt('02:00');
