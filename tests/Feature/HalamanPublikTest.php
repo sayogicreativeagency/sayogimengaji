@@ -30,9 +30,7 @@ it('menampilkan ringkasan dan kartu hadist', function () {
         ->assertSee('مَنِ اسْتَطَاعَ')
         ->assertSee('HR. Bukhari no. 5063')
         ->assertSee('Shahih')
-        ->assertSee('Ringkasan ini dibuat oleh AI')
-        ->assertSee('patokan utamanya adalah teks hadist')
-        ->assertSee('href="'.url('/kontak?q=pernikahan').'"', false);
+        ->assertDontSee('Ringkasan ini dibuat oleh AI');
 });
 
 it('memberi tahu bila ringkasan AI tidak tersedia', function () {
