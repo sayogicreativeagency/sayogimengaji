@@ -20,6 +20,12 @@
             <li>Dihitung dengan pustaka <a href="https://github.com/batoulapps/adhan-js">adhan</a> (MIT, Batoul Apps) memakai parameter Kemenag RI (Subuh 20°, Isya 18°, dengan ihtiyat), dan dicocokkan dengan jadwal resmi Kemenag dari <a href="https://api.myquran.com">api.myquran.com</a>.</li>
         </ul>
 
+        <h2>Kalender</h2>
+        <ul>
+            <li>Tanggal Hijriah dan hari besar Islam dihitung dengan kalender Umm al-Qura dari pustaka ICU (bawaan PHP dan browser).</li>
+            <li>Libur nasional dan cuti bersama dari kalender publik Google "Hari libur di Indonesia".</li>
+        </ul>
+
         <h2>Cuaca &amp; lokasi</h2>
         <ul>
             <li><a href="https://open-meteo.com/">Weather data by Open-Meteo.com</a>, dilisensikan dengan <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Data ditampilkan sebagai suhu dan kondisi cuaca saat ini.</li>
