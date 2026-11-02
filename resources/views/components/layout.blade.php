@@ -1,4 +1,5 @@
-@props(['judul' => null, 'sidebar' => true])
+{{-- penuh: halaman mengatur lebar sendiri (beranda), tanpa kontainer dan sidebar. --}}
+@props(['judul' => null, 'sidebar' => true, 'penuh' => false])
 <!DOCTYPE html>
 <html lang="id" class="dark">
 <head>
@@ -12,7 +13,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-screen bg-stone-50 text-stone-800 antialiased dark:bg-stone-950 dark:text-stone-200">
-    <header class="pola-islami border-b border-stone-200 dark:border-stone-800">
+    <header class="border-b border-stone-200 bg-stone-950 dark:border-stone-800">
         <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-2 px-4 py-4">
             <a href="/" class="font-judul text-2xl font-semibold whitespace-nowrap text-emerald-800 dark:text-emas-300">Sayogi Mengaji</a>
             <nav class="-mx-1 flex max-w-full items-center gap-4 overflow-x-auto px-1 text-sm whitespace-nowrap">
@@ -36,19 +37,25 @@
         </div>
     </header>
 
-    {{-- 70% konten, 30% sidebar di layar lebar; sidebar turun ke bawah konten di HP. --}}
-    <div class="mx-auto max-w-6xl px-4 py-8 {{ $sidebar ? 'grid gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,3fr)]' : '' }}">
-        <main class="min-w-0">
+    @if ($penuh)
+        <main>
             {{ $slot }}
         </main>
+    @else
+        {{-- 70% konten, 30% sidebar di layar lebar; sidebar turun ke bawah konten di HP. --}}
+        <div class="mx-auto max-w-6xl px-4 py-8 {{ $sidebar ? 'grid gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,3fr)]' : '' }}">
+            <main class="min-w-0">
+                {{ $slot }}
+            </main>
 
-        @if ($sidebar)
-            <aside aria-label="Jadwal sholat dan dukungan" class="space-y-6 lg:self-start">
-                <x-widget-sholat />
-                <x-papan-donasi ringkas />
-            </aside>
-        @endif
-    </div>
+            @if ($sidebar)
+                <aside aria-label="Jadwal sholat dan dukungan" class="space-y-6 lg:self-start">
+                    <x-widget-sholat />
+                    <x-papan-donasi ringkas />
+                </aside>
+            @endif
+        </div>
+    @endif
 
     <footer class="mx-auto max-w-6xl px-4 pb-10 text-xs leading-relaxed text-stone-500">
         <div class="ornamen mb-6" aria-hidden="true">✦</div>
