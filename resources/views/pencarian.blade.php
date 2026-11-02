@@ -7,7 +7,8 @@
         'maudhu' => 'Hadist palsu: dibuat-buat lalu disandarkan kepada Nabi ﷺ. Tidak boleh disebarkan sebagai sabda Nabi, kecuali untuk menjelaskan kepalsuannya.',
     ];
 @endphp
-<x-layout judul="Cari hadist">
+<x-layout judul="Cari hadist"
+          deskripsi="Cari hadist dengan bahasa sehari-hari di {{ number_format($total, 0, ',', '.') }} hadist dari Shahih Bukhari, Shahih Muslim, Sunan Abu Dawud, Tirmidzi, Nasa'i, Ibnu Majah, dan Muwaththa' Malik. Lengkap dengan teks Arab, terjemahan, dan derajatnya.">
     <h1 class="text-4xl">Cari hadist</h1>
     <p class="mt-3 max-w-2xl leading-relaxed text-stone-400">
         Tulis pertanyaanmu dengan bahasa sehari-hari. Kami mencari di {{ $angka($total) }} hadist dari {{ count(App\Enums\Kitab::cases()) }} kitab,

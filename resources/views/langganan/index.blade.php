@@ -1,5 +1,5 @@
 @php($rp = fn (int $n) => 'Rp '.number_format($n, 0, ',', '.'))
-<x-layout judul="Langganan belajar" :sidebar="false">
+<x-layout judul="Langganan belajar" :sidebar="false" :indeks="false">
     <div class="mx-auto max-w-2xl">
         <p class="text-xs font-semibold tracking-[0.25em] text-emas-500 uppercase">Langganan</p>
         <h1 class="mt-3 text-4xl">Belajar semua surat</h1>

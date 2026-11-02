@@ -1,4 +1,4 @@
-<x-layout judul="Dukung" :sidebar="false">
+<x-layout judul="Dukung" :sidebar="false" deskripsi="Infaq seikhlasnya lewat QRIS atau Saweria untuk menjaga Sayogi Mengaji tetap tanpa iklan: biaya server, AI, dan pengembangan fitur.">
     <article class="mx-auto max-w-2xl">
         <h1 class="text-3xl font-semibold tracking-tight">Infaq untuk Sayogi Mengaji</h1>
         <p class="mt-4 text-lg leading-relaxed text-stone-700 dark:text-stone-300">

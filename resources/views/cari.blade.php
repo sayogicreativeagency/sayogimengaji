@@ -1,4 +1,4 @@
-<x-layout :judul="$q">
+<x-layout :judul="$q" :indeks="false">
     <x-form-cari :q="$q" />
 
     <div data-ringkasan>

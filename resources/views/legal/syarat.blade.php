@@ -1,4 +1,4 @@
-<x-layout judul="Syarat & Ketentuan" :sidebar="false">
+<x-layout judul="Syarat & Ketentuan" :sidebar="false" deskripsi="Syarat penggunaan Sayogi Mengaji: konten keagamaan, akun, infaq, langganan belajar Al-Qur'an, dan pengembalian dana.">
     <article class="prosa mx-auto max-w-3xl">
         <h1 class="text-4xl">Syarat &amp; Ketentuan</h1>
         <p class="text-sm text-stone-500">Berlaku sejak 2 November 2026</p>

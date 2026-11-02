@@ -1,5 +1,11 @@
-{{-- penuh: halaman mengatur lebar sendiri (beranda), tanpa kontainer dan sidebar. --}}
-@props(['judul' => null, 'sidebar' => true, 'penuh' => false])
+{{-- penuh: halaman mengatur lebar sendiri (beranda), tanpa kontainer dan sidebar.
+     deskripsi: meta description + Open Graph; indeks=false: noindex (hasil cari, akun, langganan). --}}
+@props(['judul' => null, 'sidebar' => true, 'penuh' => false, 'deskripsi' => null, 'indeks' => true, 'kanonik' => null])
+{{-- Satu blok PHP saja di sini: bentuk satu baris di berkas yang juga punya blok (menu di bawah) membuat Blade menelan semua di antaranya. --}}
+@php
+    $kanonik ??= url()->current();
+    $deskripsi ??= 'Cari hadist dengan bahasa sehari-hari, baca Al-Qur\'an dengan murottal, belajar dan menghafal per kata, plus jadwal sholat dan kalender Hijriah.';
+@endphp
 <!DOCTYPE html>
 <html lang="id" class="dark">
 <head>
@@ -9,6 +15,23 @@
     <meta name="theme-color" content="#0b1512">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $judul ? $judul.' — ' : '' }}{{ config('app.name') }}</title>
+    <meta name="description" content="{{ $deskripsi }}">
+    @if ($indeks)
+        <link rel="canonical" href="{{ $kanonik }}">
+    @else
+        <meta name="robots" content="noindex, follow">
+    @endif
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{{ config('app.name') }}">
+    <meta property="og:locale" content="id_ID">
+    <meta property="og:title" content="{{ $judul ?? config('app.name') }}">
+    <meta property="og:description" content="{{ $deskripsi }}">
+    <meta property="og:url" content="{{ $kanonik }}">
+    <meta property="og:image" content="{{ url('/images/og.jpg') }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    {{ $head ?? '' }}
     <link rel="icon" href="/favicon.ico" sizes="48x48">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     @fonts

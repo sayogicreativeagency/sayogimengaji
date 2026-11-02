@@ -1,4 +1,4 @@
-<x-layout judul="Al-Qur'an">
+<x-layout judul="Al-Qur'an: Arab, Latin, Terjemahan & Murottal" deskripsi="Baca 114 surat Al-Qur'an lengkap dengan teks Arab, transliterasi latin, terjemahan Kemenag, dan murottal per ayat dari 6 qori.">
     <h1 class="text-3xl font-semibold tracking-tight">Al-Qur'an</h1>
     <p class="mt-2 text-stone-600 dark:text-stone-400">Dengarkan murottal dari 6 qori, lengkap dengan latin dan terjemahan Kemenag.</p>
 

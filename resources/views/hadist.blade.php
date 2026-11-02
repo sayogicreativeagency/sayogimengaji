@@ -1,4 +1,13 @@
-<x-layout :judul="'HR. '.$hadist->kitab->perawi().' no. '.$hadist->nomor">
+@php
+    // Sanad diakhiri nama perawi terakhir dalam [..]; matan biasanya dibuka tanda kutip sesudahnya.
+    // ponytail: heuristik teks; pisahkan sanad/matan saat impor kalau deskripsi sering meleset.
+    $matan = Str::of($hadist->terjemahan)->squish();
+    $matan = $matan->contains(']') ? $matan->afterLast(']') : $matan;
+    $matan = ($matan->contains('"') ? $matan->after('"') : $matan)->trim(' ,;:."')->limit(155, '…', preserveWords: true);
+    $deskripsi = $hadist->kitab->label().' no. '.$hadist->nomor.' ('.($hadist->derajat_ringkas?->label() ?? 'belum dinilai').')'
+        .($matan->isNotEmpty() ? ': '.$matan : ($hadist->bab_judul ? ', '.$hadist->bab_judul : '').'.');
+@endphp
+<x-layout :judul="'HR. '.$hadist->kitab->perawi().' no. '.$hadist->nomor" :deskripsi="$deskripsi">
     <p class="mb-4 text-sm text-stone-500">
         {{ $hadist->kitab->label() }}@if ($hadist->bab_judul) · {{ $hadist->bab_judul }}@endif
     </p>

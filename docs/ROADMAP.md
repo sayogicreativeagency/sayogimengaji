@@ -25,6 +25,7 @@ Project pribadi (Sayogi Creative Agency), bukan pekerjaan Akmanda Media. Tidak d
 - [x] Font Amiri benar-benar dipakai untuk huruf Arab (sebelumnya hanya subset Latin yang dimuat) (2 Nov 2026)
 - [x] Halaman `/hadist` sendiri: form cari, penjelasan derajat, daftar 7 kitab dengan jumlah hadist (2 Nov 2026)
 - [x] Sugesti pencarian dari kata terbanyak dicari 30 hari terakhir (dirapikan LLM tiap 02.00, `pencarian:sugesti`), halaman Riset pencarian di admin (2 Nov 2026)
+- [x] SEO: judul dan deskripsi per halaman (surat, hadist dari matannya, kalender per bulan), canonical, Open Graph, JSON-LD situs, noindex untuk hasil cari dan akun, `sitemap.xml` (±36.500 URL) dan `robots.txt` dinamis (2 Nov 2026)
 
 ## Perlu keputusan Angga
 
@@ -46,4 +47,5 @@ Belum ada item besar. Yang sengaja ditunda dari sugesti pencarian: autocomplete 
 - HTTPS wajib: tanpa itu browser menolak izin lokasi dan widget selalu memakai Jakarta.
 - `npm run build` di server (`public/build` tidak masuk git) dan `php artisan migrate` (tabel `pembayaran` dan `pencarian_harian`).
 - `BAYAR_REKENING` di `.env`. `OPENAI_API_KEY` hanya dipakai untuk membuat gambar; situs tidak memanggilnya saat berjalan.
+- Daftarkan domain di Google Search Console lalu kirim `https://<domain>/sitemap.xml`.
 - Cron `* * * * * php artisan schedule:run` wajib: sugesti pencarian disusun ulang tiap 02.00 dan catatan pencarian lebih dari 90 hari dihapus.

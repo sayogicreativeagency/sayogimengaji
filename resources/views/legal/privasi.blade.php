@@ -1,4 +1,4 @@
-<x-layout judul="Kebijakan Privasi" :sidebar="false">
+<x-layout judul="Kebijakan Privasi" :sidebar="false" deskripsi="Data apa yang dikumpulkan Sayogi Mengaji, untuk apa, berapa lama disimpan, dan hakmu atas data pribadimu.">
     <article class="prosa mx-auto max-w-3xl">
         <h1 class="text-4xl">Kebijakan Privasi</h1>
         <p class="text-sm text-stone-500">Berlaku sejak 2 November 2026</p>

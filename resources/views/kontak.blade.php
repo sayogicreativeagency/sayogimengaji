@@ -1,4 +1,4 @@
-<x-layout judul="Kontak">
+<x-layout judul="Kontak" deskripsi="Laporkan ringkasan, terjemahan, atau derajat hadist yang keliru, atau kirim saran untuk Sayogi Mengaji.">
     <h1 class="text-2xl font-semibold tracking-tight">Kontak &amp; laporan</h1>
     <p class="mt-2 text-stone-600 dark:text-stone-400">
         Menemukan ringkasan yang tidak sesuai dengan hadistnya, terjemahan yang keliru, atau derajat yang salah?

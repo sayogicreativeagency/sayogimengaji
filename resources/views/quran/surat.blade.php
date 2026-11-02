@@ -1,4 +1,5 @@
-<x-layout :judul="$surat->nama_latin">
+<x-layout :judul="'Surat '.$surat->nama_latin.': Arab, Latin, Terjemahan & Murottal'"
+          :deskripsi="'Baca Surat '.$surat->nama_latin.' ('.$surat->nama.', artinya '.$surat->arti.'), '.$surat->jumlah_ayat.' ayat, turun di '.$surat->tempat_turun.': teks Arab, latin, terjemahan Kemenag, dan murottal 6 qori.'">
     @php
         $qori = collect(App\Enums\Qori::cases())->map(fn ($q) => ['id' => $q->value, 'nama' => $q->nama(), 'url' => $q->urlAudio()]);
     @endphp

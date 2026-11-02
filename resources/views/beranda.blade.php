@@ -1,4 +1,33 @@
-<x-layout :penuh="true">
+<x-layout :penuh="true" judul="Cari Hadist, Murottal & Belajar Al-Qur'an"
+          deskripsi="Cari lebih dari 36 ribu hadist dengan bahasa sehari-hari, lengkap teks Arab, terjemahan, dan derajatnya. Baca Al-Qur'an dengan murottal 6 qori, belajar per kata, jadwal sholat, dan kalender Hijriah.">
+    <x-slot:head>
+        <script type="application/ld+json">{!! json_encode([
+            '@context' => 'https://schema.org',
+            '@graph' => [
+                [
+                    '@type' => 'WebSite',
+                    '@id' => url('/#website'),
+                    'name' => config('app.name'),
+                    'url' => url('/'),
+                    'inLanguage' => 'id',
+                    'publisher' => ['@id' => url('/#organisasi')],
+                    'potentialAction' => [
+                        '@type' => 'SearchAction',
+                        'target' => url('/cari').'?q={search_term_string}',
+                        'query-input' => 'required name=search_term_string',
+                    ],
+                ],
+                [
+                    '@type' => 'Organization',
+                    '@id' => url('/#organisasi'),
+                    'name' => 'Sayogi Creative Agency',
+                    'url' => url('/'),
+                    'logo' => url('/images/logo.webp'),
+                ],
+            ],
+        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) !!}</script>
+    </x-slot:head>
+
     {{-- Hero setinggi layar dikurangi header (77px di desktop: logo 44px + padding + garis). Gambar: public/images/hero*.webp (OpenAI gpt-image-2.5-sunburst). --}}
     <section class="relative isolate flex min-h-[calc(100svh-77px)] items-center overflow-hidden">
         <img src="/images/hero.webp" srcset="/images/hero-900.webp 900w, /images/hero.webp 1536w" sizes="100vw"

@@ -1,4 +1,4 @@
-<x-layout judul="Sumber & Atribusi" :sidebar="false">
+<x-layout judul="Sumber & Atribusi" :sidebar="false" deskripsi="Sumber data hadist, Al-Qur'an, murottal, jadwal sholat, cuaca, dan kalender yang dipakai Sayogi Mengaji beserta lisensinya.">
     <article class="prosa mx-auto max-w-3xl">
         <h1 class="text-4xl">Sumber &amp; Atribusi</h1>
         <p>Sayogi Mengaji berdiri di atas karya banyak orang. Berikut sumber data, layanan, dan perangkat lunak yang kami gunakan beserta lisensinya. Jazakumullahu khairan.</p>

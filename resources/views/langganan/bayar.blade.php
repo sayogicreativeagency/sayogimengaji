@@ -1,5 +1,5 @@
 @php($rp = fn (int $n) => 'Rp '.number_format($n, 0, ',', '.'))
-<x-layout judul="Pembayaran langganan" :sidebar="false">
+<x-layout judul="Pembayaran langganan" :sidebar="false" :indeks="false">
     <div class="mx-auto max-w-2xl">
         <a href="/langganan" class="text-sm text-stone-500 hover:underline">← Langganan</a>
         <h1 class="mt-3 text-3xl">Langganan {{ $tagihan->bulan }} bulan</h1>

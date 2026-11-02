@@ -1,4 +1,4 @@
-<x-layout judul="Masuk" :sidebar="false">
+<x-layout judul="Masuk" :sidebar="false" :indeks="false">
     <div class="mx-auto max-w-md">
         <h1 class="text-2xl font-semibold tracking-tight">Masuk</h1>
         <p class="mt-2 text-stone-600 dark:text-stone-400">Belum punya akun? <a href="/daftar" class="font-medium text-emerald-700 hover:underline dark:text-emas-400">Daftar</a></p>

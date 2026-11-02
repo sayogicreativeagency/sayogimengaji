@@ -1,4 +1,5 @@
-<x-layout judul="Kalender" :sidebar="false">
+<x-layout :judul="'Kalender '.$awal->translatedFormat('F Y').' Masehi & Hijriah'" :sidebar="false" :kanonik="url('/kalender?bulan='.$awal->format('Y-m'))"
+          :deskripsi="'Kalender '.$awal->translatedFormat('F Y').' ('.$bulanHijriah.') lengkap dengan tanggal Hijriah, libur nasional, cuti bersama, dan hari besar Islam.'">
     <div class="mx-auto max-w-3xl">
         <div class="flex flex-wrap items-end justify-between gap-4">
             <div>

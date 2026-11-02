@@ -7,6 +7,7 @@ use App\Http\Controllers\KalenderController;
 use App\Http\Controllers\KontakController;
 use App\Http\Controllers\LanggananController;
 use App\Http\Controllers\QuranController;
+use App\Http\Controllers\SeoController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HadistController::class, 'beranda']);
@@ -32,6 +33,8 @@ Route::view('/syarat-ketentuan', 'legal.syarat');
 Route::view('/kebijakan-privasi', 'legal.privasi');
 Route::view('/sumber', 'legal.sumber');
 Route::view('/tentang', 'tentang');
+Route::get('/robots.txt', [SeoController::class, 'robots']);
+Route::get('/sitemap.xml', [SeoController::class, 'sitemap']);
 Route::get('/kalender', [KalenderController::class, 'tampil']);
 
 Route::middleware('auth')->prefix('belajar')->group(function () {
