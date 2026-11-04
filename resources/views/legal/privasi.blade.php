@@ -1,7 +1,7 @@
 <x-layout judul="Kebijakan Privasi" :sidebar="false" deskripsi="Data apa yang dikumpulkan Sayogi Mengaji, untuk apa, berapa lama disimpan, dan hakmu atas data pribadimu.">
     <article class="prosa mx-auto max-w-3xl">
         <h1 class="text-4xl">Kebijakan Privasi</h1>
-        <p class="text-sm text-stone-500">Berlaku sejak 2 November 2026</p>
+        <p class="text-sm text-stone-500">Berlaku sejak 4 November 2026</p>
 
         <p>Kebijakan ini menjelaskan data apa yang dikumpulkan Sayogi Mengaji, untuk apa, dan ke mana data itu dikirim. Kami berusaha mengumpulkan sesedikit mungkin. Sayogi Mengaji tidak memasang iklan dan tidak memakai alat pelacak atau analitik pihak ketiga.</p>
 
@@ -19,6 +19,9 @@
         <p>Kata yang kamu cari dikirim ke penyedia AI (lihat bagian 3) untuk dikembangkan menjadi kata kunci dan untuk menyusun ringkasan. Hasilnya kami simpan sementara di cache selama 7 hari agar pencarian yang sama tidak memanggil AI lagi. Cache ini tidak dikaitkan dengan akunmu. <strong>Jangan menuliskan data pribadi di kotak pencarian.</strong></p>
         <p>Kami juga mencatat kata yang dicari beserta jumlahnya per hari, tanpa akun dan tanpa alamat IP, untuk menyusun sugesti pencarian dan menemukan topik yang belum terjawab. Kata yang sering dicari bisa tampil sebagai sugesti di beranda setelah dirapikan dengan bantuan AI; kata yang dicari kurang dari tiga kali dalam sebulan tidak pernah ditampilkan.</p>
 
+        <h3>Statistik murottal</h3>
+        <p>Saat kamu memutar murottal di halaman surat atau beranda, kami mencatat <strong>alamat IP</strong>, surat, ayat awal dan ayat terakhir yang diputar, apakah surat didengar sampai tamat, lama mendengarkan, qori, halaman asal, jenis perangkat (HP atau komputer), dan akunmu bila sedang masuk. Data ini hanya bisa dilihat superadmin, dipakai untuk memahami surat mana yang paling sering didengar dan di mana pendengar berhenti, dan tidak dibagikan ke pihak ketiga.</p>
+
         <h3>Data teknis</h3>
         <p>Saat kamu membuka situs, server mencatat <strong>alamat IP</strong> dan jenis peramban (user agent) di data sesi. Alamat IP juga dipakai untuk membatasi percobaan login dan pengiriman formulir agar tidak disalahgunakan, serta dapat tercatat di log server.</p>
 
@@ -26,7 +29,7 @@
         <p>Lokasi hanya diambil <strong>jika kamu mengizinkannya</strong> di peramban, untuk menghitung jadwal sholat dan menampilkan cuaca. Koordinat dibulatkan sekitar 1 km dan disimpan <strong>hanya di peramban kamu</strong>, tidak di server kami. Kalau kamu menolak, jadwal memakai Jakarta.</p>
 
         <h3>Disimpan di peramban kamu</h3>
-        <p>Pilihan qori, posisi terakhir murottal, tampilan latin/terjemahan, mazhab Ashar, lokasi, dan cache cuaca disimpan di penyimpanan lokal peramban (localStorage). Data ini tidak dikirim ke server kami dan bisa kamu hapus dengan membersihkan data situs di peramban.</p>
+        <p>Pilihan qori, posisi terakhir murottal, tampilan latin/terjemahan, mazhab Ashar, lokasi, dan cache cuaca disimpan di penyimpanan lokal peramban (localStorage). Data ini tidak dikirim ke server kami, kecuali qori dan ayat yang sedang diputar untuk statistik murottal di atas, dan bisa kamu hapus dengan membersihkan data situs di peramban.</p>
 
         <h2>2. Cookie</h2>
         <p>Kami hanya memakai cookie yang diperlukan agar situs berfungsi: cookie sesi, token keamanan formulir (CSRF), dan cookie "ingat saya" bila kamu mencentangnya saat masuk.</p>
@@ -43,12 +46,13 @@
         <ul>
             <li>Menjalankan layanan: login, pencarian, murottal, dan jadwal sholat.</li>
             <li>Menindaklanjuti laporan dan memperbaiki data.</li>
+            <li>Memahami pemakaian murottal lewat statistik internal.</li>
             <li>Menjaga keamanan situs dan mencegah penyalahgunaan.</li>
         </ul>
         <p>Kami tidak menjual data pribadimu dan tidak memakainya untuk iklan.</p>
 
         <h2>5. Penyimpanan &amp; keamanan</h2>
-        <p>Password disimpan dalam bentuk hash. Akses ke data di panel admin dibatasi sesuai peran. Data akun dan progres belajar disimpan selama akunmu aktif (progres tetap tersimpan meski langganan berakhir); laporan disimpan sampai selesai ditindaklanjuti; cache pencarian terhapus otomatis setelah 7 hari; catatan kata pencarian harian terhapus setelah 90 hari; data sesi kedaluwarsa setelah tidak aktif.</p>
+        <p>Password disimpan dalam bentuk hash. Akses ke data di panel admin dibatasi sesuai peran. Data akun dan progres belajar disimpan selama akunmu aktif (progres tetap tersimpan meski langganan berakhir); laporan disimpan sampai selesai ditindaklanjuti; cache pencarian terhapus otomatis setelah 7 hari; catatan kata pencarian harian dan statistik murottal terhapus setelah 90 hari; data sesi kedaluwarsa setelah tidak aktif.</p>
 
         <h2>6. Hak kamu</h2>
         <p>Sesuai Undang-Undang Pelindungan Data Pribadi (UU No. 27 Tahun 2022), kamu berhak meminta akses, perbaikan, atau penghapusan data pribadimu, termasuk penghapusan akun, serta menarik persetujuan. Izin lokasi bisa dicabut kapan saja dari pengaturan peramban. Ajukan permintaan lewat <a href="/kontak">halaman kontak</a>.</p>

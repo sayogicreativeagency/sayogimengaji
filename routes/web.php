@@ -21,6 +21,7 @@ Route::post('/kontak', [KontakController::class, 'store'])->middleware('throttle
 Route::view('/dukung', 'dukung');
 Route::get('/quran', [QuranController::class, 'daftar']);
 Route::get('/quran/{surat}', [QuranController::class, 'tampil'])->whereNumber('surat');
+Route::post('/quran/putar', [QuranController::class, 'putar'])->middleware('throttle:120,1');
 
 Route::middleware('guest')->group(function () {
     Route::get('/masuk', [AkunController::class, 'formMasuk'])->name('login');

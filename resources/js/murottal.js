@@ -24,6 +24,66 @@ const urlAudioAyat = (urlQori, surat, n) => {
     return urlQori + (n === 0 ? '001001' : tigaDigit(surat) + tigaDigit(n)) + '.mp3';
 };
 
+// Statistik murottal: satu sesi per surat yang didengar. Tamat lalu diputar lagi = sesi baru.
+const catatPutar = (audio, sumber, posisi) => {
+    const token = document.querySelector('meta[name="csrf-token"]').content;
+    let sesi = null;
+    let ayatMulai = null;
+    let tamat = false;
+    let detik = 0;
+    let detakTerakhir = 0;
+    let kirimTerakhir = 0;
+
+    const kirim = () => {
+        if (!sesi) return;
+        kirimTerakhir = performance.now();
+        const { surat, ayat, qori } = posisi();
+        const data = new FormData();
+        Object.entries({
+            _token: token, sesi, sumber, surat, qori,
+            ayat_mulai: ayatMulai, ayat_terakhir: ayat, detik: Math.round(detik), selesai: tamat ? 1 : 0,
+        }).forEach(([kunci, nilai]) => data.append(kunci, nilai));
+        navigator.sendBeacon('/quran/putar', data);
+    };
+
+    audio.addEventListener('playing', () => {
+        if (!sesi || tamat) {
+            sesi = crypto.randomUUID();
+            ayatMulai = posisi().ayat;
+            tamat = false;
+            detik = 0;
+            kirim();
+        } else if (performance.now() - kirimTerakhir > 15000) {
+            kirim(); // tidak tiap ayat: surat pendek bisa berganti ayat tiap beberapa detik
+        }
+    });
+    // Jeda panjang tidak terhitung: selisih antar timeupdate wajarnya di bawah satu detik.
+    audio.addEventListener('timeupdate', () => {
+        const kini = performance.now();
+        if (!audio.paused && kini - detakTerakhir < 5000) detik += (kini - detakTerakhir) / 1000;
+        detakTerakhir = kini;
+    });
+    // Browser juga memicu pause setiap ayat habis; itu bukan pendengar yang berhenti.
+    audio.addEventListener('pause', () => {
+        if (!audio.ended) kirim();
+    });
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') kirim();
+    });
+    window.addEventListener('pagehide', kirim);
+
+    return {
+        selesai() {
+            tamat = true;
+            kirim();
+        },
+        tutup() {
+            kirim();
+            sesi = null;
+        },
+    };
+};
+
 // ---- Daftar surat ----
 const saring = document.querySelector('[data-saring-surat]');
 if (saring) {
@@ -72,6 +132,7 @@ if (pemutar) {
     audio.preload = 'auto';
     let ayat = null; // ayat yang sedang/terakhir diputar
     let sisaUlang = 0; // -1 = ulang terus
+    const catatan = catatPutar(audio, 'surat', () => ({ surat, ayat, qori: pilihQori.value }));
 
     const qoriAktif = () => daftarQori.find((q) => q.id === pilihQori.value);
     const urlAyat = (n) => urlAudioAyat(qoriAktif().url, surat, n);
@@ -137,6 +198,7 @@ if (pemutar) {
         } else {
             status.textContent = 'Selesai';
             if (selesai) selesai.hidden = false;
+            catatan.selesai();
         }
     });
     audio.addEventListener('play', () => {
@@ -221,6 +283,7 @@ if (pilihSurat) {
     const qoriAktif = () =>
         daftarQori.find((q) => q.id === simpan.ambil('murottal:qori')) ?? daftarQori.find((q) => q.id === mini.dataset.qoriBawaan);
     const label = (n) => (n === 0 ? 'Basmalah' : `Ayat ${n} dari ${surat.jumlah}`);
+    const catatan = catatPutar(audio, 'beranda', () => ({ surat: surat.nomor, ayat, qori: qoriAktif().id }));
 
     const putar = (n) => {
         ayat = n;
@@ -247,6 +310,7 @@ if (pilihSurat) {
     };
 
     const pilih = (o) => {
+        catatan.tutup();
         surat = {
             nomor: Number(o.dataset.nomor),
             nama: o.dataset.nama,
@@ -302,8 +366,12 @@ if (pilihSurat) {
     });
 
     audio.addEventListener('ended', () => {
-        if (ayat < surat.jumlah) putar(ayat + 1);
-        else el('status').textContent = 'Selesai';
+        if (ayat < surat.jumlah) {
+            putar(ayat + 1);
+        } else {
+            el('status').textContent = 'Selesai';
+            catatan.selesai();
+        }
     });
     audio.addEventListener('play', () => {
         tombolPutar.toggleAttribute('data-main', true);

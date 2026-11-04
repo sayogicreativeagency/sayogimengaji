@@ -8,6 +8,7 @@ use App\Enums\Kitab;
 use App\Enums\Peran;
 use App\Enums\QoriBelajar;
 use App\Models\PencarianHarian;
+use App\Models\PutarMurottal;
 use App\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schedule;
@@ -118,3 +119,5 @@ Artisan::command('pencarian:sugesti', function (BuatSugestiCari $buat) {
 
 // Butuh cron `php artisan schedule:run` tiap menit di server.
 Schedule::command('pencarian:sugesti')->dailyAt('02:00')->timezone('Asia/Jakarta');
+// Memuat alamat IP; masa simpan ini tertulis di Kebijakan Privasi.
+Schedule::call(fn () => PutarMurottal::where('created_at', '<', now()->subDays(90))->delete())->dailyAt('02:10')->timezone('Asia/Jakarta');

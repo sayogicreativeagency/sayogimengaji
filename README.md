@@ -14,7 +14,7 @@
 - **Langganan.** Bayar lewat QRIS (nominal terisi otomatis dengan kode unik) atau transfer, konfirmasi bayar dengan bukti, disetujui admin. Ada saklar di admin untuk menggratiskan semua surat.
 - **Jadwal sholat, cuaca, dan kalender.** Widget jam sholat (parameter Kemenag RI, dihitung di browser), cuaca Open-Meteo, tanggal Hijriah; halaman kalender Masehi + Hijriah dengan libur nasional, cuti bersama, dan hari besar Islam.
 - **Infaq** lewat QRIS dan Saweria.
-- **Panel admin (Filament).** Koreksi data hadist, laporan pengunjung, akun dan peran, persetujuan pembayaran, pengaturan langganan dan qori.
+- **Panel admin (Filament).** Koreksi data hadist, laporan pengunjung, akun dan peran, persetujuan pembayaran, pengaturan langganan dan qori, statistik murottal.
 
 ## Stack
 
