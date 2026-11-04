@@ -18,6 +18,12 @@ const simpan = {
     },
 };
 
+const urlAudioAyat = (urlQori, surat, n) => {
+    const tigaDigit = (x) => String(x).padStart(3, '0');
+
+    return urlQori + (n === 0 ? '001001' : tigaDigit(surat) + tigaDigit(n)) + '.mp3';
+};
+
 // ---- Daftar surat ----
 const saring = document.querySelector('[data-saring-surat]');
 if (saring) {
@@ -68,8 +74,7 @@ if (pemutar) {
     let sisaUlang = 0; // -1 = ulang terus
 
     const qoriAktif = () => daftarQori.find((q) => q.id === pilihQori.value);
-    const tigaDigit = (n) => String(n).padStart(3, '0');
-    const urlAyat = (n) => qoriAktif().url + (n === 0 ? '001001' : tigaDigit(surat) + tigaDigit(n)) + '.mp3';
+    const urlAyat = (n) => urlAudioAyat(qoriAktif().url, surat, n);
     const label = (n) => (n === 0 ? 'Basmalah' : `Ayat ${n} dari ${jumlah}`);
     const jumlahUlang = () => (pilihUlang.value === '0' ? -1 : Number(pilihUlang.value) - 1);
     // defaultPlaybackRate ikut diset karena browser mereset playbackRate setiap ganti src.
@@ -167,5 +172,158 @@ if (pemutar) {
         navigator.mediaSession.setActionHandler('pause', () => audio.pause());
         navigator.mediaSession.setActionHandler('nexttrack', berikutnya);
         navigator.mediaSession.setActionHandler('previoustrack', sebelumnya);
+    }
+}
+
+// ---- Beranda: pilih surat lewat combobox, putar di mini player ----
+const pilihSurat = document.querySelector('[data-pilih-surat]');
+if (pilihSurat) {
+    const kotak = pilihSurat.querySelector('[role="combobox"]');
+    const daftar = pilihSurat.querySelector('[role="listbox"]');
+    const kosong = pilihSurat.querySelector('[data-surat-kosong]');
+    const opsi = [...daftar.children];
+    const mini = document.querySelector('[data-mini-murottal]');
+    const el = (nama) => mini.querySelector(`[data-${nama}]`);
+    const tombolPutar = el('putar');
+    const daftarQori = JSON.parse(mini.dataset.qori);
+    const audio = new Audio();
+    let surat = null; // { nomor, nama, jumlah, pertama }
+    let ayat = null;
+
+    // "al fatihah" dan "alfatihah" sama-sama cocok dengan "Al-Fatihah".
+    const bersih = (teks) => teks.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const terlihat = () => opsi.filter((o) => !o.hidden);
+    const judul = () => (surat ? `${surat.nomor}. ${surat.nama}` : '');
+
+    const sorot = (o) => {
+        opsi.forEach((x) => x.removeAttribute('data-sorot'));
+        o?.setAttribute('data-sorot', '');
+        o?.scrollIntoView({ block: 'nearest' });
+        if (o) kotak.setAttribute('aria-activedescendant', o.id);
+        else kotak.removeAttribute('aria-activedescendant');
+    };
+    const buka = () => {
+        const ada = terlihat().length > 0;
+        daftar.hidden = !ada;
+        kosong.hidden = ada;
+        kotak.setAttribute('aria-expanded', String(ada));
+    };
+    const tutup = () => {
+        daftar.hidden = kosong.hidden = true;
+        kotak.setAttribute('aria-expanded', 'false');
+        sorot(null);
+    };
+    const saring = (teks) => {
+        const kata = bersih(teks);
+        opsi.forEach((o) => (o.hidden = !bersih(o.dataset.cari).includes(kata)));
+    };
+
+    const qoriAktif = () =>
+        daftarQori.find((q) => q.id === simpan.ambil('murottal:qori')) ?? daftarQori.find((q) => q.id === mini.dataset.qoriBawaan);
+    const label = (n) => (n === 0 ? 'Basmalah' : `Ayat ${n} dari ${surat.jumlah}`);
+
+    const putar = (n) => {
+        ayat = n;
+        audio.src = urlAudioAyat(qoriAktif().url, surat.nomor, n);
+        audio.play().catch(() => {}); // diblokir browser: pengguna tinggal menekan putar
+        el('status').textContent = label(n);
+        el('progres').style.width = `${(n / surat.jumlah) * 100}%`;
+        if (n > 0) simpan.taruh('murottal:terakhir', { surat: surat.nomor, nama: surat.nama, ayat: n });
+        if ('mediaSession' in navigator) {
+            navigator.mediaSession.metadata = new MediaMetadata({
+                title: `${surat.nama} · ${label(n)}`,
+                album: "Sayogi Mengaji · Al-Qur'an",
+            });
+        }
+    };
+    const berikutnya = () => {
+        if (ayat < surat.jumlah) putar(ayat + 1);
+    };
+    const sebelumnya = () => putar(Math.max(surat.pertama, ayat - 1));
+    const putarAtauJeda = () => {
+        if (audio.ended && ayat === surat.jumlah) putar(surat.pertama);
+        else if (audio.paused) audio.play().catch(() => {});
+        else audio.pause();
+    };
+
+    const pilih = (o) => {
+        surat = {
+            nomor: Number(o.dataset.nomor),
+            nama: o.dataset.nama,
+            jumlah: Number(o.dataset.jumlah),
+            pertama: o.dataset.basmalah === '1' ? 0 : 1,
+        };
+        opsi.forEach((x) => x.setAttribute('aria-selected', String(x === o)));
+        kotak.value = judul();
+        kotak.blur();
+        el('tautan').textContent = surat.nama;
+        el('tautan').href = `/quran/${surat.nomor}`;
+        mini.hidden = false;
+        putar(surat.pertama);
+    };
+
+    kotak.addEventListener('focus', () => {
+        kotak.select();
+        saring('');
+        buka();
+    });
+    kotak.addEventListener('click', buka);
+    kotak.addEventListener('input', () => {
+        saring(kotak.value);
+        buka();
+        sorot(terlihat()[0]);
+    });
+    kotak.addEventListener('blur', () => {
+        kotak.value = judul();
+        tutup();
+    });
+    kotak.addEventListener('keydown', (e) => {
+        const ada = terlihat();
+        const posisi = ada.findIndex((o) => o.hasAttribute('data-sorot'));
+
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            buka();
+            const arah = e.key === 'ArrowDown' ? 1 : -1;
+            sorot(ada[(posisi + arah + ada.length) % ada.length]);
+        } else if (e.key === 'Enter') {
+            e.preventDefault();
+            const dipilih = ada[Math.max(posisi, 0)];
+            if (!daftar.hidden && dipilih) pilih(dipilih);
+        } else if (e.key === 'Escape') {
+            tutup();
+        }
+    });
+    // mousedown dicegah supaya kotak tidak blur (dan daftar menutup) sebelum klik terdaftar.
+    daftar.addEventListener('mousedown', (e) => e.preventDefault());
+    daftar.addEventListener('click', (e) => {
+        const o = e.target.closest('[role="option"]');
+        if (o) pilih(o);
+    });
+
+    audio.addEventListener('ended', () => {
+        if (ayat < surat.jumlah) putar(ayat + 1);
+        else el('status').textContent = 'Selesai';
+    });
+    audio.addEventListener('play', () => {
+        tombolPutar.toggleAttribute('data-main', true);
+        tombolPutar.setAttribute('aria-label', 'Jeda');
+    });
+    audio.addEventListener('pause', () => {
+        tombolPutar.toggleAttribute('data-main', false);
+        tombolPutar.setAttribute('aria-label', 'Putar');
+    });
+    audio.addEventListener('error', () => {
+        if (surat) el('status').textContent = 'Audio gagal dimuat. Coba lagi.';
+    });
+    tombolPutar.addEventListener('click', putarAtauJeda);
+    el('berikutnya').addEventListener('click', berikutnya);
+    el('sebelumnya').addEventListener('click', sebelumnya);
+
+    if ('mediaSession' in navigator) {
+        navigator.mediaSession.setActionHandler('play', () => surat && putarAtauJeda());
+        navigator.mediaSession.setActionHandler('pause', () => audio.pause());
+        navigator.mediaSession.setActionHandler('nexttrack', () => surat && berikutnya());
+        navigator.mediaSession.setActionHandler('previoustrack', () => surat && sebelumnya());
     }
 }

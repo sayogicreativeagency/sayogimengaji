@@ -1,13 +1,21 @@
 <?php
 
-it('beranda: hero dengan tombol ke form cari, lalu form + widget, lalu section bantu di atas footer', function () {
+use App\Models\Surat;
+
+it('beranda: hero, section Al-Qur\'an + widget, cari hadist, lalu section bantu di atas footer', function () {
+    Surat::create(['nomor' => 9, 'nama' => 'التوبة', 'nama_latin' => 'At-Taubah', 'arti' => 'Pengampunan', 'tempat_turun' => 'Madinah', 'jumlah_ayat' => 129, 'deskripsi' => '-']);
+    Surat::create(['nomor' => 36, 'nama' => 'يٰسۤ', 'nama_latin' => 'Yasin', 'arti' => 'Yasin', 'tempat_turun' => 'Mekah', 'jumlah_ayat' => 83, 'deskripsi' => '-']);
+
     $this->get('/')->assertOk()
         ->assertSeeInOrder([
-            '<h1', 'Mengaji hadist dan Al-Qur&#039;an, kapan saja', 'href="#cari"',
-            'id="cari"', 'action="/cari"', 'data-widget-sholat',
+            '<h1', 'href="/quran"', 'href="#cari"',
+            'id="quran"', 'id="cari-surat"', 'data-mini-murottal', 'data-widget-sholat',
+            'id="cari"', 'action="/cari"',
             'Bantu Sayogi Mengaji tetap hidup', '<footer',
         ], false)
-        ->assertSee('src="/images/hero.webp"', false);
+        ->assertSee('src="/images/hero.webp"', false)
+        // Pilihan surat membawa data untuk mini player; At-Taubah tanpa basmalah.
+        ->assertSeeInOrder(['data-nomor="9"', 'data-basmalah="0"', 'data-nomor="36"', 'data-jumlah="83"', 'data-basmalah="1"'], false);
 });
 
 it('header polos tanpa pola latar, dengan logo dan tagline Imam asy-Syafi\'i', function () {

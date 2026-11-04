@@ -42,27 +42,82 @@
                 <p class="mt-6 max-w-lg text-lg leading-relaxed text-pretty text-stone-300">
                     Cari hadist dengan bahasa sehari-hari, dengarkan murottal, dan hafalkan Al-Qur'an kata demi kata.
                 </p>
-                <a href="#cari" class="group mt-10 inline-flex items-center gap-3 rounded-full bg-emas-400 py-3 pr-3 pl-6 font-medium text-stone-950 transition-colors hover:bg-emas-300 focus-visible:ring-2 focus-visible:ring-emas-300 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-950 focus-visible:outline-none">
-                    Mulai cari hadist
-                    <span class="grid size-8 place-items-center rounded-full bg-stone-950/15 transition-transform group-hover:translate-y-0.5" aria-hidden="true">
-                        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="M10 4v12m-5-5 5 5 5-5"/></svg>
-                    </span>
-                </a>
+                <div class="mt-10 flex flex-wrap items-center gap-3">
+                    <a href="/quran" class="group inline-flex items-center gap-3 rounded-full bg-emas-400 py-3 pr-3 pl-6 font-medium text-stone-950 transition-colors hover:bg-emas-300 focus-visible:ring-2 focus-visible:ring-emas-300 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-950 focus-visible:outline-none">
+                        Baca Al-Qur'an
+                        <span class="grid size-8 place-items-center rounded-full bg-stone-950/15 transition-transform group-hover:translate-x-0.5" aria-hidden="true">
+                            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="M4 10h12m-5-5 5 5-5 5"/></svg>
+                        </span>
+                    </a>
+                    <a href="#cari" class="group inline-flex items-center gap-3 rounded-full border border-stone-300/40 bg-stone-950/40 py-3 pr-3 pl-6 font-medium text-stone-100 transition-colors hover:border-emas-400 hover:text-emas-300 focus-visible:ring-2 focus-visible:ring-emas-300 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-950 focus-visible:outline-none">
+                        Mulai cari hadist
+                        <span class="grid size-8 place-items-center rounded-full bg-stone-100/10 transition-transform group-hover:translate-y-0.5" aria-hidden="true">
+                            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="M10 4v12m-5-5 5 5 5-5"/></svg>
+                        </span>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="cari" aria-labelledby="judul-cari" class="scroll-mt-4">
+    <section id="quran" aria-labelledby="judul-quran" class="scroll-mt-4">
         <div class="mx-auto grid max-w-6xl gap-12 px-4 py-16 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-16 lg:py-20">
             <div class="lg:min-h-64">
-                <h2 id="judul-cari" class="font-judul text-4xl leading-tight font-semibold text-balance text-emas-300 sm:text-5xl">Cari hadist dengan bahasa sehari-hari</h2>
+                <h2 id="judul-quran" class="font-judul text-4xl leading-tight font-semibold text-balance text-emas-300 sm:text-5xl">Baca dan hafalkan Al-Qur'an</h2>
                 <p class="mt-4 max-w-xl leading-relaxed text-stone-400">
-                    Lebih dari 36 ribu hadist dari 7 kitab, lengkap dengan teks Arab, terjemahan, dan derajatnya, dari shahih sampai dha'if.
+                    Dengarkan murottal ayat demi ayat, ikuti bacaannya kata per kata, lalu hafalkan pelan-pelan. Progres hafalanmu tersimpan di akun, bisa dilanjutkan kapan saja.
                 </p>
-                <div class="mt-8 max-w-2xl">
-                    <x-form-cari />
+
+                {{-- Combobox surat + mini player, dikendalikan resources/js/murottal.js. --}}
+                <div data-pilih-surat class="relative mt-8 max-w-xl">
+                    <label for="cari-surat" class="mb-2 block text-sm font-medium text-stone-200">Mau dengarkan surat apa?</label>
+                    <div class="relative">
+                        <input id="cari-surat" type="text" role="combobox" autocomplete="off" aria-autocomplete="list" aria-expanded="false" aria-controls="daftar-surat"
+                               placeholder="Cari surat, mis. Yasin atau 36"
+                               class="w-full rounded-lg border border-stone-700 bg-stone-900 py-3 pr-11 pl-4 text-base shadow-sm placeholder:text-stone-500 focus:border-emas-400 focus:ring-2 focus:ring-emas-400/20 focus:outline-none">
+                        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="pointer-events-none absolute top-1/2 right-4 size-4 -translate-y-1/2 text-stone-400"><path d="m5 8 5 5 5-5"/></svg>
+                    </div>
+                    <ul id="daftar-surat" role="listbox" aria-label="Daftar surat" hidden
+                        class="absolute inset-x-0 z-20 mt-2 max-h-72 overflow-y-auto rounded-lg border border-stone-700 bg-stone-900 py-1 shadow-[0_24px_60px_-24px_rgb(0_0_0/0.75)]">
+                        @foreach ($daftarSurat as $s)
+                            <li id="surat-{{ $s->nomor }}" role="option" aria-selected="false"
+                                data-nomor="{{ $s->nomor }}" data-nama="{{ $s->nama_latin }}" data-jumlah="{{ $s->jumlah_ayat }}" data-basmalah="{{ $s->pakaiBasmalah() ? 1 : 0 }}"
+                                data-cari="{{ $s->nomor }} {{ $s->nama_latin }} {{ $s->arti }}"
+                                class="flex cursor-pointer items-center justify-between gap-4 px-4 py-2.5 hover:bg-stone-800 data-sorot:bg-stone-800">
+                                <span class="min-w-0">
+                                    <span class="block font-medium text-stone-100">{{ $s->nomor }}. {{ $s->nama_latin }}</span>
+                                    <span class="block truncate text-xs text-stone-400">{{ $s->arti }} · {{ $s->jumlah_ayat }} ayat</span>
+                                </span>
+                                <span lang="ar" dir="rtl" class="shrink-0 font-arab text-lg text-emas-300">{{ $s->nama }}</span>
+                            </li>
+                        @endforeach
+                    </ul>
+                    <p data-surat-kosong hidden class="absolute inset-x-0 z-20 mt-2 rounded-lg border border-stone-700 bg-stone-900 px-4 py-3 text-sm text-stone-400">Surat tidak ditemukan.</p>
                 </div>
-                <x-contoh-cari class="mt-5" />
+
+                <div data-mini-murottal hidden data-qori="{{ json_encode($qori, JSON_UNESCAPED_SLASHES) }}" data-qori-bawaan="{{ App\Enums\Qori::BAWAAN->value }}"
+                     class="mt-4 max-w-xl rounded-xl border border-stone-700 bg-stone-900 p-3 shadow-[0_16px_40px_-24px_rgb(0_0_0/0.75)]">
+                    <div class="flex items-center gap-3">
+                        <button type="button" data-putar aria-label="Putar" class="group grid size-12 shrink-0 place-items-center rounded-full bg-emas-400 text-stone-950 transition-colors hover:bg-emas-300 focus-visible:ring-2 focus-visible:ring-emas-300 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-950 focus-visible:outline-none">
+                            <x-ikon-media nama="putar" class="size-6 translate-x-px group-data-main:hidden" />
+                            <x-ikon-media nama="jeda" class="hidden size-6 group-data-main:block" />
+                        </button>
+                        <div class="min-w-0 flex-1">
+                            <a data-tautan href="/quran" class="block truncate font-medium text-stone-100 hover:text-emas-300"></a>
+                            <p data-status aria-live="polite" class="truncate text-sm text-stone-400"></p>
+                        </div>
+                        <button type="button" data-sebelumnya aria-label="Ayat sebelumnya" class="grid size-10 shrink-0 place-items-center rounded-full text-stone-300 hover:bg-stone-800 hover:text-emas-300"><x-ikon-media nama="sebelumnya" /></button>
+                        <button type="button" data-berikutnya aria-label="Ayat berikutnya" class="grid size-10 shrink-0 place-items-center rounded-full text-stone-300 hover:bg-stone-800 hover:text-emas-300"><x-ikon-media nama="berikutnya" /></button>
+                    </div>
+                    <div class="mt-3 h-1 overflow-hidden rounded-full bg-stone-800" aria-hidden="true">
+                        <div data-progres class="h-full rounded-full bg-emas-400 transition-[width] duration-300"></div>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium">
+                    <a href="/quran" class="text-emas-400 underline-offset-4 hover:underline">Baca semua surat →</a>
+                    <a href="/belajar" class="text-emas-400 underline-offset-4 hover:underline">Mulai menghafal →</a>
+                </div>
             </div>
 
             {{-- Desktop: kotak melayang, separuh di hero, separuh di section ini (geser ke atas 50% tinggi + padding atas section). --}}
@@ -71,6 +126,19 @@
                     <x-widget-sholat />
                 </div>
             </aside>
+        </div>
+    </section>
+
+    <section id="cari" aria-labelledby="judul-cari" class="scroll-mt-4 border-t border-stone-800">
+        <div class="mx-auto max-w-3xl px-4 py-16 text-center lg:py-24">
+            <h2 id="judul-cari" class="font-judul text-4xl leading-tight font-semibold text-balance text-emas-300 sm:text-5xl">Cari hadist dengan bahasa sehari-hari</h2>
+            <p class="mx-auto mt-4 max-w-xl leading-relaxed text-stone-400">
+                Lebih dari 36 ribu hadist dari 7 kitab, lengkap dengan teks Arab, terjemahan, dan derajatnya, dari shahih sampai dha'if.
+            </p>
+            <div class="mt-8 text-left">
+                <x-form-cari />
+            </div>
+            <x-contoh-cari class="mt-5 justify-center" />
         </div>
     </section>
 

@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Actions\CariHadist;
 use App\Enums\Derajat;
 use App\Enums\Kitab;
+use App\Enums\Qori;
 use App\Models\Hadist;
 use App\Models\PencarianHarian;
+use App\Models\Surat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
@@ -15,7 +17,10 @@ class HadistController extends Controller
 {
     public function beranda()
     {
-        return view('beranda');
+        return view('beranda', [
+            'daftarSurat' => Surat::orderBy('nomor')->get(['nomor', 'nama', 'nama_latin', 'arti', 'jumlah_ayat']),
+            'qori' => collect(Qori::cases())->map(fn (Qori $q) => ['id' => $q->value, 'url' => $q->urlAudio()]),
+        ]);
     }
 
     /** /hadist: form pencarian, penjelasan derajat, dan daftar kitab beserta jumlah hadistnya. */
