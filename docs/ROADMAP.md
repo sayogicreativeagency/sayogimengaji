@@ -44,10 +44,11 @@ Project pribadi (Sayogi Creative Agency), bukan pekerjaan Akmanda Media. Tidak d
 
 Belum ada item besar. Yang sengaja ditunda dari sugesti pencarian: autocomplete saat mengetik, grafik tren, riwayat pencarian per akun; layak ditambah kalau data pencarian sudah cukup banyak dan sugesti harian terbukti dipakai.
 
-## Sebelum tayang di produksi
+## Produksi
 
-- HTTPS wajib: tanpa itu browser menolak izin lokasi dan widget selalu memakai Jakarta.
-- `npm run build` di server (`public/build` tidak masuk git) dan `php artisan migrate` (tabel `pembayaran` dan `pencarian_harian`).
-- `BAYAR_REKENING` di `.env`. `OPENAI_API_KEY` hanya dipakai untuk membuat gambar; situs tidak memanggilnya saat berjalan.
-- Daftarkan domain di Google Search Console lalu kirim `https://<domain>/sitemap.xml`.
-- Cron `* * * * * php artisan schedule:run` wajib: sugesti pencarian disusun ulang tiap 02.00 dan catatan pencarian lebih dari 90 hari dihapus.
+Situs utama: https://mengaji.sayogicreative.com di server NEO Biznet Gio (Nginx, PHP 8.4, MariaDB lokal, HTTPS Certbot). Render dan Aiven sudah dipensiunkan (4 Nov 2026).
+
+Deploy: push ke GitHub, lalu di server `sudo deploy-laravel mengaji.sayogicreative.com https://github.com/sayogicreativeagency/sayogimengaji.git mengaji`. Script itu menjalankan composer, build Vite, migrate, cache, dan cron `schedule:run`.
+
+- [ ] Isi `BAYAR_REKENING` di `.env` server (opsi transfer belum tampil).
+- [ ] Daftarkan domain di Google Search Console lalu kirim `https://mengaji.sayogicreative.com/sitemap.xml`.

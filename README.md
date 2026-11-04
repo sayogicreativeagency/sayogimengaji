@@ -82,5 +82,5 @@ Catatan untuk fitur berbayar: syarat Quran.com melarang pemakaian kontennya untu
 
 ## Dokumen
 
-- [docs/ROADMAP.md](docs/ROADMAP.md): yang sudah beres, yang menunggu keputusan, rencana berikutnya, dan daftar cek sebelum tayang.
+- [docs/ROADMAP.md](docs/ROADMAP.md): yang sudah beres, yang menunggu keputusan, rencana berikutnya, dan catatan produksi (deploy).
 - [docs/superpowers/specs](docs/superpowers/specs) dan [docs/plans](docs/plans): desain dan rencana awal (masih memakai nama lama, Hadist Apa).
