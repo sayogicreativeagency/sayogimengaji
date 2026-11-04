@@ -24,6 +24,14 @@ it('header polos tanpa pola latar, dengan logo dan tagline Imam asy-Syafi\'i', f
         ->assertSee('ليس العلم ما حفظ، إنما العلم ما نفع');
 });
 
+it('footer: tombol bagikan ke WhatsApp membawa hadist dan alamat halaman, kutipannya tertaut ke sumber', function () {
+    $pesan = rawurlencode("“Sampaikanlah dariku walau hanya satu ayat.” (HR. Bukhari)\n\n".url('/kontak?dari=footer'));
+
+    $this->get('/kontak?dari=footer')->assertOk()
+        ->assertSee('href="https://wa.me/?text='.$pesan.'"', false)
+        ->assertSee('href="/hadist/bukhari/3461"', false);
+});
+
 it('menu HP: tombol burger membuka dialog berisi menu yang sama dengan desktop', function () {
     $halaman = $this->get('/kontak')->assertOk()->getContent();
     $dialog = str($halaman)->between('<dialog id="menu-hp"', '</dialog>')->toString();

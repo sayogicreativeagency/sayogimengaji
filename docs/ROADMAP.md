@@ -28,6 +28,7 @@ Project pribadi (Sayogi Creative Agency), bukan pekerjaan Akmanda Media. Tidak d
 - [x] SEO: judul dan deskripsi per halaman (surat, hadist dari matannya, kalender per bulan), canonical, Open Graph, JSON-LD situs, noindex untuk hasil cari dan akun, `sitemap.xml` (±36.500 URL) dan `robots.txt` dinamis (2 Nov 2026)
 
 - [x] Beranda: CTA Baca Al-Qur'an, section baca & hafal dengan pencarian surat dan mini player murottal, cari hadist jadi section ketiga (4 Nov 2026)
+- [x] Footer: tombol bagikan halaman ke WhatsApp dengan kutipan "Sampaikanlah dariku walau hanya satu ayat" (HR. Bukhari 3461) (4 Nov 2026)
 
 ## Perlu keputusan Angga
 
