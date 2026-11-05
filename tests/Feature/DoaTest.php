@@ -63,6 +63,25 @@ it('keterangan dari sumber di-escape; hanya alamat rujukan yang jadi tautan', fu
         ->assertSee('<a href="https://rumaysho.com/a?b=1&amp;c=2" rel="nofollow noopener" target="_blank">', false);
 });
 
+it('beranda menyarankan doa yang umum lewat namanya, yang namanya hilang dari sumber tidak ditampilkan', function () {
+    buatDoa(['id' => 27, 'grup' => 'Doa untuk Orang Sakit', 'nama' => 'Doa Kepada Orang Sakit']);
+    buatDoa(['id' => 31, 'grup' => 'Doa Jenazah', 'nama' => "Doa Belasungkawa (Ta'ziyah)"]);
+
+    $this->get('/')->assertOk()
+        ->assertSeeInOrder(['id="doa"', 'href="/doa/27"', 'Menjenguk orang sakit', 'href="/doa/31"', 'Melayat', 'Bantu Sayogi'], false)
+        ->assertDontSee('>Bepergian</a>', false);
+});
+
+it('kotak cari di daftar doa terisi dari form beranda dan mengenali kata yang biasa diketik', function () {
+    buatDoa(['id' => 27, 'grup' => 'Doa untuk Orang Sakit', 'nama' => 'Doa Kepada Orang Sakit']);
+
+    $this->get('/doa?q='.urlencode('doa menjenguk "orang"'))->assertOk()
+        ->assertSee('value="doa menjenguk &quot;orang&quot;"', false)
+        ->assertSee('data-cari="doa untuk orang sakit doa kepada orang sakit dengan nama engkau, wahai tuhanku. menjenguk jenguk besuk"', false);
+
+    $this->get('/doa?q[]=x')->assertOk();
+});
+
 it('doa yang tidak ada: 404', function () {
     $this->get('/doa/999')->assertNotFound();
 });

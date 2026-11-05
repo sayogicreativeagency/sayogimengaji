@@ -142,6 +142,23 @@
         </div>
     </section>
 
+    <section id="doa" aria-labelledby="judul-doa" class="scroll-mt-4 border-t border-stone-800">
+        <div class="mx-auto max-w-3xl px-4 py-16 text-center lg:py-24">
+            <h2 id="judul-doa" class="font-judul text-4xl leading-tight font-semibold text-balance text-emas-300 sm:text-5xl">Cari doa untuk sehari-hari</h2>
+            <p class="mx-auto mt-4 max-w-xl leading-relaxed text-stone-400">
+                Doa dan dzikir lengkap dengan teks Arab, latin, arti, dan rujukannya. Gratis, tanpa perlu akun.
+            </p>
+            <form action="/doa" method="get" class="mt-8 flex gap-2 text-left">
+                <label for="q-doa" class="sr-only">Cari doa</label>
+                <input id="q-doa" name="q" type="search" required maxlength="100"
+                       placeholder="mis. doa menjenguk orang sakit"
+                       class="w-full rounded-lg border border-stone-700 bg-stone-900 px-4 py-3 text-base shadow-sm focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20 focus:outline-none">
+                <button class="rounded-lg bg-emerald-700 px-5 py-3 font-medium text-white hover:bg-emerald-800 focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2 focus-visible:outline-none">Cari</button>
+            </form>
+            <x-contoh-doa class="mt-5 justify-center" />
+        </div>
+    </section>
+
     <section aria-labelledby="judul-dukung" class="border-t border-stone-800 bg-stone-900 bg-[radial-gradient(ellipse_at_85%_15%,rgb(212_176_98/0.12),transparent_55%)]">
         <div class="mx-auto grid max-w-6xl items-center gap-12 px-4 py-20 lg:grid-cols-[minmax(0,1fr)_24rem] lg:gap-20 lg:py-28">
             <div>

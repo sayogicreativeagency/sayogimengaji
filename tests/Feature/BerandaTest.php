@@ -11,6 +11,7 @@ it('beranda: hero, section Al-Qur\'an + widget, cari hadist, lalu section bantu 
             '<h1', 'href="/quran"', 'href="#cari"',
             'id="quran"', 'id="cari-surat"', 'data-mini-murottal', 'data-widget-sholat',
             'id="cari"', 'action="/cari"',
+            'id="doa"', 'action="/doa"',
             'Bantu Sayogi Mengaji tetap hidup', '<footer',
         ], false)
         ->assertSee('src="/images/hero.webp"', false)

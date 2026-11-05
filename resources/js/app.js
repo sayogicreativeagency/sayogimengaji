@@ -13,21 +13,26 @@ if (menuHp) {
 }
 
 // Halaman doa: saring kartu di browser, judul grup ikut hilang kalau semua kartunya tersaring.
+// Tiap kata harus cocok, tanpa kata umum: "doa mau pergi" dicari sebagai "pergi".
 const saringDoa = document.querySelector('[data-saring-doa]');
 
 if (saringDoa) {
     const grup = [...document.querySelectorAll('[data-doa-grup]')];
+    const kataUmum = new Set(['doa', 'mau', 'akan', 'saat', 'ketika', 'waktu', 'untuk', 'bila', 'kalau', 'yang']);
 
-    saringDoa.addEventListener('input', () => {
-        const kata = saringDoa.value.trim().toLowerCase();
+    const saring = () => {
+        const kata = saringDoa.value.toLowerCase().split(/\s+/).filter((k) => k && !kataUmum.has(k));
 
         grup.forEach((g) => {
             const kartu = [...g.querySelectorAll('[data-doa-kartu]')];
-            kartu.forEach((k) => (k.hidden = !k.dataset.cari.includes(kata)));
+            kartu.forEach((k) => (k.hidden = !kata.every((x) => k.dataset.cari.includes(x))));
             g.hidden = kartu.every((k) => k.hidden);
         });
         document.querySelector('[data-saring-doa-kosong]').hidden = grup.some((g) => !g.hidden);
-    });
+    };
+
+    saringDoa.addEventListener('input', saring);
+    if (saringDoa.value) saring(); // datang dari form cari doa di beranda
 }
 
 // Filter hasil pencarian: muat daftar dari /cari/saring (DB saja, tanpa AI) tanpa reload.
