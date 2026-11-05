@@ -11,6 +11,7 @@
 - **Pencarian hadist berbantuan AI.** 36 ribu lebih hadist dari 7 kitab (Kutubus Sittah dan Muwaththa'), lengkap dengan teks Arab, terjemahan, dan derajat. AI (DeepSeek lewat Laravel AI SDK) mengembangkan kata kunci dan menulis ringkasan; filter derajat dan kitab tanpa reload. Halaman `/hadist` menjelaskan arti tiap derajat dan cara situs menentukannya. Sugesti pencarian diambil dari kata yang paling sering dicari, dirapikan AI sekali sehari.
 - **Al-Qur'an dan murottal.** Teks, transliterasi, terjemahan Kemenag, dan pemutar murottal per ayat dengan 6 qori (ulang, kecepatan, lanjut dari terakhir).
 - **Belajar Al-Qur'an per kata.** Sorot kata mengikuti bacaan, ketuk kata untuk mendengar pelafalannya, mode hafalan (huruf awal / teks tersembunyi), progres tersimpan per akun. Al-Fatihah gratis, surat lain lewat langganan.
+- **Doa harian.** Doa dan dzikir sehari-hari per grup dengan teks Arab, latin, arti, dan rujukan; gratis untuk semua.
 - **Langganan.** Bayar lewat QRIS (nominal terisi otomatis dengan kode unik) atau transfer, konfirmasi bayar dengan bukti, disetujui admin. Ada saklar di admin untuk menggratiskan semua surat.
 - **Jadwal sholat, cuaca, dan kalender.** Widget jam sholat (parameter Kemenag RI, dihitung di browser), cuaca Open-Meteo, tanggal Hijriah; halaman kalender Masehi + Hijriah dengan libur nasional, cuti bersama, dan hari besar Islam.
 - **Infaq** lewat QRIS dan Saweria.
@@ -48,6 +49,7 @@ herd secure hadistapa
 php artisan hadist:impor                # semua kitab, atau mis. hadist:impor bukhari
 php artisan quran:impor                 # 114 surat dari equran.id, atau quran:impor 36
 php artisan quran:impor-kata            # kata Utsmani + waktu per kata (fitur belajar)
+php artisan doa:impor                   # doa dan dzikir dari equran.id
 php artisan akun:peran email@contoh.com superadmin
 ```
 

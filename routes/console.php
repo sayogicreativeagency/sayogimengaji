@@ -1,6 +1,7 @@
 <?php
 
 use App\Actions\BuatSugestiCari;
+use App\Actions\ImporDoa;
 use App\Actions\ImporHadist;
 use App\Actions\ImporKata;
 use App\Actions\ImporQuran;
@@ -58,6 +59,12 @@ Artisan::command('quran:impor {surat? : nomor surat 1-114; kosong = semua}', fun
 
     return $gagal ? 1 : 0;
 })->purpose('Impor teks Al-Qur\'an dari equran.id');
+
+Artisan::command('doa:impor', function (ImporDoa $impor) {
+    $this->info($impor().' doa');
+
+    return 0;
+})->purpose('Impor doa dan dzikir dari equran.id');
 
 Artisan::command('akun:peran {email} {peran : superadmin, editor, atau pengguna}', function () {
     $peran = Peran::tryFrom($this->argument('peran'));

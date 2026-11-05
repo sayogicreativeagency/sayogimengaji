@@ -1,4 +1,4 @@
-<x-layout judul="Sumber & Atribusi" :sidebar="false" deskripsi="Sumber data hadist, Al-Qur'an, murottal, jadwal sholat, cuaca, dan kalender yang dipakai Sayogi Mengaji beserta lisensinya.">
+<x-layout judul="Sumber & Atribusi" :sidebar="false" deskripsi="Sumber data hadist, Al-Qur'an, murottal, doa, jadwal sholat, cuaca, dan kalender yang dipakai Sayogi Mengaji beserta lisensinya.">
     <article class="prosa mx-auto max-w-3xl">
         <h1 class="text-4xl">Sumber &amp; Atribusi</h1>
         <p>Sayogi Mengaji berdiri di atas karya banyak orang. Berikut sumber data, layanan, dan perangkat lunak yang kami gunakan beserta lisensinya. Jazakumullahu khairan.</p>
@@ -13,6 +13,11 @@
             <li><a href="https://equran.id">equran.id</a>: teks Al-Qur'an, transliterasi latin, terjemahan Kementerian Agama RI, deskripsi surat, dan audio murottal.</li>
             <li><a href="https://quran.com">Quran.com</a> (Quran Foundation): teks Utsmani per kata dan waktu tiap kata untuk fitur belajar, dengan audio dari <a href="https://quran.com">Quran.com</a> dan <a href="https://quranicaudio.com">QuranicAudio</a> (Mahmoud Khalil Al-Husary Muallim dan Misyari Rasyid Al-Afasi).</li>
             <li>Qori murottal: Abdullah Al-Juhany, Abdul Muhsin Al-Qasim, Abdurrahman As-Sudais, Ibrahim Al-Dossari, Misyari Rasyid Al-Afasi, dan Yasser Al-Dosari.</li>
+        </ul>
+
+        <h2>Doa</h2>
+        <ul>
+            <li><a href="https://equran.id">equran.id</a>: teks Arab, latin, arti, dan keterangan doa harian. Rujukan tiap doa mengikuti keterangan dari sumber ini.</li>
         </ul>
 
         <h2>Jadwal sholat</h2>

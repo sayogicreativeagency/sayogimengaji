@@ -12,6 +12,24 @@ if (menuHp) {
     matchMedia('(min-width: 48rem)').addEventListener('change', (e) => e.matches && menuHp.close());
 }
 
+// Halaman doa: saring kartu di browser, judul grup ikut hilang kalau semua kartunya tersaring.
+const saringDoa = document.querySelector('[data-saring-doa]');
+
+if (saringDoa) {
+    const grup = [...document.querySelectorAll('[data-doa-grup]')];
+
+    saringDoa.addEventListener('input', () => {
+        const kata = saringDoa.value.trim().toLowerCase();
+
+        grup.forEach((g) => {
+            const kartu = [...g.querySelectorAll('[data-doa-kartu]')];
+            kartu.forEach((k) => (k.hidden = !k.dataset.cari.includes(kata)));
+            g.hidden = kartu.every((k) => k.hidden);
+        });
+        document.querySelector('[data-saring-doa-kosong]').hidden = grup.some((g) => !g.hidden);
+    });
+}
+
 // Filter hasil pencarian: muat daftar dari /cari/saring (DB saja, tanpa AI) tanpa reload.
 // Ringkasan AI disembunyikan selama filter aktif karena hanya berlaku untuk hasil awal.
 const filter = document.querySelector('[data-filter-hasil]');

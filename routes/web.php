@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\BelajarController;
+use App\Http\Controllers\DoaController;
 use App\Http\Controllers\HadistController;
 use App\Http\Controllers\KalenderController;
 use App\Http\Controllers\KontakController;
@@ -22,6 +23,8 @@ Route::view('/dukung', 'dukung');
 Route::get('/quran', [QuranController::class, 'daftar']);
 Route::get('/quran/{surat}', [QuranController::class, 'tampil'])->whereNumber('surat');
 Route::post('/quran/putar', [QuranController::class, 'putar'])->middleware('throttle:120,1');
+Route::get('/doa', [DoaController::class, 'daftar']);
+Route::get('/doa/{doa}', [DoaController::class, 'tampil'])->whereNumber('doa');
 
 Route::middleware('guest')->group(function () {
     Route::get('/masuk', [AkunController::class, 'formMasuk'])->name('login');

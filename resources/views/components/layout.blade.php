@@ -39,7 +39,7 @@
 </head>
 <body class="min-h-screen bg-stone-50 text-stone-800 antialiased dark:bg-stone-950 dark:text-stone-200">
     @php
-        $menu = ['/hadist' => 'Hadist', '/belajar' => 'Belajar', '/quran' => "Al-Qur'an"];
+        $menu = ['/hadist' => 'Hadist', '/belajar' => 'Belajar', '/quran' => "Al-Qur'an", '/doa' => 'Doa'];
         if (auth()->user()?->peran->bisaMasukAdmin()) {
             $menu['/admin'] = 'Admin';
         }

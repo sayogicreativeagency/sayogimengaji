@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Doa;
 use App\Models\Hadist;
 use App\Models\Surat;
 
@@ -21,13 +22,14 @@ class SeoController extends Controller
         ]))->header('Content-Type', 'text/plain; charset=UTF-8');
     }
 
-    /** Satu berkas cukup: ±36.500 URL, di bawah batas 50.000 per sitemap. */
+    /** Satu berkas cukup: ±36.800 URL, di bawah batas 50.000 per sitemap. */
     public function sitemap()
     {
         return response()->view('sitemap', [
             // /tentang sengaja tidak dimasukkan; hasil /cari dan halaman akun noindex.
-            'halaman' => ['/', '/hadist', '/quran', '/kalender', '/dukung', '/kontak', '/sumber', '/syarat-ketentuan', '/kebijakan-privasi'],
+            'halaman' => ['/', '/hadist', '/quran', '/doa', '/kalender', '/dukung', '/kontak', '/sumber', '/syarat-ketentuan', '/kebijakan-privasi'],
             'surat' => Surat::orderBy('nomor')->pluck('nomor'),
+            'doa' => Doa::orderBy('id')->pluck('id'),
             'hadist' => Hadist::query()->select('id', 'kitab', 'nomor')->lazyById(5000),
         ])->header('Content-Type', 'application/xml; charset=UTF-8');
     }

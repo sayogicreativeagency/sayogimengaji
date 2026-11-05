@@ -6,6 +6,9 @@
 @foreach ($surat as $nomor)
 <url><loc>{{ url('/quran/'.$nomor) }}</loc></url>
 @endforeach
+@foreach ($doa as $id)
+<url><loc>{{ url('/doa/'.$id) }}</loc></url>
+@endforeach
 @php($dasar = url('/'))
 @foreach ($hadist as $h)
 <url><loc>{{ $dasar.'/hadist/'.$h->kitab->value.'/'.rawurlencode($h->nomor) }}</loc></url>
