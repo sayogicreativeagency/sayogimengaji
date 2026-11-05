@@ -151,7 +151,7 @@
             <form action="/doa" method="get" class="mt-8 flex gap-2 text-left">
                 <label for="q-doa" class="sr-only">Cari doa</label>
                 <input id="q-doa" name="q" type="search" required maxlength="100"
-                       placeholder="mis. doa menjenguk orang sakit"
+                       placeholder="mis. doa melayat"
                        class="w-full rounded-lg border border-stone-700 bg-stone-900 px-4 py-3 text-base shadow-sm focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20 focus:outline-none">
                 <button class="rounded-lg bg-emerald-700 px-5 py-3 font-medium text-white hover:bg-emerald-800 focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2 focus-visible:outline-none">Cari</button>
             </form>
