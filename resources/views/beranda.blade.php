@@ -142,20 +142,28 @@
         </div>
     </section>
 
-    <section id="doa" aria-labelledby="judul-doa" class="scroll-mt-4 border-t border-stone-800">
-        <div class="mx-auto max-w-3xl px-4 py-16 text-center lg:py-24">
-            <h2 id="judul-doa" class="font-judul text-4xl leading-tight font-semibold text-balance text-emas-300 sm:text-5xl">Cari doa untuk sehari-hari</h2>
-            <p class="mx-auto mt-4 max-w-xl leading-relaxed text-stone-400">
-                Doa dan dzikir lengkap dengan teks Arab, latin, arti, dan rujukannya. Gratis, tanpa perlu akun.
-            </p>
-            <form action="/doa" method="get" class="mt-8 flex gap-2 text-left">
-                <label for="q-doa" class="sr-only">Cari doa</label>
-                <input id="q-doa" name="q" type="search" required maxlength="100"
-                       placeholder="mis. doa melayat"
-                       class="w-full rounded-lg border border-stone-700 bg-stone-900 px-4 py-3 text-base shadow-sm focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20 focus:outline-none">
-                <button class="rounded-lg bg-emerald-700 px-5 py-3 font-medium text-white hover:bg-emerald-800 focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2 focus-visible:outline-none">Cari</button>
-            </form>
-            <x-contoh-doa class="mt-5 justify-center" />
+    {{-- Form berupa kalimat, sengaja beda dari kotak cari hadist di atasnya. Ikon: public/images/doa.webp (OpenAI gpt-image-2.5-sunburst). --}}
+    <section id="doa" aria-labelledby="judul-doa" class="scroll-mt-4 border-t border-stone-800 bg-emerald-950">
+        <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-20 lg:py-24">
+            <div class="min-w-0">
+                <form action="/doa" method="get">
+                    <h2 id="judul-doa" class="font-judul text-4xl leading-tight font-semibold text-balance text-emas-300 sm:text-6xl">
+                        <label for="q-doa">Aku ingin berdoa saat</label>
+                    </h2>
+                    <div class="mt-3 flex items-center gap-3 border-b-2 border-emas-400 transition-colors focus-within:border-emas-200">
+                        <input id="q-doa" name="q" type="search" required maxlength="100" placeholder="hujan"
+                               class="w-full min-w-0 bg-transparent py-2 font-judul text-3xl text-stone-100 caret-emas-300 placeholder:text-stone-400 focus:outline-none sm:text-5xl">
+                        <button aria-label="Cari doa" class="grid size-11 shrink-0 place-items-center rounded-full text-emas-300 transition-colors hover:bg-emas-400/15 hover:text-emas-200 focus-visible:ring-2 focus-visible:ring-emas-300 focus-visible:outline-none">
+                            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="size-6" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5"/></svg>
+                        </button>
+                    </div>
+                </form>
+                <x-contoh-doa class="mt-6" />
+                <p class="mt-8 max-w-xl text-sm leading-relaxed text-stone-300">Lengkap dengan teks Arab, latin, arti, dan rujukannya. Gratis, tanpa perlu akun.</p>
+            </div>
+
+            <img src="/images/doa.webp" alt="" width="480" height="696" loading="lazy"
+                 class="order-first w-28 sm:w-36 lg:order-last lg:w-full">
         </div>
     </section>
 
