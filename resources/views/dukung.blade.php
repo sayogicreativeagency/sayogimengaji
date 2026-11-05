@@ -37,5 +37,7 @@
             <em>Jazakumullahu khairan.</em> Belum bisa berinfaq? Doakan kami dan bagikan Sayogi Mengaji ke orang
             terdekat. Itu juga dukungan yang sangat berarti.
         </p>
+
+        <x-tawaran-website class="mt-12 rounded-xl border border-stone-800 bg-stone-900 p-6 sm:p-8" />
     </article>
 </x-layout>

@@ -22,6 +22,11 @@ it('menyembunyikan tombol dan QR bila akun saweria belum diatur', function () {
         ->assertDontSee('data:image/svg+xml', false);
 });
 
+it('menawarkan jasa pembuatan website di bagian paling bawah sebelum footer', function (string $url) {
+    $this->get($url)->assertOk()
+        ->assertSeeInOrder(['Ingin punya website sendiri?', 'href="https://sayogicreative.com/#services"', '<footer'], false);
+})->with(['/', '/dukung', '/tentang']);
+
 it('menautkan halaman dukung dari header dan footer', function () {
     $this->get('/')->assertOk()->assertSee('href="/dukung"', false);
 });

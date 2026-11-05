@@ -32,6 +32,7 @@ Project pribadi (Sayogi Creative Agency), bukan pekerjaan Akmanda Media. Tidak d
 - [x] Statistik murottal di admin (superadmin): diputar, tamat, ayat berhenti, IP, waktu dengar, qori, perangkat; 24 jam, hari ini, 7 hari; data terhapus setelah 90 hari, tertulis di Kebijakan Privasi (4 Nov 2026)
 - [x] Halaman Doa: doa harian dari equran.id per grup, cari di tempat, halaman per doa dengan rujukan; gratis (5 Nov 2026)
 - [x] Beranda: section cari doa di bawah cari hadist, form berupa kalimat dengan flat icon (OpenAI), 12 sugesti doa umum pilihan redaksi (5 Nov 2026)
+- [x] Banner tawaran website Sayogi Creative di beranda, Dukung, dan Tentang kami (5 Nov 2026)
 
 ## Perlu keputusan Angga
 

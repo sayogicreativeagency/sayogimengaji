@@ -19,4 +19,7 @@
             situs ini tetap berjalan? Lihat <a href="/dukung">halaman dukung</a>.
         </p>
     </article>
+
+    {{-- Di luar .prosa supaya judul dan tombolnya tidak ikut gaya artikel. --}}
+    <x-tawaran-website class="mx-auto mt-12 max-w-3xl rounded-xl border border-stone-800 bg-stone-900 p-6 sm:p-8" />
 </x-layout>

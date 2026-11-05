@@ -143,7 +143,10 @@
     </section>
 
     {{-- Form berupa kalimat, sengaja beda dari kotak cari hadist di atasnya. Ikon: public/images/doa.webp (OpenAI gpt-image-2.5-sunburst). --}}
-    <section id="doa" aria-labelledby="judul-doa" class="scroll-mt-4 border-t border-stone-800 bg-emerald-950">
+    <section id="doa" aria-labelledby="judul-doa" class="relative isolate scroll-mt-4 overflow-hidden border-t border-stone-800 bg-stone-950">
+        {{-- Foto tipis sebagai tekstur: public/images/rak-quran*.webp (OpenAI gpt-image-2.5-sunburst). --}}
+        <img src="/images/rak-quran.webp" srcset="/images/rak-quran-900.webp 900w, /images/rak-quran.webp 1536w" sizes="100vw"
+             alt="" width="1536" height="1024" loading="lazy" class="absolute inset-0 -z-10 size-full object-cover opacity-10">
         <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-20 lg:py-24">
             <div class="min-w-0">
                 <form action="/doa" method="get">
@@ -203,4 +206,8 @@
             <x-papan-donasi />
         </div>
     </section>
+
+    <div class="border-t border-stone-800 bg-stone-950">
+        <x-tawaran-website class="mx-auto max-w-6xl px-4 py-14 lg:py-16" />
+    </div>
 </x-layout>
